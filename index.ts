@@ -1,9 +1,8 @@
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 dotenv.config();
 
-import app = require('./server/app');
 import http from 'http';
-
+import app = require('./server/app');
 
 const server = http.createServer(app)
 
