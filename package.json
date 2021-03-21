@@ -9,10 +9,10 @@
     "build:full": "rm -rf dist && npm run tsc && npm run build:ui",
     "dev": "ts-node-dev index.ts",
     "start": "node dist/index.js",
-    "build:ui": "cd frontend && npm install && npm run build --prod && cp -r build ../dist/backend",
+    "build:ui": "cd client && npm install && npm run build --prod && cp -r build ../dist/server",
     "heroku:autodeploy": "git add . && git commit -m Heroku-autodeploy && git push origin main",
     "logs:prod": "heroku logs --tail",
-    "lint": "eslint --ext .ts backend/."
+    "lint": "eslint --ext .ts server/."
   },
   "engines": {
     "node": "15.11.0"

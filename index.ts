@@ -1,4 +1,4 @@
-import app = require('./backend/app');
+import app = require('./server/app');
 import http from 'http';
 
 const server = http.createServer(app)
