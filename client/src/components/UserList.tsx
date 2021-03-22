@@ -8,7 +8,8 @@ const UserList: React.FC = () => {
 
   React.useEffect(() => {
     userService.getAll()
-      .then((data) => setUsers(data));
+      .then((data) => setUsers(data))
+      .catch(() => setUsers([]));
   }, []);
 
   if (users.length === 0) {
