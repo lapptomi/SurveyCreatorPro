@@ -1,9 +1,9 @@
 import React from 'react';
-import UserList from './components/UserList';
 import LoginForm from './components/LoginForm';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import { Segment } from 'semantic-ui-react';
+import RegisterForm from './components/RegisterForm';
 
 const App: React.FC = () => {
   return (
@@ -16,10 +16,8 @@ const App: React.FC = () => {
       >
         <NavBar />
         <LoginForm />
+        <RegisterForm />
       </Segment>
-      <h2>Hello world!</h2>
-      <h2>Users in database:</h2>
-      <UserList />
       <Footer />
     </div>
   );
