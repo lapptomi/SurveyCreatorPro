@@ -5,7 +5,7 @@ const App: React.FC = () => {
   return (
     <div>
       <h2>Hello world!</h2>
-      <h3>Users in database:</h3>
+      <h2>Users in database:</h2>
       <UserList />
     </div>
   );
