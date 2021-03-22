@@ -14,11 +14,11 @@ const LoginForm: React.FC = () => {
   return (
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as='h2' color='blue' textAlign='center'>
+        <Header as='h2' inverted textAlign='center'>
           Log-in to your account
         </Header>
         <Form size='large' onSubmit={handleSubmit}>
-          <Segment stacked>
+          <Segment stacked inverted>
             <Form.Input 
               fluid icon='user' 
               iconPosition='left' 
@@ -38,7 +38,7 @@ const LoginForm: React.FC = () => {
             </Button>
           </Segment>
         </Form>
-        <Message>
+        <Message color={'black'}>
           Don&apos;t have an account yet? <a href='/register'>Sign Up here</a>
         </Message>
       </Grid.Column>
