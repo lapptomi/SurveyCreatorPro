@@ -14,17 +14,27 @@ const NavBar: React.FC = () => {
         size='large'
       >
       <Container>
-        <Menu.Item as='a' active>
+        <Menu.Item as='a' href='/' active>
           Home
         </Menu.Item>
-        <Menu.Item as='a'>Path 2</Menu.Item>
+        <Menu.Item as='a' href='/'>Path 2</Menu.Item>
         <Menu.Item as='a'>Path 3</Menu.Item>
         <Menu.Item as='a'>Path 4</Menu.Item>
         <Menu.Item position='right'>
-          <Button as='a' inverted={!fixed}>
+          <Button 
+            as='a'
+            href='/login'
+            inverted={!fixed}
+          >
             Log in
           </Button>
-          <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
+          <Button 
+            as='a'
+            href='/register'
+            inverted={!fixed} 
+            primary={fixed} 
+            style={{ marginLeft: '0.5em' }}
+          >
             Sign Up
           </Button>
         </Menu.Item>

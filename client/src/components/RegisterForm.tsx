@@ -92,7 +92,7 @@ const RegisterForm: React.FC = () => {
           </Segment>
         </Form>
         <Message color={'black'}>
-          Already have an account? <a href='/register'>Log in here</a>
+          Already have an account? <a href='/login'>Log in here</a>
         </Message>
       </Grid.Column>
     </Grid>

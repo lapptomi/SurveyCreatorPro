@@ -23,7 +23,7 @@ const LoginForm: React.FC = () => {
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2' inverted textAlign='center'>
-          Log in
+          Log in to your account
         </Header>
         <Form size='large' onSubmit={handleSubmit}>
           <Segment stacked inverted>
