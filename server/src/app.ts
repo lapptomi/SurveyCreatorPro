@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import userRouter from './routes/users';
 
@@ -9,5 +9,10 @@ app.use(cors());
 app.use(express.static(`${__dirname}/../build`));
 
 app.use('/api/users', userRouter);
+
+// As default GET-requests returns React index.html
+app.get('*', (_req: Request, res: Response) => {
+  res.sendFile('index.html', { root: './dist/build/' });
+});
 
 export = app;

@@ -22,16 +22,18 @@ const NavBar: React.FC = () => {
         <Menu.Item as='a'>Path 4</Menu.Item>
         <Menu.Item position='right'>
           <Button 
+            color='black'
             as='a'
             href='/login'
-            inverted={!fixed}
+            inverted={fixed}
           >
             Log in
           </Button>
-          <Button 
+          <Button
+            color='black'
             as='a'
             href='/register'
-            inverted={!fixed} 
+            inverted={fixed} 
             primary={fixed} 
             style={{ marginLeft: '0.5em' }}
           >
