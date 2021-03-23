@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FormEvent } from 'react';
+import loginService from '../services/login';
 import { 
   Button, 
   Form, 
@@ -16,7 +17,14 @@ const LoginForm: React.FC = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    window.alert(`USERNAME: ${username}\nPASSWORD: ${password}`);
+    loginService.login({ username, password })
+      .then((user) => {
+        window.localStorage.setItem('loggedUser', JSON.stringify(user));
+        window.location.replace('/');
+      })
+      .catch(() => {
+        window.alert('Wrong credentials, please try again');
+      });
   };
 
   return (

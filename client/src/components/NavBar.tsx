@@ -3,8 +3,10 @@ import React from 'react';
 import { Visibility, Menu, Container, Button } from 'semantic-ui-react';
 
 const NavBar: React.FC = () => {
-  const fixed = false;  
+  const fixed = false;
   
+  const loggedIn = window.localStorage.length > 0;
+
   return (
     <Visibility once={true}>
       <Menu
@@ -24,20 +26,20 @@ const NavBar: React.FC = () => {
           <Button 
             color='black'
             as='a'
-            href='/login'
+            href={loggedIn ? '/profile' : '/login'}
             inverted={fixed}
           >
-            Log in
+            {loggedIn ? 'Profile' : 'Log in'}
           </Button>
           <Button
             color='black'
             as='a'
-            href='/register'
+            href={loggedIn ? '/logout' : '/register'}
             inverted={fixed} 
             primary={fixed} 
             style={{ marginLeft: '0.5em' }}
           >
-            Sign Up
+            {loggedIn ? 'Log out' : 'Sign Up'}
           </Button>
         </Menu.Item>
       </Container>
