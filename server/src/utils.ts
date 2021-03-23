@@ -6,22 +6,22 @@ const isString = (text: any): text is string => typeof text === 'string' || text
 const isGender = (param: any): param is Gender => Object.values(Gender).includes(param);
 
 const parseEmail = (email: string): string => {
-  if (!email || !isString(email)) {
+  if (!email || !isString(email) || email.length < 4) {
     throw new Error('Incorrect or missing email');
   }
   return email;
 };
 
 const parseUsername = (username: string): string => {
-  if (!username || !isString(username)) {
+  if (!username || !isString(username) || username.length < 4) {
     throw new Error('Incorrect or missing username');
   }
   return username;
 };
 
 const parsePassword = (password: string): string => {
-  if (!password || !isString(password)) {
-    throw new Error('Incorrect or missing username');
+  if (!password || !isString(password) || password.length < 4) {
+    throw new Error('Incorrect or missing password');
   }
   return password;
 };
