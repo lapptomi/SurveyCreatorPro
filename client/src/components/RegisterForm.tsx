@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FormEvent } from 'react';
-import { Gender } from '../types';
+import { Gender, User } from '../types';
+import userService from '../services/users';
 import { 
   Button, 
   Form, 
@@ -19,22 +20,18 @@ const RegisterForm: React.FC = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    window.alert(`
-      EMAIL: ${email}\n 
-      USERNAME: ${username}\n
-      PASSWORD: ${password}\n
-      GENDER: ${gender}
-    `);
+    const newUser: User = { 
+      email, username, password, gender
+    };
+    userService.create(newUser);
   };
 
   const validCredentials = (): boolean => {
-    return (
-      email.length > 3 &&
-      username.length > 2 && 
-      password.length > 3 &&
-      acceptTerms &&
-      Object.values(Gender).includes(gender)
-    );
+    return email.length > 3 
+      && username.length > 3 
+      && password.length > 3 
+      && acceptTerms 
+      && Object.values(Gender).includes(gender);
   };
 
   const genderOptions = [

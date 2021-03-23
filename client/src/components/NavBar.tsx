@@ -2,15 +2,11 @@
 import React from 'react';
 import { Visibility, Menu, Container, Button } from 'semantic-ui-react';
 
-
 const NavBar: React.FC = () => {
-
   const fixed = false;  
   
   return (
-    <Visibility
-      once={true}
-    >
+    <Visibility once={true}>
       <Menu
         inverted={!fixed}
         pointing={!fixed}
