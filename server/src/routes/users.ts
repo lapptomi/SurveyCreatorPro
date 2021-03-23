@@ -17,7 +17,7 @@ router.post('/', (req: Request, res: Response) => {
   try {
     const newUser: NewUser = toNewUser(req.body);
     userRepository.create(newUser)
-      .then(() => res.status(201).json(newUser))
+      .then((result) => res.status(201).json(result))
       .catch((e) => res.status(400).send((e as Error).message));
   } catch (e) {
     res.status(400).send((e as Error).message);
