@@ -17,7 +17,7 @@ app.use('/api/login/', loginRouter);
   (needed for react router)
 */
 app.get('*', (_req: Request, res: Response) => {
-  res.sendFile('index.html', { root: './dist/build/' });
+  res.sendFile('index.html', { root: './dist/build/' }) ;
 });
 
 export = app;
