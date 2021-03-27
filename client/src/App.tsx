@@ -19,7 +19,6 @@ const App: React.FC = () => {
     }
   }, []);
 
-
   if (loggedUser) {
     <div className='App' 
       style={{ 
