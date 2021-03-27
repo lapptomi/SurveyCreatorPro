@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - dev
-  pull _request:
+  pull_request:
 
 jobs:
   basic_pipeline:
