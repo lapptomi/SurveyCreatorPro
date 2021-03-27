@@ -11,7 +11,7 @@ import {
   Message, 
   Segment 
 } from 'semantic-ui-react';
-import Loading from './LoadingScreen';
+import LoadingScreen from './LoadingScreen';
 
 const RegisterForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -56,10 +56,9 @@ const RegisterForm: React.FC = () => {
     { key: 'o', text: 'Other', value: Gender.Other },
   ];
 
-  
   return (
     <>
-    <Loading isLoading={loading} />
+    <LoadingScreen isLoading={loading} />
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2' inverted textAlign='center'>

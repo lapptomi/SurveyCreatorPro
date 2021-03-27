@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dimmer, Loader } from 'semantic-ui-react';
 
-const Loading: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
+const LoadingScreen: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
   return (
     <Dimmer active={isLoading}>
       <Loader />
@@ -9,4 +9,4 @@ const Loading: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
   );
 };
 
-export default Loading;
+export default LoadingScreen;

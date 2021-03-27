@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NewUser, Gender } from './types';
+import { NewUser, Gender, NewSurvey } from './types';
 
-const isString = (text: any): text is string => typeof text === 'string' || text instanceof String;
+const isString = (text: any): text is string => {
+  return typeof text === 'string' || text instanceof String;
+};
 
-const isGender = (param: any): param is Gender => Object.values(Gender).includes(param);
+const isGender = (param: any): param is Gender => {
+  return Object.values(Gender).includes(param);
+};
 
 const parseEmail = (email: string): string => {
   if (!email || !isString(email) || email.length < 4) {
@@ -40,5 +44,27 @@ export const toNewUser = (object: NewUser): NewUser => {
     username: parseUsername(object.username),
     password: parsePassword(object.password),
     gender: parseGender(object.gender),
+  };
+};
+
+const parseTitle = (title: string): string => {
+  if (!title || !isString(title) || title.length < 4) {
+    throw new Error('Incorrect or missing title');
+  }
+  return title;
+};
+
+const parseDescription = (description: string): string => {
+  if (!description || !isString(description) || description.length < 4) {
+    throw new Error('Incorrect or missing description');
+  }
+  return description;
+};
+
+export const toNewSurvey = (object: NewSurvey): NewSurvey => {
+  console.log(object);
+  return {
+    title: parseTitle(object.title),
+    description: parseDescription(object.description),
   };
 };

@@ -13,6 +13,7 @@
     "es6": true
   },
   "rules": {
+    "arrow-body-style": [2, "always"],
     "import/prefer-default-export": "off",
     "no-console": "off",
     "@typescript-eslint/semi": ["error"],
