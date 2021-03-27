@@ -8,5 +8,5 @@ const server = http.createServer(app);
 
 const PORT = process.env.PORT as string || 3001;
 server.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
+  console.log(`Server running on ${PORT}`) ;
 });
