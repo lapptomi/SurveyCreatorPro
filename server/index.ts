@@ -6,7 +6,7 @@ import app = require('./src/app');
 
 const server = http.createServer(app);
 
-const PORT = process.env.PORT as string;
+const PORT = process.env.PORT as string || 3001;
 server.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
 });
