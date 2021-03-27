@@ -11,7 +11,7 @@
     "build:ui": "cd client && npm install && npm run build --prod && cp -r build ../dist/",
     "build:full": "rm -rf dist && npm run tsc && npm run build:ui",
     "logs:prod": "heroku logs --tail",
-    "lint": "eslint --ext .ts server/."
+    "eslint": "eslint --ext=.ts,.tsx  ."
   },
   "engines": {
     "node": "15.11.0"
@@ -41,6 +41,7 @@
     "@typescript-eslint/parser": "^4.18.0",
     "eslint": "^7.22.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-import": "^2.22.1",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.3"
   }
