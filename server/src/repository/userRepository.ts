@@ -1,11 +1,11 @@
 import bcrypt from 'bcrypt';
 import { pool } from '../config/dbconfig';
-import { NewUser } from '../types';
+import { NewUser, User } from '../types';
 
-const getAll = async (): Promise<NewUser[]> => {
+const getAll = async (): Promise<Array<User>> => {
   try {
     const result = await pool.query('SELECT * FROM Users');
-    return result.rows as Array<NewUser>;
+    return result.rows as Array<User>;
   } catch (error) {
     throw new Error(error);
   }
@@ -25,12 +25,11 @@ const create = async (user: NewUser): Promise<NewUser> => {
   };
 };
 
-const findByUsername = async (username: string): Promise<NewUser> => {
+const findByUsername = async (username: string): Promise<User> => {
   const query = ('SELECT * FROM Users WHERE (username = $1)');
   const result = await pool.query(query, [username]);
   if (result.rowCount === 0) throw new Error('User not found');
-
-  return result.rows[0] as NewUser;
+  return result.rows[0] as User;
 };
 
 export default {
