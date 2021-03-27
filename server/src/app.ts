@@ -14,10 +14,10 @@ app.use('/api/login/', loginRouter);
 
 /*
   As default GET-requests returns React index.html
-  (needed for react router)
+  (needed for React router)
 */
 app.get('*', (_req: Request, res: Response) => {
-  res.sendFile('index.html', { root: './dist/build/' }) ;
+  res.sendFile('index.html', { root: './dist/build/' });
 });
 
 export = app;
