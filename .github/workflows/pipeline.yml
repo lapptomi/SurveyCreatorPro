@@ -1,9 +1,7 @@
 name: Deployment pipeline
 
 on:
-  push:
-    branches:
-      - development
+  pull_request:
 
 jobs:
   basic_pipeline:
