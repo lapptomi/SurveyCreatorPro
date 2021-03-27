@@ -12,8 +12,10 @@ app.use(express.static(`${__dirname}/../build`));
 app.use('/api/users', userRouter);
 app.use('/api/login/', loginRouter);
 
-// As default GET-requests returns React index.html
-// (needed for react router)
+/*
+  As default GET-requests returns React index.html
+  (needed for react router)
+*/
 app.get('*', (_req: Request, res: Response) => {
   res.sendFile('index.html', { root: './dist/build/' });
 });
