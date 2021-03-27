@@ -8,7 +8,7 @@ import {
   Message, 
   Segment 
 } from 'semantic-ui-react';
-import Loading from './LoadingScreen';
+import LoadingScreen from './LoadingScreen';
 
 
 const LoginForm: React.FC = () => {
@@ -33,7 +33,7 @@ const LoginForm: React.FC = () => {
 
   return (
     <>
-    <Loading isLoading={loading} />
+    <LoadingScreen isLoading={loading} />
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2' inverted textAlign='center'>
