@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NewUser, Gender, NewSurvey } from './types';
 
-const isString = (text: any): text is string => typeof text === 'string' || text instanceof String;
+const isString = (text: any): text is string => {
+  return typeof text === 'string' || text instanceof String;
+};
 
-const isGender = (param: any): param is Gender => Object.values(Gender).includes(param);
+const isGender = (param: any): param is Gender => {
+  return Object.values(Gender).includes(param);
+};
 
 const parseEmail = (email: string): string => {
   if (!email || !isString(email) || email.length < 4) {

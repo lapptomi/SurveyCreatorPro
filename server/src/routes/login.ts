@@ -33,7 +33,9 @@ router.post('/', (req: Request, res: Response) => {
           console.log((e as Error).message);
         });
     })
-    .catch((e) => res.status(401).json((e as Error).message));
+    .catch((e) => {
+      return res.status(401).json((e as Error).message);
+    });
 });
 
 export default router;
