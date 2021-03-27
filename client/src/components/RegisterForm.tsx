@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { FormEvent } from 'react';
 import { Gender, User } from '../types';
 import userService from '../services/users';
+import validator from 'validator';
+import loginService from '../services/login';
 import { 
   Button, 
   Form, 
@@ -10,24 +11,39 @@ import {
   Message, 
   Segment 
 } from 'semantic-ui-react';
+import Loading from './LoadingScreen';
 
 const RegisterForm: React.FC = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [gender, setGender] = useState<Gender>(Gender.Other);
   const [acceptTerms, setAcceptTerms] = useState<boolean>(false);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
+  const handleSubmit = (): void => {
+    setLoading(true);
+
     const newUser: User = { 
       email, username, password, gender
     };
-    userService.create(newUser);
+    
+    userService.create(newUser)
+      .then(() => loginService.login({ username, password })
+        .then((user) => {
+          window.localStorage.setItem('loggedUser', JSON.stringify(user));
+          setLoading(false);
+          window.location.replace('/');
+        })
+      )
+      .catch(() => {
+        setLoading(false);
+        window.alert('Error creating user, try again with valid credentials');
+      });
   };
 
   const validCredentials = (): boolean => {
-    return email.length > 3 
+    return validator.isEmail(email)
       && username.length > 3 
       && password.length > 3 
       && acceptTerms 
@@ -40,7 +56,10 @@ const RegisterForm: React.FC = () => {
     { key: 'o', text: 'Other', value: Gender.Other },
   ];
 
+  
   return (
+    <>
+    <Loading isLoading={loading} />
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2' inverted textAlign='center'>
@@ -96,6 +115,7 @@ const RegisterForm: React.FC = () => {
         </Message>
       </Grid.Column>
     </Grid>
+    </>
   );
 };
 

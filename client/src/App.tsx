@@ -13,30 +13,24 @@ const App: React.FC = () => {
   const [loggedUser, setLoggedUser] = useState(null);
 
   useEffect(() => {
-    if (window.location.pathname == ('/logout')) {
-      window.localStorage.clear();
-      window.location.replace('/');
-    }
-
     const loggedUserJSON = window.localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
       setLoggedUser(JSON.parse(loggedUserJSON));
     }
   }, []);
 
-
   if (loggedUser) {
     <div className='App' 
       style={{ 
         position: 'relative', 
-        minHeight: '1000px'
+        minHeight: '800px'
       }}
     >
       <Router>
         <Segment
           inverted
           textAlign='center'
-          style={{ minHeight: '120vh', padding: '1em 0em'}}
+          style={{ minHeight: '100vh', padding: '1em 0em'}}
           vertical
         >
         <NavBar />

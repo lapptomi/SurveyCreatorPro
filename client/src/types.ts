@@ -6,7 +6,6 @@ export interface User {
   gender: Gender;
 }
 
-
 export enum Gender {
   Male = 'male',
   Female = 'female',
