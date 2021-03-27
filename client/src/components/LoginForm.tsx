@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FormEvent } from 'react';
 import loginService from '../services/login';
 import { 
   Button, 
@@ -9,25 +8,32 @@ import {
   Message, 
   Segment 
 } from 'semantic-ui-react';
+import Loading from './LoadingScreen';
 
 
 const LoginForm: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
+  const handleSubmit = (): void => {
+    setLoading(true);
+
     loginService.login({ username, password })
       .then((user) => {
         window.localStorage.setItem('loggedUser', JSON.stringify(user));
+        setLoading(false);
         window.location.replace('/');
       })
       .catch(() => {
+        setLoading(false);
         window.alert('Wrong credentials, please try again');
       });
   };
 
   return (
+    <>
+    <Loading isLoading={loading} />
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2' inverted textAlign='center'>
@@ -59,6 +65,7 @@ const LoginForm: React.FC = () => {
         </Message>
       </Grid.Column>
     </Grid>
+    </>
   );
 };
 

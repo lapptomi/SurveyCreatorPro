@@ -12,6 +12,13 @@ interface Token {
   username: string;
 }
 
+const logout = (): void => {
+  if (window.confirm('Are you sure you want to log out?')) {
+    window.localStorage.clear();
+    window.location.replace('/');
+  }
+};
+
 const login = async (credentials: LoginCredentials): Promise<Token> => {
   const { data } = await axios.post(baseUrl, credentials);
   return data;
@@ -19,4 +26,5 @@ const login = async (credentials: LoginCredentials): Promise<Token> => {
 
 export default {
   login,
+  logout
 };

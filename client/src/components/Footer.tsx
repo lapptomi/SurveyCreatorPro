@@ -25,7 +25,7 @@ const Footer: React.FC = () => (
       <Grid divided inverted stackable>
         <Grid.Row>
           <Grid.Column textAlign={'center'} width={8}>
-          <Header inverted as='h3' content='About' />
+          <Header inverted as='h3' content='Info' />
             <List link inverted>
               <List.Item as='a' href={'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}>
                 About The Project
