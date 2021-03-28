@@ -1,15 +1,15 @@
 import axios from 'axios';
-import { User } from '../types';
+import { NewUser, User } from '../types';
 
 const baseUrl = '/api/users';
 
-const getAll = async (): Promise<User[]> => {
+const getAll = async (): Promise<NewUser[]> => {
   const { data } = await axios.get<User[]>(baseUrl);
   return data;
 };
 
-const create = async (newUser: User): Promise<User> => {
-  const { data } = await axios.post<User>(baseUrl, newUser);
+const create = async (newUser: NewUser): Promise<NewUser> => {
+  const { data } = await axios.post<NewUser>(baseUrl, newUser);
   return data;
 };
 

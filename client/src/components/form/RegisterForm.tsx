@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Gender, User } from '../types';
-import userService from '../services/users';
+import { Gender, NewUser } from '../../types';
+import userService from '../../services/users';
 import validator from 'validator';
-import loginService from '../services/login';
+import loginService from '../../services/login';
 import { 
   Button, 
   Form, 
@@ -11,7 +11,7 @@ import {
   Message, 
   Segment 
 } from 'semantic-ui-react';
-import LoadingScreen from './LoadingScreen';
+import LoadingScreen from '../LoadingScreen';
 
 const RegisterForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -24,7 +24,7 @@ const RegisterForm: React.FC = () => {
   const handleSubmit = (): void => {
     setLoading(true);
 
-    const newUser: User = { 
+    const newUser: NewUser = { 
       email, username, password, gender
     };
     

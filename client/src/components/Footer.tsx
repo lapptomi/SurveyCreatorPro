@@ -11,13 +11,13 @@ import {
 
 
 const Footer: React.FC = () => (
+  <footer>
   <Segment 
     inverted 
     vertical 
     style={{ 
       padding: '4em 0em',  
       position: 'absolute',
-      bottom: '0',
       width: '100%',
     }}
   >
@@ -46,6 +46,8 @@ const Footer: React.FC = () => (
       </Grid>
     </Container>
   </Segment>
+  </footer>
+
 );
 
 export default Footer;

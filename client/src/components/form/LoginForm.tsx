@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import loginService from '../services/login';
+import loginService from '../../services/login';
 import { 
   Button, 
   Form, 
@@ -8,7 +8,7 @@ import {
   Message, 
   Segment 
 } from 'semantic-ui-react';
-import LoadingScreen from './LoadingScreen';
+import LoadingScreen from '../LoadingScreen';
 
 
 const LoginForm: React.FC = () => {
