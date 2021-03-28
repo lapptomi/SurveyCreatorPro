@@ -1,4 +1,3 @@
-
 import React from 'react';
 import loginService from '../services/login';
 import { 
@@ -9,7 +8,6 @@ import {
   Icon
  } from 'semantic-ui-react';
 
-
 const NavBar: React.FC = () => {
   const fixed = false;
   const loggedIn = window.localStorage.getItem('loggedUser') != null;
@@ -18,12 +16,12 @@ const NavBar: React.FC = () => {
     <Visibility once={true}>
       <Menu
         inverted={!fixed}
-        pointing={!fixed}
         secondary={!fixed}
         size='large'
       >
       <Container>
         <Menu.Item 
+          color='blue'
           as='a' 
           href='/' 
           active={
@@ -31,24 +29,27 @@ const NavBar: React.FC = () => {
             window.location.pathname !== '/surveys/browse'
           }
         >
-          <Icon name={'home'} />  Home
+        <Icon name={'home'} />  Home
         </Menu.Item>
 
         {loggedIn && 
         <>
-          <Menu.Item 
+          <Menu.Item
+            color='blue'
             as='a' 
             href={'/surveys/create'}
             active={window.location.pathname === '/surveys/create'}
           >
-            <Icon name={'edit outline'} /> Create Survey
+          <Icon name={'edit outline'} /> Create Survey
           </Menu.Item>
+          
           <Menu.Item 
+            color='blue'
             as='a'
             href={'/surveys/browse'}
             active={window.location.pathname === '/surveys/browse'}
           >
-            <Icon name={'list ul'} /> Browse Surveys
+          <Icon name={'list ul'} /> Browse Surveys
           </Menu.Item>
         </>}
 

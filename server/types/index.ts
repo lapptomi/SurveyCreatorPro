@@ -14,7 +14,7 @@ export enum Gender {
   Other = 'other',
 }
 
-export interface NewSurvey {
+export interface Survey {
   id?: number;
   title: string;
   description: string;
@@ -22,3 +22,7 @@ export interface NewSurvey {
   answers?: Array<boolean>; // these will change in future
   results?: Array<string>;
 }
+
+export type NewSurvey = Omit<Survey, 'id'>;
+
+export type SafeUser = Omit<User, 'id' | 'password'>;

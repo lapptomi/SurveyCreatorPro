@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import LoginForm from './components/LoginForm';
+import LoginForm from './components/form/LoginForm';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import { Segment } from 'semantic-ui-react';
-import RegisterForm from './components/RegisterForm';
+import RegisterForm from './components/form/RegisterForm';
 import { 
   BrowserRouter as Router, Route, Switch 
 } from 'react-router-dom';
 import HomePageHeading from './components/HomePageHeading';
+import BrowseSurveysPage from './components/BrowseSurveysPage';
+import CreateSurveyPage from './components/CreateSurveyPage';
+import surveyService from './services/surveys';
 
 const App: React.FC = () => {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -15,34 +18,41 @@ const App: React.FC = () => {
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
-      setLoggedUser(JSON.parse(loggedUserJSON));
+      const user = JSON.parse(loggedUserJSON);
+      setLoggedUser(user);
+      surveyService.setToken(user.token);
     }
   }, []);
 
   if (loggedUser) {
-    <div className='App' 
-      style={{ 
-        position: 'relative', 
-        minHeight: '800px'
-      }}
-    >
+    return (
       <Router>
         <Segment
           inverted
-          textAlign='center'
-          style={{ minHeight: '100vh', padding: '1em 0em'}}
+          style={{ 
+            minHeight: '1000px',
+            minWidth: '480px',
+            padding: '1em 0em',
+            height: '100vh'
+          }}
           vertical
         >
         <NavBar />
           <Switch>
+            <Route path='/surveys/browse'>
+              <BrowseSurveysPage />
+            </Route>
+            <Route path='/surveys/create'>
+              <CreateSurveyPage />
+            </Route>
             <Route path='/'>
               <HomePageHeading />
             </Route>
           </Switch>
+          <Footer />
         </Segment>
-        <Footer />
       </Router>
-    </div>;
+    );
   }
 
   return (
