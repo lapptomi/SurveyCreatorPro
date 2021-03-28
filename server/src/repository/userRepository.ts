@@ -3,12 +3,8 @@ import { pool } from '../config/dbconfig';
 import { NewUser, User } from '../types';
 
 const getAll = async (): Promise<Array<User>> => {
-  try {
-    const result = await pool.query('SELECT * FROM Users');
-    return result.rows as Array<User>;
-  } catch (error) {
-    throw new Error(error);
-  }
+  const result = await pool.query('SELECT * FROM Ussers');
+  return result.rows as Array<User>;
 };
 
 const create = async (user: NewUser): Promise<NewUser> => {

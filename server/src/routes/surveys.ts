@@ -14,36 +14,27 @@ const getTokenFrom = (request: Request): string => {
   return '';
 };
 
-router.get('/', (_req: Request, res: Response) => {
-  surveyRepository.getAll()
-    .then((surveys) => {
-      res.status(200).json(surveys);
-    })
-    .catch((e) => {
-      res.status(400).json((e as Error).message);
-    });
+router.get('/', async (_req: Request, res: Response): Promise<void> => {
+  try {
+    const surveys = await surveyRepository.getAll();
+    res.status(200).json(surveys);
+  } catch (e) {
+    res.status(400).json('Could not get surveys');
+  }
 });
 
-// eslint-disable-next-line consistent-return
-router.post('/', (req: Request, res: Response): void | Response<unknown> => {
+router.post('/', async (req: Request, res: Response): Promise<void> => {
   try {
     const token = getTokenFrom(req);
-
     const decodedToken = jwt.verify(token, process.env.SECRET as string) as User;
     if (!token || !decodedToken.id) {
-      return res.status(401).json({ error: 'token missing or invalid' });
+      throw new Error('token missing or invalid');
     }
-
     const surveyToAdd = toNewSurvey(req.body as NewSurvey);
-    surveyRepository.create(surveyToAdd)
-      .then(() => {
-        return res.status(201).json(surveyToAdd);
-      })
-      .catch((e) => {
-        return res.status(400).json((e as Error).message);
-      });
+    const addedSurvey = await surveyRepository.create(surveyToAdd);
+    res.status(201).json(addedSurvey);
   } catch (e) {
-    return res.status(400).json((e as Error).message);
+    res.status(400).json((e as Error).message);
   }
 });
 

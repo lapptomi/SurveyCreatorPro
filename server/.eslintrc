@@ -13,6 +13,12 @@
     "es6": true
   },
   "rules": {
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ],
     "arrow-body-style": [2, "always"],
     "import/prefer-default-export": "off",
     "no-console": "off",
