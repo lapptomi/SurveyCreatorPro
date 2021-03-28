@@ -22,7 +22,3 @@ export interface NewSurvey {
   answers?: Array<boolean>; // these will change in future
   results?: Array<string>;
 }
-
-export interface Token {
-  token: string;
-}
