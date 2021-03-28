@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import surveyRepository from '../repository/surveyRepository';
-import { NewSurvey, User } from '../types';
+import { NewSurvey, User } from '../../types';
 import { toNewSurvey } from '../utils';
 
 const router = express.Router();

@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import userRepository from '../repository/userRepository';
-import { NewUser } from '../types';
+import { NewUser } from '../../types';
 import { toNewUser } from '../utils';
 
 const router = express.Router();

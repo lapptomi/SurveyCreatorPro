@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import express, { NextFunction, Request, Response } from 'express';
 import { sign } from 'jsonwebtoken';
 import userRepository from '../repository/userRepository';
-import { User } from '../types';
+import { User } from '../../types';
 
 const router = express.Router();
 

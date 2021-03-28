@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { pool } from '../config/dbconfig';
-import { NewUser, User } from '../types';
+import { NewUser, User } from '../../types';
 
 const getAll = async (): Promise<Array<User>> => {
   const result = await pool.query('SELECT * FROM Users');
