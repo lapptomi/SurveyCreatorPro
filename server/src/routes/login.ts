@@ -1,19 +1,22 @@
 import bcrypt from 'bcrypt';
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { sign } from 'jsonwebtoken';
 import userRepository from '../repository/userRepository';
 import { User } from '../types';
 
 const router = express.Router();
 
-router.post('/', async (req: Request, res: Response): Promise<void> => {
+router.post('/', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const userToValidate = req.body as User;
     const user = await userRepository.findByUsername(userToValidate.username);
     const passwordsMatch = await bcrypt.compare(userToValidate.password, user.password);
 
     if (!(user && passwordsMatch)) {
-      throw new Error('Invalid username or password');
+      throw ({
+        name: 'ValidationError',
+        message: 'Invalid username or password',
+      }) as Error;
     }
 
     const userForToken = {
@@ -29,8 +32,8 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
     res.status(200).send({
       token, username: userForToken.username, id: userForToken.id,
     });
-  } catch (e) {
-    res.status(401).send((e as Error).message);
+  } catch (error) {
+    next(error);
   }
 });
 

@@ -6,14 +6,6 @@ import { toNewSurvey } from '../utils';
 
 const router = express.Router();
 
-const getTokenFrom = (request: Request): string => {
-  const authorization = request.get('authorization');
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7);
-  }
-  return '';
-};
-
 router.get('/', async (_req: Request, res: Response): Promise<void> => {
   try {
     const surveys = await surveyRepository.getAll();
@@ -25,11 +17,11 @@ router.get('/', async (_req: Request, res: Response): Promise<void> => {
 
 router.post('/', async (req: Request, res: Response): Promise<void> => {
   try {
-    const token = getTokenFrom(req);
+    const token = req.token as string;
     const decodedToken = jwt.verify(token, process.env.SECRET as string) as User;
-    if (!token || !decodedToken.id) {
-      throw new Error('token missing or invalid');
-    }
+
+    if (!token || !decodedToken.id) throw new Error('token is missing or invalid');
+
     const surveyToAdd = toNewSurvey(req.body as NewSurvey);
     const addedSurvey = await surveyRepository.create(surveyToAdd);
     res.status(201).json(addedSurvey);
