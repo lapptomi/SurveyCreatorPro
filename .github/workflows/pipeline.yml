@@ -22,6 +22,7 @@ jobs:
         uses: cypress-io/github-action@v2
         env:
           TEST_DATABASE_URL: ${{secrets.TEST_DATABASE_URL}}
+          SECRET: ${{secrets.SECRET}}
         with:
           browser: chrome
           headless: true
