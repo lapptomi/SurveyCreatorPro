@@ -49,7 +49,7 @@ const errorHandler = (
       });
       break;
     default:
-      console.log('ERROR = ', error.name);
+      console.log('ERROR = ', error.message);
       next(error);
       break;
   }

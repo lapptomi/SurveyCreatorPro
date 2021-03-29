@@ -67,18 +67,21 @@ const RegisterForm: React.FC = () => {
         <Form size='large' onSubmit={handleSubmit}>
           <Segment stacked inverted>
             <Form.Input 
+              id='email'
               fluid icon='at' 
               iconPosition='left' 
               placeholder='Email' 
               onChange={(({ target }) => setEmail(target.value))}
             />
             <Form.Input 
+              id='username'
               fluid icon='user' 
               iconPosition='left' 
               placeholder='Username' 
               onChange={(({ target }) => setUsername(target.value))}
             />
             <Form.Input
+              id='password'
               fluid
               icon='lock'
               iconPosition='left'
@@ -100,6 +103,7 @@ const RegisterForm: React.FC = () => {
               onClick={() => setAcceptTerms(!acceptTerms)}
             />
             <Button 
+              id='signupbutton'
               color='blue' 
               fluid size='large' 
               type='submit'
