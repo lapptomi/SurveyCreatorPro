@@ -14,7 +14,10 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(`${__dirname}/../build`));
 
-app.use(middleware.reqestPrinter);
+if (process.env.NODE_ENV === 'development') {
+  app.use(middleware.reqestPrinter);
+}
+
 app.use(middleware.tokenExtractor);
 
 app.use('/api/users', userRouter);
