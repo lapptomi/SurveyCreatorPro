@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === 'test') {
 //  As default GET-requests returns React index.html
 // (React router didn't work without this)
 app.use((_req: Request, res: Response) => {
-  res.sendFile('index.html', { root: './dist/build/' });
+  res.sendFile('index.html', { root: './dist/server/build/' });
 });
 
 app.use(middleware.unknownEndpoint);
