@@ -38,7 +38,6 @@ const parseGender = (gender: any): Gender => {
 };
 
 export const toNewUser = (object: NewUser): NewUser => {
-  console.log(object);
   return {
     email: parseEmail(object.email),
     username: parseUsername(object.username),
@@ -62,7 +61,6 @@ const parseDescription = (description: string): string => {
 };
 
 export const toNewSurvey = (object: NewSurvey): NewSurvey => {
-  console.log(object);
   return {
     title: parseTitle(object.title),
     description: parseDescription(object.description),

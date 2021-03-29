@@ -6,4 +6,5 @@
 Environment Variables
 
 DATABASE_URL=[postgresql connection string]  
+TEST_DATABASE_URL=[postgresql connection string for testing database]  
 SECRET=[secret key for jwt tokens]
