@@ -9,7 +9,7 @@
     "dev": "NODE_ENV=development ts-node-dev server/index.ts",
     "start": "tsc && node dist/server/index.js",
     "start:prod": "NODE_ENV=production node dist/server/index.js",
-    "build:ui": "cd client && npm install && npm run build --prod && cp -r build ../dist/",
+    "build:ui": "cd client && npm install && npm run build --prod && cp -r build ../dist/server/",
     "build:full": "rm -rf dist && npm run tsc && npm run build:ui",
     "logs:prod": "heroku logs --tail",
     "eslint": "eslint --ext=.ts,.tsx  .",
