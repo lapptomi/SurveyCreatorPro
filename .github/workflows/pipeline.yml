@@ -8,6 +8,7 @@ on:
 jobs:
   basic_pipeline:
     runs-on: ubuntu-18.04
+    
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -19,8 +20,11 @@ jobs:
         run: npm run eslint
       - name: e2e tests
         uses: cypress-io/github-action@v2
+        env:
+          TEST_DATABASE_URL: ${{secrets.TEST_DATABASE_URL}}
         with:
           browser: chrome
           headless: true
           start: npm run start:test
+          
           wait-on: http://localhost:3000
