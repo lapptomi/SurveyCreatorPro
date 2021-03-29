@@ -33,8 +33,16 @@ const findByUsername = async (username: string): Promise<User> => {
   return result.rows[0] as User;
 };
 
+const deleteAll = async (): Promise<void> => {
+  if (process.env.NODE_ENV === 'test') {
+    const query = ('DELETE FROM Users');
+    await pool.query(query);
+  }
+};
+
 export default {
   getAll,
   create,
   findByUsername,
+  deleteAll,
 };
