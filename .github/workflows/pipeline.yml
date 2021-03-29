@@ -22,5 +22,4 @@ jobs:
         with:
           command: npm run test:e2e
           start: npm run start:test
-          wait-on: http://localhost:3000
-          wait-on: http://localhost:3001
+          wait-on: http://localhost:3000 && http://localhost:3001
