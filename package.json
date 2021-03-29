@@ -13,7 +13,7 @@
     "build:full": "rm -rf dist && npm run tsc && npm run build:ui",
     "logs:prod": "heroku logs --tail",
     "eslint": "eslint --ext=.ts,.tsx  .",
-    "start:test": "concurrently \"cd client && npm run start\" \"NODE_ENV=test ts-node-dev server/index.ts\"",
+    "start:test": "concurrently \"cd client && npm run start\" \"NODE_ENV=test ts-node server/index.ts\"",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run"
   },
