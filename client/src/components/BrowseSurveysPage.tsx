@@ -4,7 +4,6 @@ import SurveyList from './SurveyList';
 
 const BrowseSurveysPage: React.FC = () => {
   return (
-    <>
     <Segment
       inverted
       textAlign='left'
@@ -47,10 +46,7 @@ const BrowseSurveysPage: React.FC = () => {
       </Header>
     <SurveyList />
     </Container>
-  </Segment>
-    </>
-
-    
+    </Segment>
   );
 };
 

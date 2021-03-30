@@ -1,19 +1,27 @@
 import React from 'react';
-import { Segment, Container } from 'semantic-ui-react';
+import {  Grid, Header, Segment } from 'semantic-ui-react';
 import CreateSurveyForm from './form/CreateSurveyForm';
 
 const CreateSurveyPage: React.FC = () => {
   return (
-    <Segment
-      inverted
-      textAlign='left'
-      style={{ minHeight: 700, padding: '1em 0em' }}
-      vertical
-    >
-    <Container text>
+    <Segment inverted style={{
+      paddingTop: 120,
+    }}>
+      <Grid stackable>
+        <Grid.Row >
+          <Grid.Column width={16}>
+          <Header
+            textAlign='center'
+            as='h1'
+            content='Create New Survey'
+            size='huge'
+            inverted
+          />
+        </Grid.Column>
+        </Grid.Row>
+      </Grid>        
       <CreateSurveyForm />
-    </Container>
-  </Segment>
+    </Segment>
   );
 };
 
