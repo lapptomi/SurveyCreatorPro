@@ -65,7 +65,7 @@ const HomePage: React.FC = () => {
         <Grid.Column textAlign='center' width={8}>
           <Segment vertical inverted textAlign='left' style={{ padding: '6em' }} stacked>
           <Header as='h1' style={{ fontSize: '2.3em' }}>
-            <Icon name='question' size='tiny'/>Why SurveyMakerPro?
+            <Icon name='question' size='tiny'/>What is SurveyMakerPro?
           </Header>
             <p style={{ fontSize: '1.33em' }}>
               You can make private or public online surveys 
