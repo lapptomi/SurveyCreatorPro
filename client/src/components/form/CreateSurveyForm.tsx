@@ -3,6 +3,7 @@ import { NewSurvey } from '../../types';
 import surveyService from '../../services/surveys';
 import { 
   Button, 
+  Container, 
   Form, 
   Grid, 
   Header, 
@@ -42,17 +43,17 @@ const CreateSurveyForm: React.FC = () => {
 
   return (
     <>
-      <LoadingScreen isLoading={loading} />
-      <Grid textAlign='center' verticalAlign='middle' floated='left'>
-        <Grid.Column style={{ 
-            maxWidth: 450,
-            marginTop: 100,
-            align: 'left'
-          }}
+    <LoadingScreen isLoading={loading} />
+    <Container>
+      <Grid textAlign='left' floated='left' stackable>
+        <Grid.Row style={{ padding: 80 }}>
+          <Grid.Column 
+            width={8}
+            style={{ 
+              maxWidth: 450,
+              align: 'left'
+            }}
           >
-          <Header as='h1' inverted textAlign='center'>
-            Create New Survey
-          </Header>
           <Form size='large' onSubmit={handleSubmit}>
             <Segment stacked inverted>
               <Form.Input 
@@ -68,31 +69,63 @@ const CreateSurveyForm: React.FC = () => {
                 placeholder='Tell something about this survey...' 
                 onChange={(({ target }) => setDescription(target.value))}
               />
-              
               <Form.Group grouped>
-                <Header inverted>
-                  Make this survey private?
-                </Header>
-                <Radio toggle checked={!isPrivate}
+              <Header inverted as='span' style={{ 
+                paddingRight: 20
+              }}>
+                Make this survey private?
+              </Header>
+              <p>
+                When survey is set to private, 
+                other people cannot access them without invitation
+              </p>
+              <Form.Field>
+                <Radio
+                  label='Yes'
+                  name='radioGroup'
+                  checked={!isPrivate}
                   onChange={() => {
-                    setIsPrivate(!isPrivate);
+                    setIsPrivate(false);
+                    console.log(isPrivate);
+                  }}              
+                />
+              </Form.Field>
+              <Form.Field>
+                <Radio
+                  label='No'
+                  name='radioGroup'
+                  checked={isPrivate}
+                  onChange={() => {
+                    setIsPrivate(true);
                     console.log(isPrivate);
                   }}
                 />
-              </Form.Group>
-
-              <Button 
-                color='blue' 
-                fluid size='large' 
-                type='submit'
-                disabled={!validCredentials()}
-              >
-                Create
-              </Button>
+              </Form.Field>
+            </Form.Group>
             </Segment>
           </Form>
         </Grid.Column>
+          <Grid.Column 
+            width={8}
+            textAlign={'center'} 
+          >
+            <Header inverted as='h1' content='Questions' />
+            <Header inverted as='h3' content='Coming soon...' />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row centered>
+          <Button 
+            style={{ maxWidth: 400 }}
+            color='blue' 
+            fluid size='large' 
+            type='submit'
+            disabled={!validCredentials()}
+          >
+            Create
+          </Button>
+        </Grid.Row>
       </Grid>
+    </Container>
     </>
   );
 };

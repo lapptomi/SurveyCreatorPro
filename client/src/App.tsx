@@ -26,13 +26,13 @@ const App: React.FC = () => {
 
   if (loggedUser) {
     return (
-      <Router>
+        <Router>
         <Segment
           inverted
           style={{ 
             minHeight: '1000px',
-            minWidth: '480px',
-            padding: '1em 0em',
+            minWidth: '600px',
+            padding: 10,
             height: '100vh'
           }}
           vertical
@@ -43,14 +43,14 @@ const App: React.FC = () => {
               <BrowseSurveysPage />
             </Route>
             <Route path='/surveys/create'>
-              <CreateSurveyPage />
+                <CreateSurveyPage />
             </Route>
             <Route path='/'>
               <HomePageHeading />
             </Route>
-          </Switch>
+          </Switch>   
+        </Segment> 
           <Footer />
-        </Segment>
       </Router>
     );
   }
@@ -62,28 +62,28 @@ const App: React.FC = () => {
         minHeight: '1000px'
       }}
     >
-      <Router>
-        <Segment
-          inverted
-          textAlign='center'
-          style={{ minHeight: '120vh', padding: '1em 0em'}}
-          vertical
-        >
-          <NavBar />
-            <Switch>
-              <Route path='/register'>
-                <RegisterForm />
-              </Route>
-              <Route path={['/login', '/testurl']}>
-                <LoginForm />
-              </Route>
-              <Route path='/'>
-                <HomePageHeading />
-              </Route>
-            </Switch>
-          </Segment>
-        <Footer />
-      </Router>
+    <Router>
+      <Segment
+        inverted
+        textAlign='center'
+        style={{ minHeight: '120vh', padding: '1em 0em'}}
+        vertical
+      >
+        <NavBar />
+          <Switch>
+            <Route path='/register'>
+              <RegisterForm />
+            </Route>
+            <Route path={['/login', '/testurl']}>
+              <LoginForm />
+            </Route>
+            <Route path='/'>
+              <HomePageHeading />
+            </Route>
+          </Switch>
+        </Segment>
+      <Footer />
+    </Router>
     </div>
   );
 };
