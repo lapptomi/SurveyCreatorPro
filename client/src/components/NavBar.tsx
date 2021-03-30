@@ -5,7 +5,8 @@ import {
   Menu, 
   Container, 
   Button, 
-  Icon
+  Icon,
+  Segment
  } from 'semantic-ui-react';
 
 const NavBar: React.FC = () => {
@@ -13,71 +14,74 @@ const NavBar: React.FC = () => {
   const loggedIn = window.localStorage.getItem('loggedUser') != null;
 
   return (
-    <Visibility once={true}>
-      <Menu
-        inverted={!fixed}
-        secondary={!fixed}
-        size='large'
-      >
-      <Container>
-        <Menu.Item 
-          color='blue'
-          as='a' 
-          href='/' 
-          active={
-            window.location.pathname !== '/surveys/create' && 
-            window.location.pathname !== '/surveys/browse'
-          }
+    <Visibility once={!true}>
+      <Segment inverted vertical>
+        <Menu
+          inverted={!fixed}
+          secondary={!fixed}
+          size='large'
         >
-        <Icon name={'home'} />  Home
-        </Menu.Item>
-
-        {loggedIn && 
-        <>
-          <Menu.Item
-            color='blue'
-            as='a' 
-            href={'/surveys/create'}
-            active={window.location.pathname === '/surveys/create'}
-          >
-          <Icon name={'edit outline'} /> Create Survey
-          </Menu.Item>
-          
+        <Container>
           <Menu.Item 
             color='blue'
-            as='a'
-            href={'/surveys/browse'}
-            active={window.location.pathname === '/surveys/browse'}
-          >
-          <Icon name={'list ul'} /> Browse Surveys
-          </Menu.Item>
-        </>}
-
-        <Menu.Item position='right'>
-          <Button 
-            color='black'
-            as='a'
-            href={loggedIn ? '/profile' : '/login'}
-            inverted={fixed}
-          >
-            {loggedIn ? 'Profile' : 'Log in'}
-          </Button>
-          <Button
-            color='black'
-            as='a'
-            onClick={loggedIn 
-              ? loginService.logout 
-              : () => window.location.replace('/register')
+            as='a' 
+            href='/' 
+            active={
+              loggedIn &&
+              window.location.pathname !== '/surveys/create' && 
+              window.location.pathname !== '/surveys/browse'
             }
-            inverted={fixed} 
-            primary={fixed} 
-            style={{ marginLeft: '0.5em' }}
           >
-            {loggedIn ? 'Log out' : 'Sign Up'}
-          </Button>
-        </Menu.Item>
-      </Container>
-      </Menu>
+          <Icon name={'home'} /> Home
+          </Menu.Item>
+
+          {loggedIn && 
+          <>
+            <Menu.Item
+              color='blue'
+              as='a' 
+              href={'/surveys/create'}
+              active={window.location.pathname === '/surveys/create'}
+            >
+            <Icon name={'edit outline'} /> Create Survey
+            </Menu.Item>
+            
+            <Menu.Item 
+              color='blue'
+              as='a'
+              href={'/surveys/browse'}
+              active={window.location.pathname === '/surveys/browse'}
+            >
+            <Icon name={'list ul'} /> Browse Surveys
+            </Menu.Item>
+          </>}
+
+          <Menu.Item position='right'>
+            <Button 
+              color='black'
+              as='a'
+              href={loggedIn ? '/profile' : '/login'}
+              inverted={fixed}
+            >
+              {loggedIn ? 'Profile' : 'Log in'}
+            </Button>
+            <Button
+              color='black'
+              as='a'
+              onClick={loggedIn 
+                ? loginService.logout 
+                : () => window.location.replace('/register')
+              }
+              inverted={fixed} 
+              primary={fixed} 
+              style={{ marginLeft: '0.5em' }}
+            >
+              {loggedIn ? 'Log out' : 'Sign Up'}
+            </Button>
+          </Menu.Item>
+        </Container>
+        </Menu>
+      </Segment>
     </Visibility>
   );
 };
