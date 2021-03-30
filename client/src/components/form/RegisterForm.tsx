@@ -59,64 +59,66 @@ const RegisterForm: React.FC = () => {
   return (
     <>
     <LoadingScreen isLoading={loading} />
-    <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as='h2' inverted textAlign='center'>
-          Create New Account
-        </Header>
-        <Form size='large' onSubmit={handleSubmit}>
-          <Segment stacked inverted>
-            <Form.Input 
-              id='email'
-              fluid icon='at' 
-              iconPosition='left' 
-              placeholder='Email' 
-              onChange={(({ target }) => setEmail(target.value))}
-            />
-            <Form.Input 
-              id='username'
-              fluid icon='user' 
-              iconPosition='left' 
-              placeholder='Username' 
-              onChange={(({ target }) => setUsername(target.value))}
-            />
-            <Form.Input
-              id='password'
-              fluid
-              icon='lock'
-              iconPosition='left'
-              placeholder='Password'
-              type='password'
-              onChange={(({ target }) => setPassword(target.value))}
-            />
-            <Form.Group widths='equal'>
-              <Form.Select
-                options={genderOptions}
-                placeholder='Other'
-                onChange={((e, data) => setGender(data.value as Gender))}
+    <Grid textAlign='center' style={{ minHeight: '100vh' }} verticalAlign='middle'>
+      <Grid.Row color='black'>
+        <Grid.Column style={{ maxWidth: 450 }} width={16}>
+          <Header as='h2' inverted textAlign='center'>
+            Create New Account
+          </Header>
+          <Form size='large' onSubmit={handleSubmit}>
+            <Segment stacked inverted>
+              <Form.Input 
+                id='email'
+                fluid icon='at' 
+                iconPosition='left' 
+                placeholder='Email' 
+                onChange={(({ target }) => setEmail(target.value))}
               />
-            </Form.Group>
-            <Form.Checkbox
-              inline
-              label='I agree to the terms and something...'
-              required
-              onClick={() => setAcceptTerms(!acceptTerms)}
-            />
-            <Button 
-              id='signupbutton'
-              color='blue' 
-              fluid size='large' 
-              type='submit'
-              disabled={!validCredentials()}
-            >
-              Sign Up
-            </Button>
-          </Segment>
-        </Form>
-        <Message color={'black'}>
-          Already have an account? <a href='/login'>Log in here</a>
-        </Message>
-      </Grid.Column>
+              <Form.Input 
+                id='username'
+                fluid icon='user' 
+                iconPosition='left' 
+                placeholder='Username' 
+                onChange={(({ target }) => setUsername(target.value))}
+              />
+              <Form.Input
+                id='password'
+                fluid
+                icon='lock'
+                iconPosition='left'
+                placeholder='Password'
+                type='password'
+                onChange={(({ target }) => setPassword(target.value))}
+              />
+              <Form.Group widths='equal'>
+                <Form.Select
+                  options={genderOptions}
+                  placeholder='Other'
+                  onChange={((e, data) => setGender(data.value as Gender))}
+                />
+              </Form.Group>
+              <Form.Checkbox
+                inline
+                label='I agree to the terms and something...'
+                required
+                onClick={() => setAcceptTerms(!acceptTerms)}
+              />
+              <Button 
+                id='signupbutton'
+                color='blue' 
+                fluid size='large' 
+                type='submit'
+                disabled={!validCredentials()}
+              >
+                Sign Up
+              </Button>
+            </Segment>
+          </Form>
+          <Message color={'black'}>
+            Already have an account? <a href='/login'>Log in here</a>
+          </Message>
+        </Grid.Column>
+      </Grid.Row>
     </Grid>
     </>
   );

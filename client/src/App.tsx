@@ -7,9 +7,9 @@ import RegisterForm from './components/form/RegisterForm';
 import { 
   BrowserRouter as Router, Route, Switch 
 } from 'react-router-dom';
-import HomePageHeading from './components/HomePageHeading';
-import BrowseSurveysPage from './components/BrowseSurveysPage';
-import CreateSurveyPage from './components/CreateSurveyPage';
+import HomePage from './components/pages/HomePage';
+import BrowseSurveysPage from './components/pages/BrowseSurveysPage';
+import CreateSurveyPage from './components/pages/CreateSurveyPage';
 import surveyService from './services/surveys';
 
 const App: React.FC = () => {
@@ -26,62 +26,56 @@ const App: React.FC = () => {
 
   if (loggedUser) {
     return (
-        <Router>
-        <Segment
-          inverted
+      <Router>
+        <div 
+          className='App' 
           style={{ 
-            minHeight: '1000px',
-            minWidth: '600px',
-            padding: 10,
-            height: '100vh'
+            minHeight: '100vh',
           }}
-          vertical
         >
-        <NavBar />
-          <Switch>
-            <Route path='/surveys/browse'>
-              <BrowseSurveysPage />
-            </Route>
-            <Route path='/surveys/create'>
-                <CreateSurveyPage />
-            </Route>
-            <Route path='/'>
-              <HomePageHeading />
-            </Route>
-          </Switch>   
+          <NavBar />
+        <Segment vertical>
+        <Switch>
+          <Route path='/surveys/browse'>
+            <BrowseSurveysPage />
+          </Route>
+          <Route path='/surveys/create'>
+            <CreateSurveyPage />
+          </Route>
+          <Route path='/'>
+            <HomePage />
+          </Route>
+        </Switch> 
         </Segment> 
-          <Footer />
+          <Footer /> 
+        </div>
       </Router>
     );
   }
 
   return (
-    <div className='App' 
+    <div 
+      className='App' 
       style={{ 
-        position: 'relative', 
-        minHeight: '1000px'
+        minHeight: '100vh',
       }}
     >
     <Router>
-      <Segment
-        inverted
-        textAlign='center'
-        style={{ minHeight: '120vh', padding: '1em 0em'}}
-        vertical
-      >
-        <NavBar />
-          <Switch>
-            <Route path='/register'>
-              <RegisterForm />
-            </Route>
-            <Route path={['/login', '/testurl']}>
-              <LoginForm />
-            </Route>
-            <Route path='/'>
-              <HomePageHeading />
-            </Route>
-          </Switch>
-        </Segment>
+      <NavBar />
+      <Segment vertical>
+      <Switch>
+        <Route path='/register'>
+          <RegisterForm />
+        </Route>
+        <Route path='/login'>
+          <LoginForm />
+        </Route>
+        <Route path='/'>
+          <HomePage />
+        </Route>
+      </Switch>
+       
+      </Segment> 
       <Footer />
     </Router>
     </div>
