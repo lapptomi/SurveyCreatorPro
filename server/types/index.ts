@@ -15,10 +15,11 @@ export enum Gender {
 }
 
 export interface Survey {
-  id?: number;
+  id: number;
   title: string;
   description: string;
-  questions?: Array<string>;
+  questions: Array<string>;
+  private: boolean;
   answers?: Array<boolean>; // these will change in future
   results?: Array<string>;
 }

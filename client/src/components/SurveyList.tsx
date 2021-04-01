@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Segment, List, Container, Header, Icon } from 'semantic-ui-react';
-import { Survey } from '../../../server/types';
 import surveyService from '../services/surveys';
+import { NewSurvey } from '../types';
 import LoadingScreen from './LoadingScreen';
 
 const SurveyList: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [surveys, setSurveys] = useState<Survey[]>([]);
+  const [surveys, setSurveys] = useState<NewSurvey[]>([]);
 
   useEffect(() => {
     surveyService.getAll()

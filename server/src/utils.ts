@@ -60,9 +60,21 @@ const parseDescription = (description: string): string => {
   return description;
 };
 
+const parseQuestions = (questions: string[]): string[] => {
+  Object.values(questions).forEach((question) => {
+    if (!isString(question) || question.length < 4) {
+      throw new Error('Incorrect or missing questions');
+    }
+  });
+
+  return questions;
+};
+
 export const toNewSurvey = (object: NewSurvey): NewSurvey => {
   return {
     title: parseTitle(object.title),
     description: parseDescription(object.description),
+    questions: parseQuestions(object.questions),
+    private: object.private,
   };
 };

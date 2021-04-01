@@ -11,7 +11,7 @@ import {
 const HomePage: React.FC = () => {
   const loggedIn = window.localStorage.getItem('loggedUser') !== null;
   return (
-    <Grid stackable style={{ minHeight: '100vh', minWidth: '600px' }}>
+    <Grid style={{ minHeight: '100vh' }}>
       <Grid.Row centered color='blue'>
         <Segment
           vertical
@@ -61,9 +61,9 @@ const HomePage: React.FC = () => {
         </Segment>
       </Grid.Row>
 
-      <Grid.Row color='black' style={{ paddingTop: 50 }}>
-        <Grid.Column textAlign='center' width={8}>
-          <Segment vertical inverted textAlign='left' style={{ padding: '6em' }} stacked>
+      <Grid.Row color='black' style={{ padding: '100px' }} centered>
+        <Grid.Column textAlign='center' computer={8} mobile={16}>
+          <Segment vertical inverted textAlign='left'  stacked>
           <Header as='h1' style={{ fontSize: '2.3em' }}>
             <Icon name='question' size='tiny'/>What is SurveyMakerPro?
           </Header>
@@ -74,8 +74,8 @@ const HomePage: React.FC = () => {
           </Segment>
         </Grid.Column>
 
-        <Grid.Column textAlign='center' width={8}>
-          <Segment vertical inverted textAlign='left' style={{ padding: '6em' }} stacked>
+        <Grid.Column textAlign='center' computer={8} mobile={16}>
+          <Segment vertical inverted textAlign='left'  stacked>
             <Header as='h1'style={{ fontSize: '2.5em' }}>
               <Icon name='puzzle' /> Easy-To-Use
             </Header>
@@ -98,15 +98,7 @@ const HomePage: React.FC = () => {
                   fontSize: '3em',
                 }}
               />
-              <Header
-                as='h2'
-                content='Create New Survey Or Sign Up For Free'
-                style={{
-                  fontSize: '1.7em',
-                  fontWeight: 'normal',
-                  marginBottom: '1em',
-                }}
-              />
+             
               <Button 
                 color='blue'
                 as='a' 
