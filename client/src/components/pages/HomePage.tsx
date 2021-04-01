@@ -68,8 +68,8 @@ const HomePage: React.FC = () => {
             <Icon name='question' size='tiny'/>What is SurveyMakerPro?
           </Header>
             <p style={{ fontSize: '1.33em' }}>
-              You can make private or public online surveys 
-              / research with it, where other people can answer.
+              SurveyMakerPro is a tool for making surveys / research online easily,
+              where other people can answer.
             </p>
           </Segment>
         </Grid.Column>
@@ -98,8 +98,8 @@ const HomePage: React.FC = () => {
                   fontSize: '3em',
                 }}
               />
-             
-              <Button 
+              <Button
+                style={{ marginTop: 40 }}
                 color='blue'
                 as='a' 
                 href={loggedIn ? '/surveys/create' : '/login'} 
@@ -111,7 +111,6 @@ const HomePage: React.FC = () => {
             </Container>
           </Segment>
         </Grid.Column>
-        
       </Grid.Row>
     </Grid>
   );

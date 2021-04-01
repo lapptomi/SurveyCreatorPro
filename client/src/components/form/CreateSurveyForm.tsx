@@ -20,28 +20,23 @@ const CreateSurveyForm: React.FC = () => {
   const [question, setQuestion] = useState<string>('');
  
   const handleSubmit = () => {
-    console.log('asd');
     const newSurvey: NewSurvey = {
       title: title,
       description: description,
       questions: questions,
       private: isPrivate,
     };
-    console.log('SUEVEY=', JSON.stringify(newSurvey));
-    
+
     surveyService.create(newSurvey)
       .then(() => {
         window.alert('New survey created!');
       })
       .catch((e) => {
-        console.log('error', (e as Error).message);
         window.alert('Error creating survey, try again with valid credentials');
       });
-      
   };
 
-  const addQuestion = (event: FormEvent) => {
-    event.preventDefault();
+  const addQuestion = () => {
     if (questions.length >= 5) {
       window.alert('Max number of questions is 5 at the moment');
       return;
@@ -126,6 +121,7 @@ const CreateSurveyForm: React.FC = () => {
             <b> No</b>
           </Form.Field>
         </Form.Group> 
+        
         <Button
           style={{ marginTop: 20 }}
           color='blue' 
