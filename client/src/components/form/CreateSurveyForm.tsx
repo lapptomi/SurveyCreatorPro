@@ -121,7 +121,6 @@ const CreateSurveyForm: React.FC = () => {
             <b> No</b>
           </Form.Field>
         </Form.Group> 
-        
         <Button
           style={{ marginTop: 20 }}
           color='blue' 
