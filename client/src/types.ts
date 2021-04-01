@@ -18,9 +18,15 @@ export interface Survey {
   id?: number;
   title: string;
   description: string;
-  questions?: Array<string>;
-  answers?: Array<boolean>; // these will change in future
+  private: boolean;
+  questions: Array<string>;
+  answers?: Array<number>; // these will change in future
   results?: Array<string>;
+}
+
+export interface Question {
+  title: string;
+  answer: number;
 }
 
 export type NewSurvey = Omit<Survey, 'id'>;

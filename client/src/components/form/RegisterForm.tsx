@@ -57,9 +57,8 @@ const RegisterForm: React.FC = () => {
   ];
 
   return (
-    <>
-    <LoadingScreen isLoading={loading} />
     <Grid textAlign='center' style={{ minHeight: '100vh' }} verticalAlign='middle'>
+      <LoadingScreen isLoading={loading} />
       <Grid.Row color='black'>
         <Grid.Column style={{ maxWidth: 450 }} width={16}>
           <Header as='h2' inverted textAlign='center'>
@@ -120,7 +119,6 @@ const RegisterForm: React.FC = () => {
         </Grid.Column>
       </Grid.Row>
     </Grid>
-    </>
   );
 };
 

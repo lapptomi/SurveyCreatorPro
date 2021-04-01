@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import surveyRepository from '../repository/surveyRepository';
 import { NewSurvey, User } from '../../types';
 import { toNewSurvey } from '../utils';
+import questionRepository from '../repository/questionRepository';
 
 const router = express.Router();
 
@@ -24,8 +25,14 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
 
     const surveyToAdd = toNewSurvey(req.body as NewSurvey);
     const addedSurvey = await surveyRepository.create(surveyToAdd);
+
+    surveyToAdd.questions.forEach(async (question) => {
+      await questionRepository.create(question, addedSurvey.id);
+    });
+
     res.status(201).json(addedSurvey);
   } catch (e) {
+    console.log((e as Error).message);
     res.status(400).json((e as Error).message);
   }
 });

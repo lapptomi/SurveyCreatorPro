@@ -7,6 +7,7 @@ import surveyRouter from './routes/surveys';
 import middleware from './middleware';
 import userRepository from './repository/userRepository';
 import surveyRepository from './repository/surveyRepository';
+import questionRepository from './repository/questionRepository';
 
 const app = express();
 
@@ -27,6 +28,8 @@ app.use('/api/surveys', surveyRouter);
 if (process.env.NODE_ENV === 'test') {
   app.get('/api/testing/reset', async (_req: Request, res: Response) => {
     try {
+      await questionRepository.deleteAll();
+
       await userRepository.deleteAll();
       await surveyRepository.deleteAll();
       res.status(204).end();

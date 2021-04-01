@@ -30,10 +30,10 @@ const App: React.FC = () => {
         <div 
           className='App' 
           style={{ 
-            minHeight: '100vh',
+            minWidth: '768px'
           }}
         >
-          <NavBar />
+        <NavBar />
         <Segment vertical>
         <Switch>
           <Route path='/surveys/browse'>
@@ -54,31 +54,30 @@ const App: React.FC = () => {
   }
 
   return (
-    <div 
-      className='App' 
-      style={{ 
-        minHeight: '100vh',
-      }}
-    >
     <Router>
+      <div 
+        className='App' 
+        style={{ 
+          minWidth: '768px',
+        }}
+      >
       <NavBar />
-      <Segment vertical>
-      <Switch>
-        <Route path='/register'>
-          <RegisterForm />
-        </Route>
-        <Route path='/login'>
-          <LoginForm />
-        </Route>
-        <Route path='/'>
-          <HomePage />
-        </Route>
-      </Switch>
-       
-      </Segment> 
-      <Footer />
+        <Segment vertical>
+          <Switch>
+            <Route path='/register'>
+              <RegisterForm />
+            </Route>
+            <Route path='/login'>
+              <LoginForm />
+            </Route>
+            <Route path='/'>
+              <HomePage />
+            </Route>
+          </Switch>
+        </Segment> 
+      <Footer /> 
+      </div>
     </Router>
-    </div>
   );
 };
 

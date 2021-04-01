@@ -28,7 +28,6 @@ describe('When logged in', function() {
 
   it('user can log out', function() {
     cy.contains('Log out').click()
-    cy.contains('Home')
     cy.contains('Log in')
     cy.contains('Sign Up')
   })

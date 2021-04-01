@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Segment, List, Container, Header, Icon } from 'semantic-ui-react';
-import { Survey } from '../../../server/types';
 import surveyService from '../services/surveys';
+import { NewSurvey } from '../types';
 import LoadingScreen from './LoadingScreen';
 
 const SurveyList: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [surveys, setSurveys] = useState<Survey[]>([]);
+  const [surveys, setSurveys] = useState<NewSurvey[]>([]);
 
   useEffect(() => {
     surveyService.getAll()
@@ -32,13 +32,13 @@ const SurveyList: React.FC = () => {
         <Header inverted as='h1' content='Surveys' />
         <List divided inverted relaxed>
           {Object.values(surveys).map((survey, i) => 
-            <List.Item key={i}>
-              <Icon name='book'/>
-              <List.Content>
-                <List.Header>Title: {survey.title}</List.Header>
-                Description: {survey.description}
-              </List.Content>
-            </List.Item>
+          <List.Item key={i}>
+            <Icon name='book'/>
+            <List.Content>
+              <List.Header>Title: {survey.title}</List.Header>
+              Description: {survey.description}
+            </List.Content>
+          </List.Item>
           )}
         </List>
       </Segment>

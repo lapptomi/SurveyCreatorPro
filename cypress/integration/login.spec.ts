@@ -20,7 +20,7 @@ describe('Login', function() {
   
 
   it('front page can be opened', function() {
-    cy.contains('Home')
+    cy.contains('Log in')
     cy.contains('SurveyMakerPro')
   });
 
