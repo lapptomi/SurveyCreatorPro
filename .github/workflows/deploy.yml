@@ -1,0 +1,23 @@
+name: Deploy pull request
+
+on:
+  pull_request:
+    types: [closed]
+    
+jobs:
+  basic_pipeline:
+    runs-on: ubuntu-18.04
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "tsoha-app-2021"
+          heroku_email: ${{secrets.EMAIL}}
+          healthcheck: "https://tsoha-app-2021.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
