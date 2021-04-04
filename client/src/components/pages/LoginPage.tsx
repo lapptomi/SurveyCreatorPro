@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { Button, Form, Grid, Header, Message, Segment } from "semantic-ui-react";
 import loginService from '../../services/login';
-import { 
-  Button, 
-  Form, 
-  Grid, 
-  Header, 
-  Message, 
-  Segment 
-} from 'semantic-ui-react';
-import LoadingScreen from '../LoadingScreen';
+import LoadingScreen from "../LoadingScreen";
 
-
-const LoginForm: React.FC = () => {
+const LoginPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -33,16 +25,15 @@ const LoginForm: React.FC = () => {
 
   return (
     <>
-    <LoadingScreen isLoading={loading} />
+      <LoadingScreen isLoading={loading} />
       <Grid textAlign='center' style={{ minHeight: '100vh' }} verticalAlign='middle'>
         <Grid.Row color='black'>
-
           <Grid.Column style={{ maxWidth: 450 }} width={16}>
             <Header as='h2' inverted textAlign='center'>
               Log in to your account
             </Header>
             <Form size='large' onSubmit={handleSubmit}>
-              <Segment stacked inverted>
+              <Segment vertical inverted>
                 <Form.Input 
                   id='username'
                   fluid icon='user' 
@@ -64,15 +55,14 @@ const LoginForm: React.FC = () => {
                 </Button>
               </Segment>
             </Form>
-          <Message color={'black'}>
-            Don&apos;t have an account yet? <a href='/register'>Sign Up here</a>
-          </Message>
-        </Grid.Column>
-
+            <Message color={'black'}>
+              Don&apos;t have an account yet? <a href='/register'>Sign Up here</a>
+            </Message>
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     </>
   );
 };
-
-export default LoginForm;
+ 
+export default LoginPage;
