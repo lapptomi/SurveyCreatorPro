@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import { Segment } from 'semantic-ui-react';
-import RegisterForm from './components/form/RegisterForm';
 import {
   BrowserRouter as Router, Route, Switch
 } from 'react-router-dom';
@@ -11,6 +10,7 @@ import BrowseSurveysPage from './components/pages/BrowseSurveysPage';
 import CreateSurveyPage from './components/pages/CreateSurveyPage';
 import surveyService from './services/surveys';
 import LoginPage from './components/pages/LoginPage';
+import RegisterPage from './components/pages/RegisterPage';
 
 const App: React.FC = () => {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -24,7 +24,6 @@ const App: React.FC = () => {
     }
   }, []);
 
-
   return (
     <Router>
       <div
@@ -37,9 +36,9 @@ const App: React.FC = () => {
         }}
       >
       <NavBar />
-
         <Segment vertical>
           {loggedUser
+            // Use different routes if user is logged in
             ? (
               <Switch>
                 <Route path='/surveys/browse'>
@@ -56,7 +55,7 @@ const App: React.FC = () => {
             : (
               <Switch>
                 <Route path='/register'>
-                  <RegisterForm />
+                  <RegisterPage />
                 </Route>
                 <Route path='/login'>
                   <LoginPage />
@@ -66,10 +65,10 @@ const App: React.FC = () => {
                 </Route>
               </Switch>
             )
-          } <Footer />
+          } 
         </Segment>
-     
       </div>
+      <Footer />
     </Router>
   );
 };
