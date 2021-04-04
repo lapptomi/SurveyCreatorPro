@@ -46,7 +46,7 @@ app.get('/health', (_req: Request, res: Response) => {
 
 //  As default GET-requests returns React index.html
 // (React router didn't work without this)
-app.use((_req: Request, res: Response) => {
+app.get('*', (_req: Request, res: Response) => {
   res.sendFile('index.html', { root: './dist/server/build/' });
 });
 
