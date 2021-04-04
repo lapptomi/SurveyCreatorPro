@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'test') {
       res.status(400).json((e as Error).message);
     }
   });
-}
+};
 //  As default GET-requests returns React index.html
 // (React router didn't work without this)
 app.use((_req: Request, res: Response) => {
@@ -46,7 +46,7 @@ app.use((_req: Request, res: Response) => {
 });
 
 app.get('/health', (_req: Request, res: Response) => {
-  res.send('wrong');
+  res.send('ok');
 });
 
 app.use(middleware.unknownEndpoint);
