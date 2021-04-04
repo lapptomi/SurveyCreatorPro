@@ -26,6 +26,7 @@ const HomePage: React.FC = () => {
               fontSize: '4em',
               fontWeight: 'normal',
               marginTop: '2em',
+              
             }}
           />
           <Header
@@ -61,7 +62,7 @@ const HomePage: React.FC = () => {
         </Segment>
       </Grid.Row>
 
-      <Grid.Row color='black' style={{ padding: '100px' }} centered>
+      <Grid.Row color='black' style={{ padding: '130px' }}>
         <Grid.Column textAlign='center' computer={8} mobile={16}>
           <Segment vertical inverted textAlign='left'  stacked>
           <Header as='h1' style={{ fontSize: '2.3em' }}>
@@ -86,12 +87,20 @@ const HomePage: React.FC = () => {
           </Segment>
         </Grid.Column>
       </Grid.Row>
-      
-      <Grid.Row style={{ padding: '8em' }} centered>
+
+      <Grid.Row 
+        style={{ 
+          padding: '18em',
+          backgroundImage: `url("https://images.unsplash.com/photo-1492551557933-34265f7af79e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2160&q=80")` 
+        }} 
+        centered 
+        color='black'
+      >
         <Grid.Column width={16}>
           <Segment vertical textAlign='center'>
             <Container text>
               <Header
+                inverted
                 as='h1'
                 content='So What Are You Waiting For?'
                 style={{
