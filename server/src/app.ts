@@ -39,14 +39,15 @@ if (process.env.NODE_ENV === 'test') {
     }
   });
 }
+
+app.get('/health', (_req: Request, res: Response) => {
+  res.send('ok');
+});
+
 //  As default GET-requests returns React index.html
 // (React router didn't work without this)
 app.use((_req: Request, res: Response) => {
   res.sendFile('index.html', { root: './dist/server/build/' });
-});
-
-app.get('/health', (_req: Request, res: Response) => {
-  res.send('ok');
 });
 
 app.use(middleware.unknownEndpoint);
