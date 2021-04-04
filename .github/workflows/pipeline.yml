@@ -34,7 +34,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "tsoha-app-2021"
           heroku_email: ${{secrets.EMAIL}}
-          appdir: "dist/server"
+          appdir: "server"
           branch: "development"
           healthcheck: "https://tsoha-app-2021.herokuapp.com/health"
           checkstring: "ok"
