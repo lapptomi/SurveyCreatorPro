@@ -45,6 +45,10 @@ app.use((_req: Request, res: Response) => {
   res.sendFile('index.html', { root: './dist/server/build/' });
 });
 
+app.get('/health', (_req: Request, res: Response) => {
+  res.send('wrong');
+});
+
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 
