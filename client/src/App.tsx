@@ -38,7 +38,7 @@ const App: React.FC = () => {
       <NavBar />
         <Segment vertical>
           {loggedUser
-            // Return different routes if user is logged in
+            // Use different routes if user is logged in
             ? (
               <Switch>
                 <Route path='/surveys/browse'>
