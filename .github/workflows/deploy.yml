@@ -13,8 +13,8 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "tsoha-app-2021"
+          heroku_app_name: "surveycreatorpro"
           heroku_email: ${{secrets.EMAIL}}
-          healthcheck: "https://tsoha-app-2021.herokuapp.com/health"
+          healthcheck: "https://surveycreatorpro/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
