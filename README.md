@@ -1,12 +1,12 @@
-[![Deployment pipeline](https://github.com/lapptomi/tsoha-2021/actions/workflows/pipeline.yml/badge.svg)](https://github.com/lapptomi/tsoha-2021/actions/workflows/pipeline.yml)
+[![Deployment pipeline](https://github.com/lapptomi/surveycreatorpro/actions/workflows/pipeline.yml/badge.svg)](https://github.com/lapptomi/surveycreatorpro/actions/workflows/pipeline.yml)
 
-# [tsoha-2021](https://hy-tsoha.github.io/materiaali/index)
+[![Heroku deploy](https://github.com/lapptomi/surveycreatorpro/actions/workflows/deploy.yml/badge.svg)](https://github.com/lapptomi/surveycreatorpro/actions/workflows/deploy.yml)
 
-## [App on Heroku](https://tsoha-2021.herokuapp.com/)
+## [Link to application](https://surveycreatorpro.herokuapp.com/)
 
 
-Environment Variables
+### Environment Variables needed for this app
 
-DATABASE_URL=[postgresql connection string]  
-TEST_DATABASE_URL=[postgresql connection string for testing database]  
+DATABASE_URL=[MongoDB URI]
+TEST_DATABASE_URL=[MongoDB URI for testing database]  
 SECRET=[secret key for jwt tokens]
