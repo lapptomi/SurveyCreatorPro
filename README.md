@@ -5,7 +5,7 @@
 ## [Link to application](https://surveycreatorpro.herokuapp.com/)
 
 
-### Environment Variables needed for this app
+### Environment variables needed for this app
 
 DATABASE_URL=[MongoDB URI]  
 
