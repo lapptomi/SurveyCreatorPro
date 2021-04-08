@@ -1,6 +1,6 @@
 # Working hours
 
-| date | time | things done |
+| date | time (hours) | things done |
 | :----:|:-----| :-----|
 | 21.3. | 4    | setting up the project |
 | 21.3. | 4    | setting up Postgresql database |
