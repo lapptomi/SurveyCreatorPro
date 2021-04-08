@@ -1,5 +1,5 @@
 {
-  "name": "tsoha-backend",
+  "name": "surveycreatorpro-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,10 +11,9 @@
     "start:prod": "NODE_ENV=production node dist/server/index.js",
     "build:ui": "cd client && npm install && npm run build --prod && cp -r build ../dist/server/",
     "build:full": "rm -rf dist && npm run tsc && npm run build:ui",
-    "logs:prod": "heroku logs --tail",
     "eslint": "eslint --ext=.ts,.tsx  .",
     "start:test": "concurrently \"cd client && npm run start\" \"NODE_ENV=test ts-node server/index.ts\"",
-    "dev:full": "concurrently \"cd client && npm run start\" \"NODE_ENV=development ts-node server/index.ts\"",
+    "dev:full": "concurrently \"cd client && npm run start\" \"NODE_ENV=development ts-node-dev server/index.ts\"",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run"
   },
