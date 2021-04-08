@@ -15,6 +15,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "surveycreatorpro"
           heroku_email: ${{secrets.EMAIL}}
-          healthcheck: "https://surveycreatorpro/health"
+          healthcheck: "https://surveycreatorpro.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
