@@ -23,7 +23,7 @@ mongoose.connect(connectionString, {
 }).then(() => {
   console.log('connected to MongoDB');
 }).catch((error) => {
-  console.log('errorgetConnection connection to MongoDB:', (error as Error).message);
+  console.log('error connecting to MongoDB:', (error as Error).message);
 });
 
 app.use(express.json());
