@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import express, { Request, Response } from 'express';
 import cors from 'cors';
+import mongoose from 'mongoose';
 import userRouter from './routes/users';
 import loginRouter from './routes/login';
 import surveyRouter from './routes/surveys';
@@ -10,6 +11,17 @@ import surveyRepository from './repository/surveyRepository';
 import questionRepository from './repository/questionRepository';
 
 const app = express();
+
+mongoose.connect(process.env.MONGODB_URI || 'asd', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
+}).then(() => {
+  console.log('connected to MongoDB');
+}).catch((error) => {
+  console.log('error connection to MongoDB:', (error as Error).message);
+});
 
 app.use(express.json());
 app.use(cors());

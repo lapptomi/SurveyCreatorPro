@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-const reqestPrinter = (req: Request, __res: Response, next: NextFunction): void => {
+const reqestPrinter = (req: Request, _res: Response, next: NextFunction): void => {
   console.log('Method:', req.method);
   console.log('Path:  ', req.path);
   console.log('Body:  ', req.body);

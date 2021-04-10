@@ -1,14 +1,14 @@
 import bcrypt from 'bcrypt';
-import express, { NextFunction, Request, Response } from 'express';
+import express from 'express';
 import { sign } from 'jsonwebtoken';
 import userRepository from '../repository/userRepository';
-import { User } from '../../types';
+import { IUser } from '../../types';
 
 const router = express.Router();
 
-router.post('/', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+router.post('/', async (req, res, next): Promise<void> => {
   try {
-    const userToValidate = req.body as User;
+    const userToValidate = req.body as IUser;
     const user = await userRepository.findByUsername(userToValidate.username);
     const passwordsMatch = await bcrypt.compare(userToValidate.password, user.password);
 

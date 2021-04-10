@@ -30,3 +30,4 @@
 | 5.4  | 3    | making the UI more responsive |
 | 5.4  | 1    | added Heroku deploy to the Github Actions |
 | 5.4  | 1    | fixed the Heroku deployment to work with Gitub Actions |  
+| 10.4  | start 10.00-12.00 -> 14.00 - | changing SQL to MongoDB |  

@@ -1,4 +1,4 @@
-export interface User {
+export interface IUser {
   id: number;
   email: string;
   username: string;
@@ -6,7 +6,7 @@ export interface User {
   gender: Gender;
 }
 
-export type NewUser = Omit<User, 'id'>;
+export type NewUser = Omit<IUser, 'id'>;
 
 export enum Gender {
   Male = 'male',
@@ -26,4 +26,4 @@ export interface Survey {
 
 export type NewSurvey = Omit<Survey, 'id'>;
 
-export type SafeUser = Omit<User, 'id' | 'password'>;
+export type SafeUser = Omit<IUser, 'id' | 'password'>;

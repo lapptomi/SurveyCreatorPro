@@ -1,11 +1,11 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express from 'express';
 import userRepository from '../repository/userRepository';
 import { NewUser } from '../../types';
 import { toNewUser } from '../utils';
 
 const router = express.Router();
 
-router.get('/', async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
+router.get('/', async (_req, res, next): Promise<void> => {
   try {
     const users = await userRepository.getAll();
     res.status(200).json(users);
@@ -14,7 +14,7 @@ router.get('/', async (_req: Request, res: Response, next: NextFunction): Promis
   }
 });
 
-router.post('/', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+router.post('/', async (req, res, next): Promise<void> => {
   try {
     const newUser: NewUser = toNewUser(req.body);
     const createdUser = await userRepository.create(newUser);
