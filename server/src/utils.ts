@@ -16,13 +16,6 @@ const parseEmail = (email: string): string => {
   return email;
 };
 
-const parseUsername = (username: string): string => {
-  if (!username || !isString(username) || username.length < 4) {
-    throw new Error('Incorrect or missing username');
-  }
-  return username;
-};
-
 const parsePassword = (password: string): string => {
   if (!password || !isString(password) || password.length < 4) {
     throw new Error('Incorrect or missing password');
@@ -40,7 +33,6 @@ const parseGender = (gender: any): Gender => {
 export const toNewUser = (object: NewUser): NewUser => {
   return {
     email: parseEmail(object.email),
-    username: parseUsername(object.username),
     password: parsePassword(object.password),
     gender: parseGender(object.gender),
   };

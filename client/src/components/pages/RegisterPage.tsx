@@ -16,7 +16,6 @@ import LoadingScreen from '../LoadingScreen';
 const RegisterForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [gender, setGender] = useState<Gender>(Gender.Other);
   const [acceptTerms, setAcceptTerms] = useState<boolean>(false);
@@ -25,11 +24,11 @@ const RegisterForm: React.FC = () => {
     setLoading(true);
 
     const newUser: NewUser = { 
-      email, username, password, gender
+      email, password, gender
     };
     
     userService.create(newUser)
-      .then(() => loginService.login({ username, password })
+      .then(() => loginService.login({ email, password })
         .then((user) => {
           window.localStorage.setItem('loggedUser', JSON.stringify(user));
           setLoading(false);
@@ -44,7 +43,6 @@ const RegisterForm: React.FC = () => {
 
   const validCredentials = (): boolean => {
     return validator.isEmail(email)
-      && username.length > 3 
       && password.length > 3 
       && acceptTerms 
       && Object.values(Gender).includes(gender);
@@ -72,13 +70,6 @@ const RegisterForm: React.FC = () => {
                 iconPosition='left' 
                 placeholder='Email' 
                 onChange={(({ target }) => setEmail(target.value))}
-              />
-              <Form.Input 
-                id='username'
-                fluid icon='user' 
-                iconPosition='left' 
-                placeholder='Username' 
-                onChange={(({ target }) => setUsername(target.value))}
               />
               <Form.Input
                 id='password'

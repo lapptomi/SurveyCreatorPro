@@ -1,48 +1,40 @@
 import bcrypt from 'bcrypt';
-import { pool } from '../config/dbconfig';
-import { NewUser, User } from '../../types';
+import { NewUser, IUser } from '../../types';
+import User from '../models/user';
 
-const getAll = async (): Promise<Array<User>> => {
-  const result = await pool.query('SELECT * FROM Users');
-  return result.rows as Array<User>;
+const getAll = async (): Promise<Array<IUser>> => {
+  const users = await User.find({}) as Array<IUser>;
+  return users;
 };
 
-const create = async (user: NewUser): Promise<NewUser> => {
-  const query = ('INSERT INTO Users (email, username, password, gender) VALUES ($1, $2, $3, $4)');
-  const passwordHash = await bcrypt.hash(user.password, 10);
-  const values = [user.email, user.username, passwordHash, user.gender];
-  await pool.query(query, values);
+const create = async (newUser: NewUser): Promise<NewUser> => {
+  const user = new User({
+    email: newUser.email,
+    password: await bcrypt.hash(newUser.password, 10),
+    gender: newUser.gender,
+  }) as NewUser;
 
-  return {
-    email: user.email,
-    username: user.username,
-    password: passwordHash,
-    gender: user.gender,
-  };
+  const savedUser = await User.create(user) as NewUser;
+  return savedUser;
 };
 
-const findByUsername = async (username: string): Promise<User> => {
-  const query = ('SELECT * FROM Users WHERE (username = $1)');
-  const result = await pool.query(query, [username]);
-  if (result.rowCount === 0) {
-    throw {
-      name: 'UserNotFound',
-      message: `Could not find user with username ${username}`,
-    } as Error;
-  }
-  return result.rows[0] as User;
+const findByEmail = async (email: string): Promise<IUser> => {
+  const users = await User.find({}) as Array<IUser>;
+  const userToFind = users.find((u) => {
+    return u.email === email;
+  });
+  return userToFind as IUser;
 };
 
 const deleteAll = async (): Promise<void> => {
   if (process.env.NODE_ENV === 'test') {
-    const query = ('DELETE FROM Users');
-    await pool.query(query);
+    await User.deleteMany();
   }
 };
 
 export default {
   getAll,
   create,
-  findByUsername,
+  findByEmail,
   deleteAll,
 };

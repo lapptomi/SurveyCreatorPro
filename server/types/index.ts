@@ -1,12 +1,11 @@
-export interface User {
+export interface IUser {
   id: number;
   email: string;
-  username: string;
   password: string;
   gender: Gender;
 }
 
-export type NewUser = Omit<User, 'id'>;
+export type NewUser = Omit<IUser, 'id'>;
 
 export enum Gender {
   Male = 'male',
@@ -14,8 +13,8 @@ export enum Gender {
   Other = 'other',
 }
 
-export interface Survey {
-  id: number;
+export interface ISurvey {
+  id?: number;
   title: string;
   description: string;
   questions: Array<string>;
@@ -24,6 +23,6 @@ export interface Survey {
   results?: Array<string>;
 }
 
-export type NewSurvey = Omit<Survey, 'id'>;
+export type NewSurvey = Omit<ISurvey, 'id'>;
 
-export type SafeUser = Omit<User, 'id' | 'password'>;
+export type SafeUser = Omit<IUser, 'id' | 'password'>;

@@ -21,7 +21,7 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v2
         env:
-          TEST_DATABASE_URL: ${{secrets.TEST_DATABASE_URL}}
+          MONGODB_TEST_URI: ${{secrets.MONGODB_TEST_URI}}
           SECRET: ${{secrets.SECRET}}
         with:
           browser: chrome
