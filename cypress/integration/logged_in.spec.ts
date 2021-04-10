@@ -1,17 +1,15 @@
 /// <reference types="cypress" />
-
 import { Gender, NewUser } from "../../server/types";
 
 // @ts-check
-
 describe('When logged in', function() {
 
   beforeEach(function() {
     cy.request('GET', 'http://localhost:3001/api/testing/reset')
+
     // creating user for testing
     const testUser: NewUser = {
       email: 'testemail@gmail.com',
-      username: "testusername", 
       password: "testpassword",
       gender: Gender.Other,
     }
@@ -21,7 +19,7 @@ describe('When logged in', function() {
 
     // Logging in with created user
     cy.contains('Log in').click()
-    cy.get('#username').type('testusername')
+    cy.get('#email').type('testemail@gmail.com')
     cy.get('#password').type('testpassword')
     cy.contains('Login').click()
   })

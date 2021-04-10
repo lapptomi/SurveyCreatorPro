@@ -3,7 +3,7 @@ import axios from 'axios';
 const baseUrl = '/api/login';
 
 interface LoginCredentials {
-  username: string;
+  email: string;
   password: string;
 }
 

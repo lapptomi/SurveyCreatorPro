@@ -9,7 +9,6 @@ describe('Login', function() {
     // creating user for testing
     const testUser: NewUser = {
       email: 'testemail@gmail.com',
-      username: "testusername", 
       password: "testpassword",
       gender: Gender.Other,
     }
@@ -26,16 +25,16 @@ describe('Login', function() {
 
   it('succeeds with correct credentials', function() {
     cy.contains('Log in').click()
-    cy.get('#username').type('testusername')
+    cy.get('#email').type('testemail@gmail.com')
     cy.get('#password').type('testpassword')
     cy.contains('Login').click()
     cy.contains('Log out')
     cy.contains('Profile')
   })
 
-  it('fails with wrong username', function() {
+  it('fails with wrong email', function() {
     cy.contains('Log in').click()
-    cy.get('#username').type('wrongusername')
+    cy.get('#email').type('wrongemail@gmail.com')
     cy.get('#password').type('testpassword')
     cy.contains('Login').click()
 
@@ -47,7 +46,7 @@ describe('Login', function() {
 
   it('fails with wrong password', function() {
     cy.contains('Log in').click()
-    cy.get('#username').type('testusername')
+    cy.get('#email').type('testemail@gmail.com')
     cy.get('#password').type('wrongpassword')
     cy.contains('Login').click()
 
@@ -57,7 +56,7 @@ describe('Login', function() {
     })
   })
 
-  it('fails if username is not given', function() {
+  it('fails if email is not given', function() {
     cy.contains('Log in').click()
     cy.get('#password').type('wrongpassword')
     cy.contains('Login').click()
@@ -70,7 +69,7 @@ describe('Login', function() {
 
   it('fails if password is not given', function() {
     cy.contains('Log in').click()
-    cy.get('#username').type('testusername')
+    cy.get('#email').type('testemail@gmail.com')
     cy.contains('Login').click()
 
     cy.contains('Log in to your account')

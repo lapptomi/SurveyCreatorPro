@@ -14,7 +14,6 @@ describe('Sign up', function() {
   it('succeeds with valid credentials', function() {
     cy.contains('Sign Up').click()
     cy.get('#email').type('testemail@gmail.com')
-    cy.get('#username').type('testusername')
     cy.get('#password').type('testpassword')
     cy.contains('I agree to the terms and something...').click()
     
@@ -28,10 +27,9 @@ describe('Sign up', function() {
       })
   })
 
-  it('fails if non unique username given', function() {
+  it('fails if non unique email given', function() {
     const testUser: NewUser = {
       email: 'testemail@gmail.com',
-      username: "testusername", 
       password: "testpassword",
       gender: Gender.Other,
     }
@@ -39,7 +37,6 @@ describe('Sign up', function() {
 
     cy.contains('Sign Up').click()
     cy.get('#email').type('testemail@gmail.com')
-    cy.get('#username').type('testusername')
     cy.get('#password').type('testpassword')
     cy.contains('I agree to the terms and something...').click()
     cy.get('#signupbutton').click()

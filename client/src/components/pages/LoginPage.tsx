@@ -5,13 +5,13 @@ import LoadingScreen from "../LoadingScreen";
 
 const LoginPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const handleSubmit = (): void => {
     setLoading(true);
 
-    loginService.login({ username, password })
+    loginService.login({ email, password })
       .then((user) => {
         window.localStorage.setItem('loggedUser', JSON.stringify(user));
         setLoading(false);
@@ -34,11 +34,11 @@ const LoginPage: React.FC = () => {
           <Form size='large' onSubmit={handleSubmit}>
             <Segment vertical inverted>
               <Form.Input 
-                id='username'
-                fluid icon='user' 
+                id='email'
+                fluid icon='at' 
                 iconPosition='left' 
-                placeholder='Username' 
-                onChange={((event) => setUsername(event.target.value))}
+                placeholder='Email' 
+                onChange={((event) => setEmail(event.target.value))}
               />
               <Form.Input
                 id='password'

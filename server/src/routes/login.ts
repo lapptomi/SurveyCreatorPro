@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/', async (req, res, next): Promise<void> => {
   try {
     const userToValidate = req.body as IUser;
-    const user = await userRepository.findByUsername(userToValidate.username);
+    const user = await userRepository.findByEmail(userToValidate.email);
     const passwordsMatch = await bcrypt.compare(userToValidate.password, user.password);
 
     if (!(user && passwordsMatch)) {
@@ -20,17 +20,17 @@ router.post('/', async (req, res, next): Promise<void> => {
     }
 
     const userForToken = {
-      username: user.username,
+      email: user.email,
       id: user.id,
     };
     const token = sign(
       userForToken,
       process.env.SECRET as string,
-      { expiresIn: 60 * 60 }, // Token expires in one hour
+      { expiresIn: 60 * 60 }, // expires in one hour
     );
 
     res.status(200).send({
-      token, username: userForToken.username, id: userForToken.id,
+      token, username: userForToken.email, id: userForToken.id,
     });
   } catch (error) {
     next(error);

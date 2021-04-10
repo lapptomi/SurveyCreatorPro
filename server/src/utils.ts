@@ -10,18 +10,10 @@ const isGender = (param: any): param is Gender => {
 };
 
 const parseEmail = (email: string): string => {
-  console.log('EMAIL === ', email);
   if (!email || !isString(email) || email.length < 4) {
     throw new Error('Incorrect or missing email');
   }
   return email;
-};
-
-const parseUsername = (username: string): string => {
-  if (!username || !isString(username) || username.length < 4) {
-    throw new Error('Incorrect or missing username');
-  }
-  return username;
 };
 
 const parsePassword = (password: string): string => {
@@ -41,7 +33,6 @@ const parseGender = (gender: any): Gender => {
 export const toNewUser = (object: NewUser): NewUser => {
   return {
     email: parseEmail(object.email),
-    username: parseUsername(object.username),
     password: parsePassword(object.password),
     gender: parseGender(object.gender),
   };

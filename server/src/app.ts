@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import express, { Request, Response } from 'express';
+import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import userRouter from './routes/users';
@@ -8,11 +8,14 @@ import surveyRouter from './routes/surveys';
 import middleware from './middleware';
 import userRepository from './repository/userRepository';
 import surveyRepository from './repository/surveyRepository';
-import questionRepository from './repository/questionRepository';
 
 const app = express();
 
-mongoose.connect(process.env.MONGODB_URI || 'asd', {
+const connectionString = process.env.NODE_ENV === 'test'
+  ? process.env.MONGODB_TEST_URI as string
+  : process.env.MONGODB_URI as string;
+
+mongoose.connect(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -20,7 +23,7 @@ mongoose.connect(process.env.MONGODB_URI || 'asd', {
 }).then(() => {
   console.log('connected to MongoDB');
 }).catch((error) => {
-  console.log('error connection to MongoDB:', (error as Error).message);
+  console.log('errorgetConnection connection to MongoDB:', (error as Error).message);
 });
 
 app.use(express.json());
@@ -38,10 +41,8 @@ app.use('/api/login', loginRouter);
 app.use('/api/surveys', surveyRouter);
 
 if (process.env.NODE_ENV === 'test') {
-  app.get('/api/testing/reset', async (_req: Request, res: Response) => {
+  app.get('/api/testing/reset', async (_req, res) => {
     try {
-      await questionRepository.deleteAll();
-
       await userRepository.deleteAll();
       await surveyRepository.deleteAll();
       res.status(204).end();
@@ -52,13 +53,13 @@ if (process.env.NODE_ENV === 'test') {
   });
 }
 
-app.get('/health', (_req: Request, res: Response) => {
+app.get('/health', (_req, res) => {
   res.send('ok');
 });
 
-//  As default GET-requests returns React index.html
+// As default GET-requests returns React index.html
 // (React router didn't work without this)
-app.get('*', (_req: Request, res: Response) => {
+app.get('*', (_req, res) => {
   res.sendFile('index.html', { root: './dist/server/build/' });
 });
 
