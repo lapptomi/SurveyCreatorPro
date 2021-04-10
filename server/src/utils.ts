@@ -63,7 +63,6 @@ const parseQuestions = (questions: string[]): string[] => {
 };
 
 export const toNewSurvey = (object: NewSurvey): NewSurvey => {
-  console.log('USER = ', object);
   return {
     title: parseTitle(object.title),
     description: parseDescription(object.description),
