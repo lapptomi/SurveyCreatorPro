@@ -12,6 +12,39 @@ import surveyService from './services/surveys';
 import LoginPage from './components/pages/LoginPage';
 import RegisterPage from './components/pages/RegisterPage';
 
+
+const SignInRoutes: React.FC = () => {
+  return (
+    <Switch>
+      <Route path='/surveys/browse'>
+        <BrowseSurveysPage />
+      </Route>
+      <Route path='/surveys/create'>
+        <CreateSurveyPage />
+      </Route>
+      <Route path='/'>
+        <HomePage />
+      </Route>
+    </Switch>
+  );
+};
+
+const SignOutRoutes: React.FC = () => {
+  return (
+    <Switch>
+      <Route path='/register'>
+        <RegisterPage />
+      </Route>
+      <Route path='/login'>
+        <LoginPage />
+      </Route>
+      <Route path='/'>
+        <HomePage />
+      </Route>
+    </Switch>
+  );
+};
+
 const App: React.FC = () => {
   const [loggedUser, setLoggedUser] = useState(null);
 
@@ -30,7 +63,6 @@ const App: React.FC = () => {
         className='App'
         style={{
           minWidth: '768px',
-          maxWidth: '2160px',
           minHeight: '1200px',
           background: '#1b1c1d',
         }}
@@ -39,32 +71,8 @@ const App: React.FC = () => {
         <Segment vertical>
           {loggedUser
             // Use different routes if user is logged in
-            ? (
-              <Switch>
-                <Route path='/surveys/browse'>
-                  <BrowseSurveysPage />
-                </Route>
-                <Route path='/surveys/create'>
-                  <CreateSurveyPage />
-                </Route>
-                <Route path='/'>
-                  <HomePage />
-                </Route>
-              </Switch>
-            )
-            : (
-              <Switch>
-                <Route path='/register'>
-                  <RegisterPage />
-                </Route>
-                <Route path='/login'>
-                  <LoginPage />
-                </Route>
-                <Route path='/'>
-                  <HomePage />
-                </Route>
-              </Switch>
-            )
+            ? <SignInRoutes />
+            : <SignOutRoutes />
           } 
         </Segment>
       </div>
