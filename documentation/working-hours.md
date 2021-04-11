@@ -32,4 +32,6 @@
 | 5.4  | 1    | fixed the Heroku deployment to work with Gitub Actions |  
 | 10.4 | 4    | changing database from Postgres to MongoDB |  
 | 10.4 | 1    | fixing tests |  
+| 11.4 | 2    | changes on UI |  
+
 

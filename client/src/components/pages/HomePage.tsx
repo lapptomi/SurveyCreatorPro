@@ -13,8 +13,10 @@ const HomePage: React.FC = () => {
   
   return (
     <Grid style={{ minHeight: '100vh' }} padded='horizontally'>
-      <Grid.Row centered color='blue'>
+      <Grid.Row centered color='black'>
+
         <Segment
+          style={{ marginBottom: 100 }}
           vertical
           textAlign='center'
         >
@@ -22,11 +24,11 @@ const HomePage: React.FC = () => {
           <Header
             inverted
             as='h1'
-            content='SurveyMakerPro'
+            content='SurveyCreatorPro'
             style={{
               fontSize: '4em',
               fontWeight: 'normal',
-              marginTop: '2em',
+              marginTop: '1em',
             }}
           />
           <Header
@@ -53,7 +55,6 @@ const HomePage: React.FC = () => {
             as='a' 
             href={loggedIn ? '/surveys/create' : '/login'} 
             primary size='huge'
-            style={{ marginBottom: '2em' }}
           >
             Get Started
             <Icon name='angle right' />
@@ -62,26 +63,35 @@ const HomePage: React.FC = () => {
         </Segment>
       </Grid.Row>
 
-      <Grid.Row color='black' style={{ padding: '130px' }}>
-        <Grid.Column textAlign='center' computer={8} mobile={16}>
-          <Segment vertical inverted textAlign='left'  stacked>
-          <Header as='h1' style={{ fontSize: '2.3em' }}>
-            <Icon name='question' size='tiny'/>What is SurveyMakerPro?
+      <Grid.Row style={{ background: '#f7f7f7' }} centered>
+        <Grid.Column
+          style={{ padding: '100px' }}
+          textAlign='center' 
+          computer={8} 
+          mobile={16}
+        >
+          <Segment vertical>
+          <Header as='h1' style={{ fontSize: '3em' }}>
+            What is SurveyCreatorPro?
           </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              SurveyMakerPro is a tool for making surveys / research online easily,
-              where other people can answer.
+            <p style={{ fontSize: '2em' }}>
+              With SurveyCreatorPro you can create private or public surveys / research online.
             </p>
           </Segment>
         </Grid.Column>
 
-        <Grid.Column textAlign='center' computer={8} mobile={16}>
-          <Segment vertical inverted textAlign='left'  stacked>
-            <Header as='h1'style={{ fontSize: '2.5em' }}>
-              <Icon name='puzzle' /> Easy-To-Use
+        <Grid.Column
+          style={{ padding: '100px' }}
+          textAlign='center' 
+          computer={8} 
+          mobile={16}
+        >
+          <Segment vertical>
+            <Header as='h1'style={{ fontSize: '3em' }}>
+              Easy-To-Use
             </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              SurveyMakerPro is simple but powerful tool 
+            <p style={{ fontSize: '2em' }}>
+              SurveyCreatorPro is simple but powerful tool 
               and its very easy to get started with!
             </p>
           </Segment>
@@ -92,9 +102,9 @@ const HomePage: React.FC = () => {
         style={{ 
           paddingTop: '10em',
           paddingBottom: '10em',
+          background: '#1a86cb'
         }} 
         centered 
-        color='blue'
       >
         <Grid.Column width={16}>
           <Segment vertical textAlign='center'>
@@ -109,13 +119,13 @@ const HomePage: React.FC = () => {
               />
               <Button
                 style={{ marginTop: 40 }}
-                color='blue'
+                color='black'
                 as='a' 
-                href={loggedIn ? '/surveys/create' : '/login'} 
+                href='/register'
                 size='huge'
               >
               Click Here To Sign Up For Free
-              <Icon name='angle right' />
+              <Icon name='arrow right' />
             </Button>
             </Container>
           </Segment>
