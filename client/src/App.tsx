@@ -16,16 +16,16 @@ import RegisterPage from './components/pages/RegisterPage';
 const SignInRoutes: React.FC = () => {
   return (
     <Switch>
-    <Route path='/surveys/browse'>
-      <BrowseSurveysPage />
-    </Route>
-    <Route path='/surveys/create'>
-      <CreateSurveyPage />
-    </Route>
-    <Route path='/'>
-      <HomePage />
-    </Route>
-  </Switch>
+      <Route path='/surveys/browse'>
+        <BrowseSurveysPage />
+      </Route>
+      <Route path='/surveys/create'>
+        <CreateSurveyPage />
+      </Route>
+      <Route path='/'>
+        <HomePage />
+      </Route>
+    </Switch>
   );
 };
 
