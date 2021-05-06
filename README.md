@@ -10,5 +10,3 @@
 DATABASE_URL=[MongoDB URI]  
 TEST_DATABASE_URL=[MongoDB URI for testing database]  
 SECRET=[secret key for jwt tokens]
-
-test
