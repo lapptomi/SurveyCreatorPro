@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { Gender, NewUser } from "../../server/types";
+import { Gender, NewUser } from "../../../server/types";
 
 // @ts-check
 

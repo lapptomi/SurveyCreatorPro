@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { Gender, NewUser } from "../../server/types"
+import { Gender, NewUser } from "../../../server/types"
 
 describe('Login', function() {
   // @ts-check
