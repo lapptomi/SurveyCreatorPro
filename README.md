@@ -1,6 +1,4 @@
-[![Deployment pipeline](https://github.com/lapptomi/surveycreatorpro/actions/workflows/pipeline.yml/badge.svg)](https://github.com/lapptomi/surveycreatorpro/actions/workflows/pipeline.yml)
-
-[![Heroku deploy](https://github.com/lapptomi/surveycreatorpro/actions/workflows/deploy.yml/badge.svg)](https://github.com/lapptomi/surveycreatorpro/actions/workflows/deploy.yml)
+[![Test And Deploy](https://github.com/lapptomi/surveycreatorpro/actions/workflows/pipeline.yml/badge.svg)](https://github.com/lapptomi/surveycreatorpro/actions/workflows/pipeline.yml)
 
 ## [Link to the app](https://surveycreatorpro.herokuapp.com/)
 
