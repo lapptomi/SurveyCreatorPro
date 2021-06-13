@@ -7,13 +7,13 @@ const getAll = async (): Promise<Array<IUserSchema>> => {
   return users;
 };
 
-const create = async (newUser: NewUser): Promise<NewUser> => {
+const create = async (newUser: NewUser): Promise<IUserSchema> => {
   const user = new User({
     email: newUser.email,
     password: await bcrypt.hash(newUser.password, 10),
   }) as NewUser;
 
-  const savedUser = await User.create(user) as NewUser;
+  const savedUser = await User.create(user);
   return savedUser;
 };
 

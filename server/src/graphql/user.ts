@@ -21,7 +21,7 @@ export const typeDef = `
     allUsers: [User!]!
   }
 
-  type Mutation {
+  extend type Mutation {
     addUser(
       email: String!
       password: String!
@@ -37,7 +37,7 @@ export const resolvers = {
     addUser: async (_root: any, args: AddUserArgs) => {
       try {
         const user = new User(toNewUser(args));
-        const addedUser = await user.save();
+        const addedUser = await userRepository.create(user);
         return addedUser;
       } catch (error) {
         throw new UserInputError((error as Error).message, {

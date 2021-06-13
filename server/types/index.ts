@@ -4,8 +4,6 @@ export interface IUser {
   password: string;
 }
 
-export type NewUser = Omit<IUser, 'id'>;
-
 export interface ISurvey {
   id?: number;
   title: string;
@@ -15,6 +13,13 @@ export interface ISurvey {
   answers?: Array<boolean>; // these will change in future
   results?: Array<string>;
 }
+
+export interface IToken {
+  id: string;
+  token: string;
+}
+
+export type NewUser = Omit<IUser, 'id'>;
 
 export type NewSurvey = Omit<ISurvey, 'id'>;
 

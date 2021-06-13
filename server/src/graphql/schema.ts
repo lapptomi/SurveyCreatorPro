@@ -8,11 +8,23 @@ import {
   typeDef as SurveyDef,
   resolvers as surveyResolvers,
 } from './survey';
+import {
+  typeDef as LoginDef,
+  resolvers as LoginResolvers,
+} from './login';
 
-// If you had Query fields not associated with a
+// If you had Query / Mutation / Subscription fields not associated with a
 // specific type you could put them here
 const Query = `
   type Query {
+    _empty: String
+  }
+
+  type Mutation {
+    _empty: String
+  }
+
+  type Subscription {
     _empty: String
   }
 `;
@@ -20,6 +32,6 @@ const Query = `
 const resolvers = {};
 
 export const schema = makeExecutableSchema({
-  typeDefs: [Query, UserDef, SurveyDef],
-  resolvers: merge(resolvers, userResolvers, surveyResolvers),
+  typeDefs: [Query, UserDef, SurveyDef, LoginDef],
+  resolvers: merge(resolvers, userResolvers, surveyResolvers, LoginResolvers),
 });
