@@ -28,3 +28,15 @@ jobs:
           headless: true
           start: npm run start:test
           wait-on: http://localhost:3000
+
+      - name: Heroku deploy
+        uses: akhileshns/heroku-deploy@v3.12.12
+        # Deploy to Heroku when pushing to the main branch
+        if: ${{ success() && github.ref == 'refs/heads/main' }}
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "surveycreatorpro"
+          heroku_email: ${{ secrets.EMAIL }}
+          healthcheck: "https://surveycreatorpro.herokuapp.com/api/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
