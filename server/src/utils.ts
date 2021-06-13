@@ -1,12 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NewUser, Gender, NewSurvey } from '../types';
+import { NewUser, NewSurvey } from '../types';
 
 const isString = (text: any): text is string => {
   return typeof text === 'string' || text instanceof String;
-};
-
-const isGender = (param: any): param is Gender => {
-  return Object.values(Gender).includes(param);
 };
 
 const parseEmail = (email: string): string => {
@@ -23,18 +19,10 @@ const parsePassword = (password: string): string => {
   return password;
 };
 
-const parseGender = (gender: any): Gender => {
-  if (!gender || !isGender(gender)) {
-    throw new Error('Incorrect or missing gender');
-  }
-  return gender;
-};
-
 export const toNewUser = (object: NewUser): NewUser => {
   return {
     email: parseEmail(object.email),
     password: parsePassword(object.password),
-    gender: parseGender(object.gender),
   };
 };
 

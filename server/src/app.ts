@@ -1,8 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import express from 'express';
 import cors from 'cors';
-import mongoose from 'mongoose';
-import userRouter from './routes/users';
 import loginRouter from './routes/login';
 import surveyRouter from './routes/surveys';
 import middleware from './middleware';
@@ -10,21 +8,6 @@ import userRepository from './repository/userRepository';
 import surveyRepository from './repository/surveyRepository';
 
 const app = express();
-
-const connectionString = process.env.NODE_ENV === 'test'
-  ? process.env.MONGODB_TEST_URI as string
-  : process.env.MONGODB_URI as string;
-
-mongoose.connect(connectionString, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true,
-}).then(() => {
-  console.log('connected to MongoDB');
-}).catch((error) => {
-  console.log('error connecting to MongoDB:', (error as Error).message);
-});
 
 app.use(express.json());
 app.use(cors());
@@ -36,7 +19,6 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(middleware.tokenExtractor);
 
-app.use('/api/users', userRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/surveys', surveyRouter);
 
@@ -59,11 +41,11 @@ app.get('/api/health', (_req, res) => {
 
 // As default GET-requests returns React index.html
 // (React router didn't work without this)
-app.get('*', (_req, res) => {
+app.get('/api/*', (_req, res) => {
   res.sendFile('index.html', { root: './dist/server/build/' });
 });
 
-app.use(middleware.unknownEndpoint);
+// app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 
 export = app;

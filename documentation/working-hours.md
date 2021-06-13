@@ -33,4 +33,4 @@
 | 10.4 | 4    | changing database from Postgres to MongoDB |  
 | 10.4 | 1    | fixing tests |  
 | 11.4 | 1    | changes on UI |  
-| 13.6 | xxx  | changing app to use GraphQL instead of REST |  
+| 13.6 | 3    | changing the server to use GraphQL instead of REST |  
