@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {  Grid, Header, Segment } from 'semantic-ui-react';
-import CreateSurveyForm from '../form/CreateSurveyForm';
-import LoadingScreen from '../LoadingScreen';
+import CreateSurveyForm from '../components/form/CreateSurveyForm';
+import LoadingScreen from '../components/LoadingScreen';
 
 const CreateSurveyPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);

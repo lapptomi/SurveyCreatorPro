@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { Gender, NewUser } from '../../types';
-import userService from '../../services/users';
 import validator from 'validator';
-import loginService from '../../services/login';
 import { 
   Button, 
   Form, 
@@ -11,48 +8,47 @@ import {
   Message, 
   Segment 
 } from 'semantic-ui-react';
-import LoadingScreen from '../LoadingScreen';
+import LoadingScreen from '../components/LoadingScreen';
+import { useMutation } from '@apollo/client';
+import { CREATE_NEW_USER } from '../graphql/queries/user';
+import { LOGIN } from '../graphql/queries/login';
 
 const RegisterForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [gender, setGender] = useState<Gender>(Gender.Other);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [acceptTerms, setAcceptTerms] = useState<boolean>(false);
+
+  const [createNewUser] = useMutation(CREATE_NEW_USER);
+  const [login] = useMutation(LOGIN);
 
   const handleSubmit = (): void => {
     setLoading(true);
 
-    const newUser: NewUser = { 
-      email, password, gender
-    };
-    
-    userService.create(newUser)
-      .then(() => loginService.login({ email, password })
-        .then((user) => {
-          window.localStorage.setItem('loggedUser', JSON.stringify(user));
-          setLoading(false);
+    createNewUser({ variables: { email, password } })
+      .then(() => login({ variables: { email, password } })
+        .then((response) => {
+          const token = JSON.stringify(response.data.login.token);
+          console.log(token);
+          
+          window.localStorage.setItem('loggedUser', token);
           window.location.replace('/');
         })
       )
-      .catch(() => {
+      .catch((error) => {
         setLoading(false);
-        window.alert('Error creating user, try again with valid credentials');
+        console.log(error.message);
+        window.alert(error);
       });
   };
 
   const validCredentials = (): boolean => {
     return validator.isEmail(email)
       && password.length > 3 
-      && acceptTerms 
-      && Object.values(Gender).includes(gender);
+      && acceptTerms
+      && password === confirmPassword;
   };
-
-  const genderOptions = [
-    { key: 'm', text: 'Male', value: Gender.Male },
-    { key: 'f', text: 'Female', value: Gender.Female },
-    { key: 'o', text: 'Other', value: Gender.Other },
-  ];
 
   return (
     <Grid textAlign='center' style={{ minHeight: '100vh' }} verticalAlign='middle' padded>
@@ -80,13 +76,15 @@ const RegisterForm: React.FC = () => {
                 type='password'
                 onChange={(({ target }) => setPassword(target.value))}
               />
-              <Form.Group widths='equal'>
-                <Form.Select
-                  options={genderOptions}
-                  placeholder='Other'
-                  onChange={((e, data) => setGender(data.value as Gender))}
-                />
-              </Form.Group>
+               <Form.Input
+                id='confirmPassword'
+                fluid
+                icon='lock'
+                iconPosition='left'
+                placeholder='Confirm Password'
+                type='password'
+                onChange={(({ target }) => setConfirmPassword(target.value))}
+              />
               <Form.Checkbox
                 inline
                 label='I agree to the terms and something...'

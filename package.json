@@ -15,7 +15,7 @@
     "start:test": "concurrently \"cd client && npm run start\" \"NODE_ENV=test ts-node server/index.ts\"",
     "dev:full": "concurrently \"cd client && npm run start\" \"NODE_ENV=development ts-node-dev server/index.ts\"",
     "cypress:open": "cypress open",
-    "test:e2e": "cypress run"
+    "cypress:run": "cypress run"
   },
   "engines": {
     "node": "15.11.0"

@@ -27,7 +27,6 @@ export const typeDef = `
 export const resolvers = {
   Mutation: {
     login: async (_root: any, args: LoginArgs): Promise<IToken> => {
-      console.log(args);
       const user = await User.findOne({ email: args.email });
       if (!user) {
         throw new Error('User not found');

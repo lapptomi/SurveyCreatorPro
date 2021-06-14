@@ -34,3 +34,5 @@
 | 10.4 | 1    | fixing tests |  
 | 11.4 | 1    | changes on UI |  
 | 13.6 | 4    | changing the server to use GraphQL instead of REST |  
+| 14.6 | 4    | changing the client to use GraphQL instead of REST |  
+

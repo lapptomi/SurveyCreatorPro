@@ -1,61 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-import { Segment } from 'semantic-ui-react';
 import {
-  BrowserRouter as Router, Route, Switch
+  BrowserRouter as Router, Route, Switch, Redirect
 } from 'react-router-dom';
-import HomePage from './components/pages/HomePage';
-import BrowseSurveysPage from './components/pages/BrowseSurveysPage';
-import CreateSurveyPage from './components/pages/CreateSurveyPage';
-import surveyService from './services/surveys';
-import LoginPage from './components/pages/LoginPage';
-import RegisterPage from './components/pages/RegisterPage';
-
-
-const SignInRoutes: React.FC = () => {
-  return (
-    <Switch>
-      <Route path='/surveys/browse'>
-        <BrowseSurveysPage />
-      </Route>
-      <Route path='/surveys/create'>
-        <CreateSurveyPage />
-      </Route>
-      <Route path='/'>
-        <HomePage />
-      </Route>
-    </Switch>
-  );
-};
-
-const SignOutRoutes: React.FC = () => {
-  return (
-    <Switch>
-      <Route path='/register'>
-        <RegisterPage />
-      </Route>
-      <Route path='/login'>
-        <LoginPage />
-      </Route>
-      <Route path='/'>
-        <HomePage />
-      </Route>
-    </Switch>
-  );
-};
+import HomePage from './pages/HomePage';
+import BrowseSurveysPage from './pages/BrowseSurveysPage';
+import CreateSurveyPage from './pages/CreateSurveyPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import { useGlobalState } from './state/state';
+import LoadingScreen from './components/LoadingScreen';
 
 const App: React.FC = () => {
-  const [loggedUser, setLoggedUser] = useState(null);
+  const [state] = useGlobalState();
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedUser');
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setLoggedUser(user);
-      surveyService.setToken(user.token);
-    }
+    console.log('STATE = ', state);
   }, []);
+
+  if (state.isLoading) {
+    return <LoadingScreen isLoading={true} />;
+  }
 
   return (
     <Router>
@@ -68,15 +34,33 @@ const App: React.FC = () => {
         }}
       >
       <NavBar />
-        <Segment vertical>
-          {loggedUser
-            // Use different routes if user is logged in
-            ? <SignInRoutes />
-            : <SignOutRoutes />
-          } 
-        </Segment>
+        <div style={{ minHeight: '1000px' }}>
+          <Switch>
+
+          <Route path='/register'>
+            { state.isLoggedIn ?  <Redirect to="/" /> : <RegisterPage /> }
+          </Route>
+
+          <Route path='/login'>
+            { state.isLoggedIn ?  <Redirect to="/" /> : <LoginPage /> }
+          </Route>
+
+          <Route path='/surveys/browse'>
+            { state.isLoggedIn ? <BrowseSurveysPage /> : <Redirect to="/" /> }
+          </Route>
+
+          <Route path='/surveys/create'>
+            { state.isLoggedIn ? <CreateSurveyPage /> : <Redirect to="/" /> }
+          </Route>
+
+          <Route path='/'>
+            <HomePage />
+          </Route>
+
+          </Switch>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </Router>
   );
 };

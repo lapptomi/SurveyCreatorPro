@@ -1,33 +1,39 @@
 import React, { useState } from "react";
 import { Button, Form, Grid, Header, Message, Segment } from "semantic-ui-react";
-import loginService from '../../services/login';
-import LoadingScreen from "../LoadingScreen";
+import LoadingScreen from "../components/LoadingScreen";
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../graphql/queries/login";
 
 const LoginPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
+  const [login] = useMutation(LOGIN);
+
   const handleSubmit = (): void => {
     setLoading(true);
 
-    loginService.login({ email, password })
-      .then((user) => {
-        window.localStorage.setItem('loggedUser', JSON.stringify(user));
-        setLoading(false);
+    login({ variables: { email, password } })
+      .then((response) => {
+        const token = JSON.stringify(response.data.login.token);
+        console.log(token);
+        
+        window.localStorage.setItem('loggedUser', token);
         window.location.replace('/');
       })
-      .catch(() => {
+      .catch((error) => {
         setLoading(false);
-        window.alert('Wrong credentials, please try again');
+        console.log(error.message);
+        window.alert(error.message);
       });
   };
 
   return (
-    <Grid textAlign='center' style={{ minHeight: '100vh', margin: 0 }} verticalAlign='middle'>
+    <Grid textAlign='center' verticalAlign='middle'>
     <LoadingScreen isLoading={loading} />
       <Grid.Row color='black'>
-        <Grid.Column style={{ maxWidth: 450 }} width={16}>
+        <Grid.Column style={{ maxWidth: '450px', marginTop: '300px' }} width={16}>
           <Header as='h2' inverted textAlign='center'>
             Log in to your account
           </Header>

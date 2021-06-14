@@ -2,16 +2,9 @@ export interface User {
   id: number;
   email: string;
   password: string;
-  gender: Gender;
 }
 
 export type NewUser = Omit<User, 'id'>;
-
-export enum Gender {
-  Male = 'male',
-  Female = 'female',
-  Other = 'other',
-}
 
 export interface Survey {
   id?: number;

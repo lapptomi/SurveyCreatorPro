@@ -1,14 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable arrow-body-style */
 import { UserInputError } from 'apollo-server-express';
+import { NewUser } from '../../types';
 import User from '../models/user';
 import userRepository from '../repository/userRepository';
 import { toNewUser } from '../utils';
-
-interface AddUserArgs {
-  email: string;
-  password: string;
-}
 
 export const typeDef = `
   type User {
@@ -34,7 +30,7 @@ export const resolvers = {
     allUsers: () => userRepository.getAll(),
   },
   Mutation: {
-    addUser: async (_root: any, args: AddUserArgs) => {
+    addUser: async (_root: any, args: NewUser) => {
       try {
         const user = new User(toNewUser(args));
         const addedUser = await userRepository.create(user);

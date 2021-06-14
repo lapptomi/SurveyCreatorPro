@@ -27,7 +27,7 @@ jobs:
         with:
           browser: chrome
           headless: true
-          start: npm run start:test
+          start: npm run cypress:run
           wait-on: http://localhost:3000
 
       - name: Heroku deploy

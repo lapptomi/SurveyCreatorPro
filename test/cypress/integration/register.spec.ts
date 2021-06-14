@@ -1,13 +1,13 @@
 /// <reference types="cypress" />
 
-import { Gender, NewUser } from "../../../server/types";
+import { NewUser } from "../../../server/types";
 
 // @ts-check
 
 describe('Sign up', function() {
 
   beforeEach(function() {
-    cy.request('GET', 'http://localhost:3001/api/testing/reset')
+    cy.request('POST', 'http://localhost:4000/api/testing/reset')
     cy.visit('http://localhost:3000')
   })
 
@@ -31,7 +31,6 @@ describe('Sign up', function() {
     const testUser: NewUser = {
       email: 'testemail@gmail.com',
       password: "testpassword",
-      gender: Gender.Other,
     }
     cy.request('POST', 'http://localhost:3001/api/users/', testUser)
 
