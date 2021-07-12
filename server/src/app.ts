@@ -2,8 +2,8 @@
 import express from 'express';
 import cors from 'cors';
 import middleware from './middleware';
-import userRepository from './repository/userRepository';
-import surveyRepository from './repository/surveyRepository';
+import Survey from './models/survey';
+import User from './models/user';
 
 const app = express();
 
@@ -19,8 +19,12 @@ app.use(middleware.tokenExtractor);
 
 app.post('/api/testing/reset', async (_req, res) => {
   try {
-    await userRepository.deleteAll();
-    await surveyRepository.deleteAll();
+    // Delete objects only if NODE_ENV is in test mode
+    if (process.env.NODE_ENV === 'test') {
+      await User.deleteMany();
+      await Survey.deleteMany();
+    }
+
     res.status(204).end();
   } catch (e) {
     console.log(e);

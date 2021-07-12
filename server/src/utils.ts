@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NewUser, NewSurvey } from '../types';
+import { NewUser, NewSurvey, IQuestion } from '../types';
 
 const isString = (text: any): text is string => {
   return typeof text === 'string' || text instanceof String;
 };
 
 const parseEmail = (email: string): string => {
-  if (!email || !isString(email) || email.length < 4) {
+  if (!email || !isString(email) || email.length < 6) {
     throw new Error('Incorrect or missing email');
   }
   return email;
@@ -40,11 +40,18 @@ const parseDescription = (description: string): string => {
   return description;
 };
 
-const parseQuestions = (questions: string[]): string[] => {
-  Object.values(questions).forEach((question) => {
-    if (!isString(question) || question.length < 4) {
-      throw new Error('Incorrect or missing questions');
-    }
+const parseQuestions = (questions: Array<IQuestion>): Array<IQuestion> => {
+  // Check that question is valid
+  Object.values(questions).forEach((object) => {
+    // Parse title
+    parseTitle(object.question);
+
+    // Parse answer options
+    Object.values(object.answerOptions).forEach((option) => {
+      if (!option || !isString(option) || option.length < 4) {
+        throw new Error('Incorrect or missing option');
+      }
+    });
   });
 
   return questions;

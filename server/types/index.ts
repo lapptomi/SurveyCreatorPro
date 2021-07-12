@@ -1,17 +1,21 @@
 export interface IUser {
-  id: number;
+  id: string;
   email: string;
   password: string;
 }
 
+export interface IQuestion {
+  id?: string;
+  question: string;
+  answerOptions: Array<string>;
+}
+
 export interface ISurvey {
-  id?: number;
+  id?: string;
   title: string;
   description: string;
-  questions: Array<string>;
+  questions: Array<IQuestion>;
   private: boolean;
-  answers?: Array<boolean>; // these will change in future
-  results?: Array<string>;
 }
 
 export interface IToken {

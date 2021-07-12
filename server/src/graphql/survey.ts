@@ -1,15 +1,26 @@
 /* eslint-disable arrow-body-style */
 import { UserInputError } from 'apollo-server-express';
-import { NewSurvey } from '../../types';
-import surveyRepository from '../repository/surveyRepository';
+import { ISurvey, NewSurvey } from '../../types';
+import Survey from '../models/survey';
 import { toNewSurvey } from '../utils';
 
 export const typeDef = `
   type Survey {
     id: ID!
-    email: String!
-    username: String!
-    password: String!
+    title: String!
+    description: String!
+    questions: [Question!]!
+    private: Boolean
+  }
+
+  type Question {
+    question: String!
+    answerOptions: [String!]!
+  }
+
+  input QuestionInput {
+    question: String!
+    answerOptions: [String!]!
   }
 
   extend type Query {
@@ -20,7 +31,7 @@ export const typeDef = `
     addSurvey (
       title: String!
       description: String!
-      questions: [String]
+      questions: [QuestionInput!]!
       private: Boolean
     ): Survey
   }
@@ -28,13 +39,16 @@ export const typeDef = `
 
 export const resolvers = {
   Query: {
-    allSurveys: () => surveyRepository.getAll(),
+    allSurveys: async (): Promise<Array<ISurvey>> => {
+      return await Survey.find({}) as Array<ISurvey>;
+    },
   },
   Mutation: {
-    addSurvey: async (_root: any, args: NewSurvey) => {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    addSurvey: async (_root: any, args: NewSurvey): Promise<ISurvey> => {
       try {
-        const surveyToAdd = toNewSurvey(args);
-        const addedSurvey = await surveyRepository.create(surveyToAdd);
+        const newSurvey = toNewSurvey(args);
+        const addedSurvey = await Survey.create(new Survey(newSurvey)) as ISurvey;
 
         return addedSurvey;
       } catch (error) {

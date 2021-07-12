@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import {  Button, Form, Grid, Header, Icon, List, Container, Radio, Segment } from 'semantic-ui-react';
-import Question from '../components/Question';
+import { Button, Form, Grid, Header, Icon, Container, Radio, Segment } from 'semantic-ui-react';
 
 const CreateSurveyPage: React.FC = () => {
 

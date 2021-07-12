@@ -28,7 +28,7 @@ const Footer: React.FC = () => (
 
       <Grid.Column textAlign={'center'} width={8}>
         <Segment inverted >
-          <Header as='h3'>Tsoha-2021</Header>
+          <Header as='h3'>Fullstack Project 2021</Header>
             <p>Project On Github</p>
           <Menu.Item>
             <Icon name={'github'} size={'huge'} inverted/>

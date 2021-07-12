@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable arrow-body-style */
+import bcrypt from 'bcrypt';
 import { UserInputError } from 'apollo-server-express';
-import { NewUser } from '../../types';
+import { IUser, NewUser } from '../../types';
 import User from '../models/user';
-import userRepository from '../repository/userRepository';
 import { toNewUser } from '../utils';
 
 export const typeDef = `
@@ -27,13 +27,23 @@ export const typeDef = `
 
 export const resolvers = {
   Query: {
-    allUsers: () => userRepository.getAll(),
+    allUsers: async (): Promise<Array<IUser>> => {
+      return await User.find({}) as Array<IUser>;
+    },
   },
   Mutation: {
-    addUser: async (_root: any, args: NewUser) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    addUser: async (_root: any, args: NewUser): Promise<IUser> => {
       try {
-        const user = new User(toNewUser(args));
-        const addedUser = await userRepository.create(user);
+        // Check that the user object has valid fields or throw error if not
+        toNewUser(args);
+
+        const newUser = new User({
+          email: args.email,
+          password: await bcrypt.hash(args.password, 10),
+        }) as NewUser;
+
+        const addedUser = await User.create(newUser);
         return addedUser;
       } catch (error) {
         throw new UserInputError((error as Error).message, {
