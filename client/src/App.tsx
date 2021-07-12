@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import NavBar from './components/NavBar';
+import React, { useEffect } from 'react';
+import TopNav from './components/TopNav';
 import Footer from './components/Footer';
 import {
   BrowserRouter as Router, Route, Switch, Redirect
@@ -20,7 +20,7 @@ const App: React.FC = () => {
   }, []);
 
   if (state.isLoading) {
-    return <LoadingScreen isLoading={true} />;
+    return <LoadingScreen isLoading={!state.isLoading} />;
   }
 
   return (
@@ -33,7 +33,7 @@ const App: React.FC = () => {
           background: '#1b1c1d',
         }}
       >
-      <NavBar />
+      <TopNav />
         <div style={{ minHeight: '1000px' }}>
           <Switch>
 

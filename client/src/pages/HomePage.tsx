@@ -7,22 +7,26 @@ import {
   Segment,
   Grid
 } from 'semantic-ui-react';
+import img from '../style/header-image.png';
 
 const HomePage: React.FC = () => {
   const loggedIn = window.localStorage.getItem('loggedUser') !== null;
   
   return (
     <Grid style={{ minHeight: '100vh' }} padded='horizontally'>
-      <Grid.Row centered color='black'>
-
-        <Segment
-          style={{ marginBottom: 100 }}
-          vertical
-          textAlign='center'
-        >
+      <Grid.Row
+        centered
+        color='black'
+        style={{
+          paddingTop: '150px',
+          height: '850px',
+          backgroundImage: `url(${img})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 100%',
+        }}
+      >
         <Container text>
           <Header
-            inverted
             as='h1'
             content='SurveyCreatorPro'
             style={{
@@ -32,7 +36,6 @@ const HomePage: React.FC = () => {
             }}
           />
           <Header
-            inverted
             as='h2'
             content='Best Online Survey Creator Available'
             style={{
@@ -42,7 +45,6 @@ const HomePage: React.FC = () => {
             }}
           />
           <Header
-            inverted
             content='"Creating surveys online has never been so easy!"'
             style={{
               fontSize: '1.2em',
@@ -60,7 +62,6 @@ const HomePage: React.FC = () => {
             <Icon name='angle right' />
           </Button>
         </Container>
-        </Segment>
       </Grid.Row>
 
       <Grid.Row style={{ background: '#f7f7f7' }} centered>

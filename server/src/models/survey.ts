@@ -13,9 +13,15 @@ const surveySchema: Schema = new mongoose.Schema({
     unique: false,
   },
   questions: [{
-    type: String,
-    required: true,
-    unique: false,
+    question: {
+      type: String,
+      required: true,
+      unique: false,
+    },
+    choises: [{
+      type: String,
+      required: true,
+    }],
   }],
   private: {
     type: Boolean,

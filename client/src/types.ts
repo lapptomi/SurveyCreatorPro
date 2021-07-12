@@ -6,21 +6,19 @@ export interface User {
 
 export type NewUser = Omit<User, 'id'>;
 
-export interface Survey {
+export interface ISurvey {
   id?: number;
   title: string;
   description: string;
+  questions: Array<IQuestion>;
   private: boolean;
-  questions: Array<string>;
-  answers?: Array<number>; // these will change in future
-  results?: Array<string>;
 }
 
-export interface Question {
-  title: string;
-  answer: number;
+export interface IQuestion {
+  question: string;
+  choises: Array<string>;
 }
 
-export type NewSurvey = Omit<Survey, 'id'>;
+export type NewSurvey = Omit<ISurvey, 'id'>;
 
 export type SafeUser = Omit<User, 'id' | 'password'>;

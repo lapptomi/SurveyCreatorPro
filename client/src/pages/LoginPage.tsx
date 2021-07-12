@@ -16,9 +16,7 @@ const LoginPage: React.FC = () => {
 
     login({ variables: { email, password } })
       .then((response) => {
-        const token = JSON.stringify(response.data.login.token);
-        console.log(token);
-        
+        const token = JSON.stringify(response.data.login.token);        
         window.localStorage.setItem('loggedUser', token);
         window.location.replace('/');
       })
