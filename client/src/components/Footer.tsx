@@ -1,43 +1,47 @@
 import React from 'react';
 import {
+  Container,
+  Divider,
   Grid,
   Header,
-  Icon,
   List,
-  Menu,
-  Segment,
 } from 'semantic-ui-react';
 
 const Footer: React.FC = () => (
-  <Grid style={{ minWidth: '768px' }} padded='horizontally'>
-    <Grid.Row color='black' centered style={{ padding: 50 }}>
-
-      <Grid.Column textAlign={'center'} width={8}>
-        <Segment inverted>
-          <Header as='h3' content='Info' />
-          <List link inverted>
-            <List.Item as='a' href={'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}>
-              About The Project
-            </List.Item>
-            <List.Item as='a' href={'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}>
-              Contact
-            </List.Item>
-          </List>
-        </Segment>
-      </Grid.Column>
-
-      <Grid.Column textAlign={'center'} width={8}>
-        <Segment inverted >
-          <Header as='h3'>Fullstack Project 2021</Header>
-            <p>Project On Github</p>
-          <Menu.Item>
-            <Icon name={'github'} size={'huge'} inverted/>
-          </Menu.Item>
-        </Segment>
-      </Grid.Column>
-
-    </Grid.Row>
-  </Grid>
+  <Grid>
+    <Grid.Row
+      style={{
+        padding: '120px', 
+        background: "#0E2C47"
+      }}
+    >
+    <Grid.Column width={16}>
+      <Container textAlign="center">
+        <Grid divided inverted>
+          <Grid.Column width={16}>
+            <Header inverted as="h1" content="SurveyCreatorPro" />
+            <Header inverted as="p" subheader="© 2021 All Rights Reserved jne"/>
+          </Grid.Column>
+        </Grid>
+        <Divider inverted section />
+        <List horizontal inverted link size="small">
+          <List.Item as="a" href="#">
+            Site Map
+          </List.Item>
+          <List.Item as="a" href="#">
+            Contact Us
+          </List.Item>
+          <List.Item as="a" href="#">
+            Terms and Conditions
+          </List.Item>
+          <List.Item as="a" href="#">
+            Privacy Policy
+          </List.Item>
+        </List>
+      </Container>
+    </Grid.Column>
+  </Grid.Row>
+</Grid>
 );
 
 export default Footer;

@@ -30,7 +30,7 @@ const App: React.FC = () => {
         style={{
           minWidth: '768px',
           minHeight: '1200px',
-          background: '#1b1c1d',
+          background: '#0E2C47',
         }}
       >
       <TopNav />

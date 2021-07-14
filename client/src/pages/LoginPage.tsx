@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Button, Form, Grid, Header, Message, Segment } from "semantic-ui-react";
 import LoadingScreen from "../components/LoadingScreen";
+import backgroundImage from '../style/header-image.png';
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../graphql/queries/login";
+import { Link } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -30,19 +32,31 @@ const LoginPage: React.FC = () => {
   return (
     <Grid textAlign='center' verticalAlign='middle'>
     <LoadingScreen isLoading={loading} />
-      <Grid.Row color='black'>
-        <Grid.Column style={{ maxWidth: '450px', marginTop: '300px' }} width={16}>
+      <Grid.Row 
+        color='black'
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 100%',
+          height: '1000px',
+        }}
+      >
+        <Grid.Column style={{ maxWidth: '600px' }} width={16}>
           <Header as='h2' inverted textAlign='center'>
             Log in to your account
           </Header>
+          
           <Form size='large' onSubmit={handleSubmit}>
-            <Segment vertical inverted>
+            <Segment style={{ background: 'rgba(14, 44, 71, 0.07)' }}>
+              <Header as='h1' textAlign='center'>
+                Log in to your account
+              </Header>
               <Form.Input 
                 id='email'
                 fluid icon='at' 
                 iconPosition='left' 
                 placeholder='Email' 
-                onChange={((event) => setEmail(event.target.value))}
+                onChange={(({ target }) => setEmail(target.value))}
               />
               <Form.Input
                 id='password'
@@ -51,16 +65,27 @@ const LoginPage: React.FC = () => {
                 iconPosition='left'
                 placeholder='Password'
                 type='password'
-                onChange={((event) => setPassword(event.target.value))}
+                onChange={(({ target }) => setPassword(target.value))}
               />
-              <Button color='blue' fluid size='large' type="submit">
-                Login
+              <Button 
+                id='signupbutton'
+                color='blue' 
+                fluid size='large' 
+                type='submit'
+                disabled={!email || !password}
+              >
+                Log in
               </Button>
             </Segment>
           </Form>
-          <Message color={'black'}>
-            Don&apos;t have an account yet? <a href='/register'>Sign Up here</a>
+
+          <Message style={{ background: 'rgba(0, 0, 0, 0.1)' }}>
+            Don&apos;t have an account yet?  &nbsp;
+            <Link to="/register">
+              Sign up here
+            </Link>
           </Message>
+
         </Grid.Column>
       </Grid.Row>
     </Grid>

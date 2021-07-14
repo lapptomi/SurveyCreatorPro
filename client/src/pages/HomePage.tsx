@@ -5,15 +5,20 @@ import {
   Button, 
   Icon, 
   Segment,
-  Grid
+  Grid,
+  Image
 } from 'semantic-ui-react';
+import '../style/index.css';
+
 import img from '../style/header-image.png';
+import img2 from '../style/img2.png';
+import img3 from '../style/img3.png';
 
 const HomePage: React.FC = () => {
   const loggedIn = window.localStorage.getItem('loggedUser') !== null;
   
   return (
-    <Grid style={{ minHeight: '100vh' }} padded='horizontally'>
+    <Grid style={{ minHeight: '100vh' }}>
       <Grid.Row
         centered
         color='black'
@@ -30,18 +35,17 @@ const HomePage: React.FC = () => {
             as='h1'
             content='SurveyCreatorPro'
             style={{
-              fontSize: '4em',
-              fontWeight: 'normal',
+              fontSize: '5em',
+              fontWeight: 'bold',
               marginTop: '1em',
             }}
           />
           <Header
             as='h2'
-            content='Best Online Survey Creator Available'
+            content='Your number #1 tool for creating surveys'
             style={{
               fontSize: '1.7em',
               fontWeight: 'normal',
-              marginTop: '1.5em',
             }}
           />
           <Header
@@ -57,6 +61,7 @@ const HomePage: React.FC = () => {
             as='a' 
             href={loggedIn ? '/surveys/create' : '/login'} 
             primary size='huge'
+            style={{ marginTop: '50px', width: '300px' }}
           >
             Get Started
             <Icon name='angle right' />
@@ -64,54 +69,56 @@ const HomePage: React.FC = () => {
         </Container>
       </Grid.Row>
 
-      <Grid.Row style={{ background: '#f7f7f7' }} centered>
+      <Grid.Row 
+        centered 
+        style={{ background: '#0E2C47' }}  
+        verticalAlign='middle'
+      >
         <Grid.Column
-          style={{ padding: '100px' }}
-          textAlign='center' 
-          computer={8} 
+          style={{ padding: '150px', maxWidth: '1000px' }}
+          textAlign='left' 
+          computer={12} 
           mobile={16}
         >
-          <Segment vertical>
-          <Header as='h1' style={{ fontSize: '3em' }}>
-            What is SurveyCreatorPro?
-          </Header>
-            <p style={{ fontSize: '2em' }}>
-              With SurveyCreatorPro you can create private or public surveys / research online.
-            </p>
-          </Segment>
+          <Container>
+            <Header as='h1' style={{ fontSize: '4.5em' }} inverted>
+              What is SurveyCreatorPro?
+            </Header>
+
+            <Header as='p' style={{ fontSize: '1.9em', opacity: '0.8' }} inverted>
+              Lorem ipsum dolor sit amet, consectetur adipisci elit, 
+              sed eiusmod tempor incidunt ut labore et dolore magna aliqua. 
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.
+            </Header>
+          </Container>
         </Grid.Column>
 
         <Grid.Column
-          style={{ padding: '100px' }}
-          textAlign='center' 
-          computer={8} 
+          className="hidden-mobile" // image will be hidden with mobile resolutions
+          style={{
+            marginTop: '50px',
+          }}
+          computer={4}
           mobile={16}
         >
-          <Segment vertical>
-            <Header as='h1'style={{ fontSize: '3em' }}>
-              Easy-To-Use
-            </Header>
-            <p style={{ fontSize: '2em' }}>
-              SurveyCreatorPro is simple but powerful tool 
-              and its very easy to get started with!
-            </p>
-          </Segment>
+          <Image floated='right' src={img3} />
         </Grid.Column>
       </Grid.Row>
 
-      <Grid.Row 
+      <Grid.Row
+        centered
+        verticalAlign='middle'
         style={{ 
-          paddingTop: '10em',
-          paddingBottom: '10em',
-          background: '#1a86cb'
+          padding: '150px',
+          backgroundImage: `url(${img2})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 100%',
         }} 
-        centered 
       >
         <Grid.Column width={16}>
           <Segment vertical textAlign='center'>
             <Container text>
               <Header
-                inverted
                 as='h1'
                 content='So What Are You Waiting For?'
                 style={{
@@ -120,7 +127,7 @@ const HomePage: React.FC = () => {
               />
               <Button
                 style={{ marginTop: 40 }}
-                color='black'
+                color='blue'
                 as='a' 
                 href='/register'
                 size='huge'

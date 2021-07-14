@@ -26,6 +26,7 @@ export const typeDef = `
 
 export const resolvers = {
   Mutation: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     login: async (_root: any, args: LoginArgs): Promise<IToken> => {
       const user = await User.findOne({ email: args.email });
       if (!user) {

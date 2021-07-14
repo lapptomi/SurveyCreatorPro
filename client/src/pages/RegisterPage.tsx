@@ -8,10 +8,12 @@ import {
   Message, 
   Segment 
 } from 'semantic-ui-react';
+import backgroundImage from '../style/header-image.png';
 import LoadingScreen from '../components/LoadingScreen';
 import { useMutation } from '@apollo/client';
 import { CREATE_NEW_USER } from '../graphql/queries/user';
 import { LOGIN } from '../graphql/queries/login';
+import { Link } from 'react-router-dom';
 
 const RegisterForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -49,15 +51,27 @@ const RegisterForm: React.FC = () => {
   };
 
   return (
-    <Grid textAlign='center' style={{ minHeight: '100vh' }} verticalAlign='middle' padded>
+    <Grid 
+      textAlign='center' 
+      style={{ minHeight: '1000px' }} 
+      verticalAlign='middle' 
+    >
       <LoadingScreen isLoading={loading} />
-      <Grid.Row color='black'>
-        <Grid.Column style={{ maxWidth: 450 }} width={16}>
-          <Header as='h2' inverted textAlign='center'>
-            Create New Account
-          </Header>
+      <Grid.Row 
+        color='black'
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 100%',
+          height: '1000px',
+        }}
+      >
+        <Grid.Column style={{ maxWidth: 600 }} width={16}>
           <Form size='large' onSubmit={handleSubmit}>
-            <Segment stacked inverted>
+            <Segment style={{ background: 'rgba(14, 44, 71, 0.07)' }}>
+              <Header as='h1' textAlign='center'>
+                Create new account
+              </Header>
               <Form.Input 
                 id='email'
                 fluid icon='at' 
@@ -98,10 +112,14 @@ const RegisterForm: React.FC = () => {
               >
                 Sign Up
               </Button>
+              
             </Segment>
           </Form>
-          <Message color={'black'}>
-            Already have an account? <a href='/login'>Log in here</a>
+          <Message style={{ background: 'rgba(0, 0, 0, 0.1)' }}>
+            Already have an account? &nbsp;
+            <Link to="/login">
+              Log in here
+            </Link>
           </Message>
         </Grid.Column>
       </Grid.Row>

@@ -37,3 +37,4 @@
 | 14.6 | 4    | changing the client to use GraphQL instead of REST |  
 | 12.7 | 2    | minor changes |  
 | 12.7 | 3    | added functionality on the server for creating new surveys and some minor changes   |  
+| 14.7 | 4    | styling changes on the ui   |

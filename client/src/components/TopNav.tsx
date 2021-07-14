@@ -5,7 +5,8 @@ import {
   Container, 
   Button, 
   Icon,
-  Header
+  Header,
+  Grid
  } from 'semantic-ui-react';
 import { useGlobalState } from '../state/state';
 import { Link } from 'react-router-dom';
@@ -73,11 +74,16 @@ const LoggedOutTopNav: React.FC = () => (
       </Link>
     </Menu.Item>
 
-    <Menu.Menu position='right'>
-
+    <Menu.Menu 
+      position='right' 
+      style={{paddingRight: '20px' }}
+    >
       <Menu.Item>
         <Link to="/login">
-          <Button color='black'>
+          <Button 
+            secondary 
+            style={{ background: '#324D66' }}
+          >
             Log In
           </Button>
         </Link>
@@ -99,9 +105,19 @@ const TopNav: React.FC = () => {
   const [state] = useGlobalState();
 
   return (
-    <Menu size='large' secondary inverted color='black'>
-      {state.isLoggedIn ? <LoggedInTopNav /> : <LoggedOutTopNav />}
-    </Menu>
+    <Grid>
+      <Grid.Row style={{ padding: '15px', background: '#0E2C47'  }}>
+        <Menu
+          size='large' 
+          style={{
+            background: '#0E2C47',
+            minWidth: '100%',
+          }}
+        >
+        {state.isLoggedIn ? <LoggedInTopNav /> : <LoggedOutTopNav />}
+      </Menu>
+      </Grid.Row>
+    </Grid>
   );
 };
 
