@@ -39,4 +39,5 @@
 | 12.7 | 3    | added functionality on the server for creating new surveys and some minor changes   |  
 | 14.7 | 4    | styling changes on the React UI   |
 | 16.7 | 2   | small styling changes on the React UI and fixing Cypress tests   |
+| 16.7 | 1   | fixing Github actions pipeline   |
 
