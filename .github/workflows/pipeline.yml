@@ -23,11 +23,11 @@ jobs:
         uses: cypress-io/github-action@v2
         env:
           MONGODB_TEST_URI: ${{ secrets.TEST_MONGODB_URI }}
-          SECRET: ${{ secrets.SECRET }}
+          SECRET: 'randomsecretkey'
         with:
           browser: chrome
           headless: true
-          start: npm run cypress:run
+          start: npm run start:test
           wait-on: http://localhost:3000
 
       - name: Heroku deploy
