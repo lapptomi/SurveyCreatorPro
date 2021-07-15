@@ -20,7 +20,7 @@ app.use(middleware.tokenExtractor);
 app.post('/api/testing/reset', async (_req, res) => {
   try {
     // Delete objects only if NODE_ENV is in test mode
-    if (process.env.NODE_ENV === 'test') {
+    if (process.env.NODE_ENV !== 'production') {
       await User.deleteMany();
       await Survey.deleteMany();
     }

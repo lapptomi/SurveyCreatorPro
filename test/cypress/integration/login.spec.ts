@@ -1,92 +1,94 @@
 /// <reference types="cypress" />
 import { NewUser } from "../../../server/types"
 
+
+const testUser: NewUser = {
+  email: 'testemail@gmail.com',
+  password: "testpassword",
+}
+
 describe('Login', function() {
   // @ts-check
   beforeEach(function() {
     cy.request('POST', 'http://localhost:4000/api/testing/reset')
 
-    // creating user for testing
-    const testUser: NewUser = {
-      email: 'testemail@gmail.com',
-      password: "testpassword",
-    }
-
     cy.visit('http://localhost:3000')
 
-    cy.contains('Sign Up').click()
-    cy.get('#email').type(testUser.email)
-    cy.get('#password').type(testUser.password)
-    cy.contains('I agree to the terms and something...').click()
-    
-    cy.get('#signupbutton').click()
+    // creating user for testing login
+    cy.get('#topnav-signup-button').click()
+    cy.get('#register-form-email-field').type(testUser.email)
+    cy.get('#register-form-password-field').type(testUser.password)
+    cy.get('#register-form-confirm-password-field').type(testUser.password)
+
+    cy.get('.register-form-accept-terms-checkbox').click()
+    cy.wait(1000)
+
+    cy.get('#register-form-signup-button').click()
       .then(() => {
-        cy.wait(4000)
         cy.contains('Log out')
         cy.contains('Profile')
         cy.contains('Create Survey')
         cy.contains('Browse Surveys')
       })
-  })
+
+    cy.contains('Log out').click()
+    cy.wait(1000)
+
+    cy.get('#topnav-login-button').click()
+  });
   
 
   it('front page can be opened', function() {
-    cy.contains('Log in')
-    cy.contains('SurveyCreatorPro')
+    cy.contains('SurveyCreatorPro').click()
+    cy.contains('Get Started')
   });
 
   it('succeeds with correct credentials', function() {
-    cy.contains('Log in').click()
-    cy.get('#email').type('testemail@gmail.com')
-    cy.get('#password').type('testpassword')
-    cy.contains('Login').click()
+    cy.get('#login-form-email-field').type(testUser.email)
+    cy.get('#login-form-password-field').type(testUser.password)
+    cy.get('#login-form-login-button').click()
+    
     cy.contains('Log out')
     cy.contains('Profile')
   })
 
   it('fails with wrong email', function() {
-    cy.contains('Log in').click()
-    cy.get('#email').type('wrongemail@gmail.com')
-    cy.get('#password').type('testpassword')
-    cy.contains('Login').click()
+    cy.get('#login-form-email-field').type('worngemail@random.com')
+    cy.get('#login-form-password-field').type(testUser.password)
+    cy.get('#login-form-login-button').click()
 
+    cy.wait(1000)
     cy.contains('Log in to your account')
+    
     cy.on('window:alert', (str) => {
-      expect(str).to.eq('Wrong credentials, please try again')
+      expect(str).to.eq('User not found')
     })
   })
 
   it('fails with wrong password', function() {
-    cy.contains('Log in').click()
-    cy.get('#email').type('testemail@gmail.com')
-    cy.get('#password').type('wrongpassword')
-    cy.contains('Login').click()
+    cy.get('#login-form-email-field').type(testUser.email)
+    cy.get('#login-form-password-field').type('wrongpassword')
+    cy.get('#login-form-login-button').click()
 
+    cy.wait(1000)
     cy.contains('Log in to your account')
+
     cy.on('window:alert', (str) => {
-      expect(str).to.eq('Wrong credentials, please try again')
+      expect(str).to.eq('Invalid username or password')
     })
   })
 
-  it('fails if email is not given', function() {
-    cy.contains('Log in').click()
-    cy.get('#password').type('wrongpassword')
-    cy.contains('Login').click()
+  it('fails if email is not given', function() {    
+    cy.get('#login-form-password-field').type('wrongpassword')
+    cy.get('#login-form-login-button').should('be.disabled');
 
     cy.contains('Log in to your account')
-    cy.on('window:alert', (str) => {
-      expect(str).to.eq('Wrong credentials, please try again')
-    })
   })
 
   it('fails if password is not given', function() {
-    cy.contains('Log in').click()
-    cy.get('#email').type('testemail@gmail.com')
-    cy.contains('Login').click()
+    cy.get('#login-form-email-field').type(testUser.email)
+    cy.get('#login-form-login-button').should('be.disabled');
 
     cy.contains('Log in to your account')
-    cy.on('window:alert', (str) => {
-      expect(str).to.eq('Wrong credentials, please try again')
-    })
   })
 });

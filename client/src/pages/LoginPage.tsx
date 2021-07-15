@@ -42,9 +42,6 @@ const LoginPage: React.FC = () => {
         }}
       >
         <Grid.Column style={{ maxWidth: '600px' }} width={16}>
-          <Header as='h2' inverted textAlign='center'>
-            Log in to your account
-          </Header>
           
           <Form size='large' onSubmit={handleSubmit}>
             <Segment style={{ background: 'rgba(14, 44, 71, 0.07)' }}>
@@ -52,14 +49,14 @@ const LoginPage: React.FC = () => {
                 Log in to your account
               </Header>
               <Form.Input 
-                id='email'
+                id='login-form-email-field'
                 fluid icon='at' 
                 iconPosition='left' 
                 placeholder='Email' 
                 onChange={(({ target }) => setEmail(target.value))}
               />
               <Form.Input
-                id='password'
+                id='login-form-password-field'
                 fluid
                 icon='lock'
                 iconPosition='left'
@@ -68,7 +65,7 @@ const LoginPage: React.FC = () => {
                 onChange={(({ target }) => setPassword(target.value))}
               />
               <Button 
-                id='signupbutton'
+                id='login-form-login-button'
                 color='blue' 
                 fluid size='large' 
                 type='submit'

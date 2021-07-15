@@ -73,14 +73,14 @@ const RegisterForm: React.FC = () => {
                 Create new account
               </Header>
               <Form.Input 
-                id='email'
+                id='register-form-email-field'
                 fluid icon='at' 
                 iconPosition='left' 
                 placeholder='Email' 
                 onChange={(({ target }) => setEmail(target.value))}
               />
               <Form.Input
-                id='password'
+                id='register-form-password-field'
                 fluid
                 icon='lock'
                 iconPosition='left'
@@ -89,7 +89,7 @@ const RegisterForm: React.FC = () => {
                 onChange={(({ target }) => setPassword(target.value))}
               />
                <Form.Input
-                id='confirmPassword'
+                id='register-form-confirm-password-field'
                 fluid
                 icon='lock'
                 iconPosition='left'
@@ -98,13 +98,14 @@ const RegisterForm: React.FC = () => {
                 onChange={(({ target }) => setConfirmPassword(target.value))}
               />
               <Form.Checkbox
+                className='register-form-accept-terms-checkbox'
                 inline
                 label='I agree to the terms and something...'
                 required
                 onClick={() => setAcceptTerms(!acceptTerms)}
               />
               <Button 
-                id='signupbutton'
+                id='register-form-signup-button'
                 color='blue' 
                 fluid size='large' 
                 type='submit'
