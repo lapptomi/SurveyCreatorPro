@@ -1,27 +1,29 @@
 export interface IUser {
-  id: number;
+  id: string;
   email: string;
   password: string;
-  gender: Gender;
 }
 
-export type NewUser = Omit<IUser, 'id'>;
-
-export enum Gender {
-  Male = 'male',
-  Female = 'female',
-  Other = 'other',
+export interface IQuestion {
+  id?: string;
+  question: string;
+  answerOptions: Array<string>;
 }
 
 export interface ISurvey {
-  id?: number;
+  id?: string;
   title: string;
   description: string;
-  questions: Array<string>;
+  questions: Array<IQuestion>;
   private: boolean;
-  answers?: Array<boolean>; // these will change in future
-  results?: Array<string>;
 }
+
+export interface IToken {
+  id: string;
+  token: string;
+}
+
+export type NewUser = Omit<IUser, 'id'>;
 
 export type NewSurvey = Omit<ISurvey, 'id'>;
 

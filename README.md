@@ -5,6 +5,6 @@
 
 ### Environment variables needed for this app
 
-DATABASE_URL=[MongoDB URI]  
-TEST_DATABASE_URL=[MongoDB URI for testing database]  
+MONGODB_URI=[MongoDB URI]  
+TEST_MONGODB_URI=[MongoDB URI for testing database]  
 SECRET=[secret key for jwt tokens]

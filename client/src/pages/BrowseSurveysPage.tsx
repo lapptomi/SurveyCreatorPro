@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Header, Grid } from 'semantic-ui-react';
-import SurveyList from '../SurveyList';
+import SurveyList from '../components/SurveyList';
 
 const BrowseSurveysPage: React.FC = () => {
   return (

@@ -1,15 +1,28 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
-import { Gender } from '../../types';
+
+export interface IUserSchema extends Document {
+  id: string;
+  email: string;
+  password: string;
+}
 
 const userSchema: Schema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true, unique: false },
-  gender: { type: Gender, required: true, unique: false },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 6,
+  },
+  password: {
+    type: String,
+    required: true,
+    unique: false,
+  },
 });
 
 userSchema.plugin(uniqueValidator);
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model<IUserSchema>('User', userSchema);
 
 export default User;

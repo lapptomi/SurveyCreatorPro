@@ -33,4 +33,11 @@
 | 10.4 | 4    | changing database from Postgres to MongoDB |  
 | 10.4 | 1    | fixing tests |  
 | 11.4 | 1    | changes on UI |  
-| 13.6 | xxx  | changing app to use GraphQL instead of REST |  
+| 13.6 | 4    | changing the server to use GraphQL instead of REST |  
+| 14.6 | 4    | changing the client to use GraphQL instead of REST |  
+| 12.7 | 2    | minor changes |  
+| 12.7 | 3    | added functionality on the server for creating new surveys and some minor changes   |  
+| 14.7 | 4    | styling changes on the React UI   |
+| 16.7 | 2   | small styling changes on the React UI and fixing Cypress tests   |
+| 16.7 | 1   | fixing Github actions pipeline   |
+
