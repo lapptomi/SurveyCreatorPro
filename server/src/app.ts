@@ -33,7 +33,7 @@ app.post('/api/testing/reset', async (_req, res) => {
 });
 
 app.get('/api/health', (_req, res) => {
-  res.send('ok');
+  res.status(200).send('ok');
 });
 
 // As default GET-requests returns React index.html
