@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Form, Grid, Header, Icon, Container, Radio, Segment } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Icon, Container, Radio, Segment, Accordion, List, Divider } from 'semantic-ui-react';
+import QuestionList from '../components/QuestionList';
+import img from '../style/img2.png';
 
 const CreateSurveyPage: React.FC = () => {
 
@@ -53,155 +55,117 @@ const CreateSurveyPage: React.FC = () => {
 
   return ( 
     <Grid>
-      <Grid.Row color='blue' style={{ padding: '100px' }}>
-        <Grid.Column width={16}>
+      <Grid.Row
+        centered
+        style={{
+          minHeight: '1500px',
+          backgroundImage: `url(${img})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 100%',
+        }}
+      >
+        <Grid.Column 
+          width={16}
+          style={{ maxWidth: '900px' }}
+        >
           <Header
-            inverted
             textAlign='center'
             content='Create new survey'
-            style={{ fontSize: '60px' }}
+            style={{ fontSize: '60px', margin: '80px' }}
           />
-        </Grid.Column>
-      </Grid.Row>
 
-
-      <Grid.Row style={{ padding: '50px' }} centered>
-        <Grid.Column width={16} style={{ maxWidth: 600 }}>
-          <Header
-            inverted
-            textAlign='center'
-            content='Survey information'
-            style={{ fontSize: '40px' }}
-          />
-          <Form size='large' onSubmit={handleSubmit}>
-            <Segment inverted>
-              <Form.Input 
-                label='Survey title' 
-                icon='edit' 
-                iconPosition='left' 
-                placeholder='Title' 
-                onChange={(({ target }) => setTitle(target.value))}
-              />
-            <Form.TextArea 
-              label='Survey description' 
-              placeholder='Tell something about this survey...' 
-              onChange={(({ target }) => setDescription(target.value))}
-            />
-            </Segment>
-          </Form>
-        </Grid.Column>
-      </Grid.Row>
-
-
-      <Grid.Row centered color='yellow' style={{ padding: '50px' }}>
-        <Header 
-          as='h1' 
-          content='Questions' 
-          subheader='Type question to the text field and press Enter or click Add field to add question' 
-        />
-      </Grid.Row> 
-
-      <Grid.Row centered>
-
-      <Grid.Column width={16} color='grey' style={{ padding: '50px' }}>
-        <Container>
-          <Header 
-              inverted
-              as='h1' 
-              content='Question' 
-              subheader='Type question to the text field and press Enter or click Add field to add question' 
-            />
-            <Form onSubmit={addQuestion}>
-            <Form.Input 
-              icon='edit' 
-              iconPosition='left' 
-              placeholder='Question'
-              value={question}
-              onChange={(({ target }) => setQuestion(target.value))}
-            />
-            <Button
-              style={{ marginTop: 20, width: '200px' }}
-              color='blue' 
-              fluid size='large' 
-              content='Add Question'
-            />
-          </Form>
-        </Container>
-      </Grid.Column>
-      </Grid.Row>
-
-        {Object.values(questions).map((question, i) => 
-
-          <Grid.Row key={i}>
-            <Grid.Column width={16}>
+          <Segment style={{ background: 'rgb(18, 112, 149, 0.1)' }}>
+            <Form size='large' onSubmit={handleSubmit}>
               <Container>
-                <Segment>
-                  <Segment secondary>
-                    <Header
-                      as='h3'
-                      textAlign='left'
-                      content='Question:'
-                      subheader={question}
-                    />
-                  </Segment>
-                    <Header 
-                      as='h3' 
-                      content='Choises' 
-                      subheader='Add choises to a question' 
-                    />
-                  <Segment secondary>
-                    <Icon name='edit' size='big' />
-                    question
-                  </Segment>
-                  <Button
-                    type='submit'
-                    style={{ marginTop: 20, width: '200px' }}
-                    color='blue' 
-                    fluid size='large' 
-                    content='Add Choise'
-                  />
-                </Segment>
-              </Container>
-            </Grid.Column>
-          </Grid.Row>
-        )}
+                <Form.Input 
+                  label='Survey title' 
+                  icon='edit' 
+                  iconPosition='left' 
+                  placeholder='Title' 
+                  onChange={(({ target }) => setTitle(target.value))}
+                />
+                <Form.TextArea 
+                  label='Survey description' 
+                  placeholder='Tell something about this survey...' 
+                  onChange={(({ target }) => setDescription(target.value))}
+                />
 
-       <Grid.Row centered color='grey'>
-          <Segment inverted style={{ maxWidth: '600px' }}>
-            <Form.Group grouped>
-              <Header inverted as='span'>
-                Make this survey private?
-              </Header>
-              <p>
-                When survey is set to private, 
-                other people cannot access them without link
-              </p>
-              <Form.Field inline>
-                <Radio
-                  name='radioGroup'
-                  checked={isPrivate}
-                  onChange={() => setIsPrivate(true)}              
+                <Header 
+                  as='h1' 
+                  content='Questions' 
                 />
-                <b> Yes</b>
-              </Form.Field>
-              <Form.Field>
-                <Radio
-                  name='radioGroup'
-                  checked={!isPrivate}
-                  onChange={() => setIsPrivate(false)}
-                />
-                <b> No</b>
-              </Form.Field>
-            </Form.Group> 
-            <Button
-              style={{ marginTop: 20 }}
-              color='blue' 
-              fluid size='large' 
-              onClick={handleSubmit}
-              disabled={!validCredentials()}
-              content='Create'
-            />
+
+                <QuestionList />
+
+                <Divider />
+
+                <Header as='b' content='New question' />
+                  <Form.Input 
+                    icon='edit' 
+                    iconPosition='left' 
+                    placeholder='Question'
+                    value={question}
+                    onChange={(({ target }) => setQuestion(target.value))}
+                  />
+                  <Button
+                    style={{ marginTop: 20, width: '150px' }}
+                    secondary
+                    inverted
+                    fluid size='medium' 
+                    content='Cancel'
+                    onClick={() => console.log('cancel')}
+                  />
+                  <Button
+                    style={{ marginTop: 20, width: '150px' }}
+                    color='blue' 
+                    fluid size='medium' 
+                    content='Add Question'
+                    onClick={addQuestion}
+                  />
+              </Container>
+            </Form>
+
           </Segment>
+        </Grid.Column>
+      </Grid.Row>
+
+
+
+      <Grid.Row centered color='grey'>
+        <Segment inverted style={{ maxWidth: '600px' }}>
+          <Form.Group grouped>
+            <Header inverted as='span'>
+              Make this survey private?
+            </Header>
+            <p>
+              text
+            </p>
+            <Form.Field inline>
+              <Radio
+                name='radioGroup'
+                checked={isPrivate}
+                onChange={() => setIsPrivate(true)}              
+              />
+              <b> Yes</b>
+            </Form.Field>
+            <Form.Field>
+              <Radio
+                name='radioGroup'
+                checked={!isPrivate}
+                onChange={() => setIsPrivate(false)}
+              />
+              <b> No</b>
+            </Form.Field>
+          </Form.Group> 
+          <Button
+            style={{ marginTop: 20 }}
+            color='blue' 
+            fluid size='large' 
+            onClick={handleSubmit}
+            disabled={!validCredentials()}
+            content='Create'
+          />
+        </Segment>
       </Grid.Row>
 
     </Grid>

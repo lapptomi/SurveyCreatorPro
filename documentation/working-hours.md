@@ -40,4 +40,4 @@
 | 14.7 | 4    | styling changes on the React UI   |
 | 16.7 | 2   | small styling changes on the React UI and fixing Cypress tests   |
 | 16.7 | 2   | fixing Github actions pipeline / Heroku deploy   |
-
+| 19.7 | 3   | creating a form on the ui for adding new surveys   |
