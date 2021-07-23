@@ -23,6 +23,10 @@ export interface IToken {
   token: string;
 }
 
+export interface ApolloContext {
+  currentUser: IUser;
+}
+
 export type NewUser = Omit<IUser, 'id'>;
 
 export type NewSurvey = Omit<ISurvey, 'id'>;

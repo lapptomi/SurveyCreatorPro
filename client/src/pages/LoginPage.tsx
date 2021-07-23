@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { Button, Form, Grid, Header, Message, Segment } from "semantic-ui-react";
-import LoadingScreen from "../components/LoadingScreen";
+import React, { useState } from 'react';
+import {
+  Button, Form, Grid, Header, Message, Segment,
+} from 'semantic-ui-react';
+import { useMutation } from '@apollo/client';
+import { Link } from 'react-router-dom';
+import LoadingScreen from '../components/LoadingScreen';
 import backgroundImage from '../style/header-image.png';
-import { useMutation } from "@apollo/client";
-import { LOGIN } from "../graphql/queries/login";
-import { Link } from "react-router-dom";
+import { LOGIN } from '../graphql/queries/login';
 
 const LoginPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -18,7 +20,7 @@ const LoginPage: React.FC = () => {
 
     login({ variables: { email, password } })
       .then((response) => {
-        const token = JSON.stringify(response.data.login.token);        
+        const token = JSON.stringify(response.data.login.token);
         window.localStorage.setItem('loggedUser', token);
         window.location.replace('/');
       })
@@ -30,10 +32,10 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <Grid textAlign='center' verticalAlign='middle'>
-    <LoadingScreen isLoading={loading} />
-      <Grid.Row 
-        color='black'
+    <Grid textAlign="center" verticalAlign="middle">
+      <LoadingScreen isLoading={loading} />
+      <Grid.Row
+        color="black"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundRepeat: 'no-repeat',
@@ -42,33 +44,35 @@ const LoginPage: React.FC = () => {
         }}
       >
         <Grid.Column style={{ maxWidth: '600px' }} width={16}>
-          
-          <Form size='large' onSubmit={handleSubmit}>
+
+          <Form size="large" onSubmit={handleSubmit}>
             <Segment style={{ background: 'rgba(14, 44, 71, 0.07)' }}>
-              <Header as='h1' textAlign='center'>
+              <Header as="h1" textAlign="center">
                 Log in to your account
               </Header>
-              <Form.Input 
-                id='login-form-email-field'
-                fluid icon='at' 
-                iconPosition='left' 
-                placeholder='Email' 
+              <Form.Input
+                id="login-form-email-field"
+                fluid
+                icon="at"
+                iconPosition="left"
+                placeholder="Email"
                 onChange={(({ target }) => setEmail(target.value))}
               />
               <Form.Input
-                id='login-form-password-field'
+                id="login-form-password-field"
                 fluid
-                icon='lock'
-                iconPosition='left'
-                placeholder='Password'
-                type='password'
+                icon="lock"
+                iconPosition="left"
+                placeholder="Password"
+                type="password"
                 onChange={(({ target }) => setPassword(target.value))}
               />
-              <Button 
-                id='login-form-login-button'
-                color='blue' 
-                fluid size='large' 
-                type='submit'
+              <Button
+                id="login-form-login-button"
+                color="blue"
+                fluid
+                size="large"
+                type="submit"
                 disabled={!email || !password}
               >
                 Log in
@@ -88,5 +92,5 @@ const LoginPage: React.FC = () => {
     </Grid>
   );
 };
- 
+
 export default LoginPage;

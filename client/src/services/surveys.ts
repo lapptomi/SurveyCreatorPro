@@ -20,14 +20,14 @@ const create = async (newSurvey: NewSurvey): Promise<NewSurvey> => {
   };
 
   const { data } = await axios.post<NewSurvey>(
-    baseUrl, newSurvey, config
+    baseUrl, newSurvey, config,
   );
-  
+
   return data;
 };
 
 export default {
   getAll,
   create,
-  setToken
+  setToken,
 };

@@ -26,5 +26,5 @@ const login = async (credentials: LoginCredentials): Promise<Token> => {
 
 export default {
   login,
-  logout
+  logout,
 };
