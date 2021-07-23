@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
+import {
+  BrowserRouter as Router, Route, Switch, Redirect,
+} from 'react-router-dom';
 import TopNav from './components/TopNav';
 import Footer from './components/Footer';
-import {
-  BrowserRouter as Router, Route, Switch, Redirect
-} from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import BrowseSurveysPage from './pages/BrowseSurveysPage';
 import CreateSurveyPage from './pages/CreateSurveyPage';
@@ -26,36 +26,36 @@ const App: React.FC = () => {
   return (
     <Router>
       <div
-        className='App'
+        className="App"
         style={{
           minWidth: '768px',
           minHeight: '1200px',
           background: '#0E2C47',
         }}
       >
-      <TopNav />
+        <TopNav />
         <div style={{ minHeight: '1000px' }}>
           <Switch>
 
-          <Route path='/register'>
-            { state.isLoggedIn ?  <Redirect to="/" /> : <RegisterPage /> }
-          </Route>
+            <Route path="/register">
+              { state.isLoggedIn ? <Redirect to="/" /> : <RegisterPage /> }
+            </Route>
 
-          <Route path='/login'>
-            { state.isLoggedIn ?  <Redirect to="/" /> : <LoginPage /> }
-          </Route>
+            <Route path="/login">
+              { state.isLoggedIn ? <Redirect to="/" /> : <LoginPage /> }
+            </Route>
 
-          <Route path='/surveys/browse'>
-            { state.isLoggedIn ? <BrowseSurveysPage /> : <Redirect to="/" /> }
-          </Route>
+            <Route path="/surveys/browse">
+              { state.isLoggedIn ? <BrowseSurveysPage /> : <Redirect to="/" /> }
+            </Route>
 
-          <Route path='/surveys/create'>
-            { state.isLoggedIn ? <CreateSurveyPage /> : <Redirect to="/" /> }
-          </Route>
+            <Route path="/surveys/create">
+              { state.isLoggedIn ? <CreateSurveyPage /> : <Redirect to="/" /> }
+            </Route>
 
-          <Route path='/'>
-            <HomePage />
-          </Route>
+            <Route path="/">
+              <HomePage />
+            </Route>
 
           </Switch>
         </div>

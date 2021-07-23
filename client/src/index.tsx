@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import 'semantic-ui-css/semantic.min.css';
 import { setContext } from '@apollo/client/link/context';
 import {
@@ -13,6 +12,7 @@ import {
 import { onError } from '@apollo/client/link/error';
 import { Store } from './state/state';
 import reducer from './state/reducer';
+import App from './App';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -40,7 +40,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 const authLink = setContext(({ headers }: any) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem('loggedUser');
-  
+
   // return the headers to the context so httpLink can read them
   return {
     headers: {
@@ -55,12 +55,11 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Store reducer={reducer}>
       <App />
     </Store>
   </ApolloProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

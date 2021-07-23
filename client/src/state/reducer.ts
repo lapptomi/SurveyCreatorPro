@@ -1,6 +1,4 @@
-
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
 /* eslint-disable arrow-body-style */
 export const setLoading = (loading: boolean) => {
   return {
@@ -8,7 +6,6 @@ export const setLoading = (loading: boolean) => {
     data: loading,
   };
 };
-
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const reducer = (state: any, action: { type: any; data: any; }) => {

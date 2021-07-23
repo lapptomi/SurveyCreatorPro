@@ -1,28 +1,40 @@
+/* eslint-disable no-alert */
 import React, { useState } from 'react';
-import { Button, Form, Grid, Header, Icon, Container, Radio, Segment, Accordion, List, Divider } from 'semantic-ui-react';
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Container,
+  Radio,
+  Segment,
+  Divider,
+} from 'semantic-ui-react';
 import QuestionList from '../components/QuestionList';
 import img from '../style/img2.png';
+import { NewSurvey } from '../types';
 
 const CreateSurveyPage: React.FC = () => {
-
   const [isPrivate, setIsPrivate] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [questions, setQuestions] = useState<string[]>([]);
+  const [questions, setQuestions] = useState<Array<string>>([]);
   const [question, setQuestion] = useState<string>('');
- 
-  const handleSubmit = () => {
 
+  const handleSubmit = () => {
+    // eslint-disable-next-line no-console
     console.log('SUBMIT');
 
-    /*
     const newSurvey: NewSurvey = {
-      title: title,
-      description: description,
-      questions: questions,
+      title,
+      description,
+      questions,
       private: isPrivate,
     };
 
+    console.log(newSurvey);
+
+    /*
     surveyService.create(newSurvey)
       .then(() => {
         window.alert('New survey created!');
@@ -35,8 +47,8 @@ const CreateSurveyPage: React.FC = () => {
   };
 
   const addQuestion = () => {
-    if (questions.length >= 5) {
-      window.alert('Max number of questions is 5 at the moment');
+    if (questions.length >= 10) {
+      window.alert('Max number of questions is 10 at the moment');
       return;
     }
     if (question.length < 4) {
@@ -48,12 +60,11 @@ const CreateSurveyPage: React.FC = () => {
     setQuestion('');
   };
 
-  const validCredentials = (): boolean => {
-    return title.length > 3 && questions.length > 0;
-  };
+  const validFields = (): boolean => (
+    title.length > 3 && questions.length > 0 && description.length > 0
+  );
 
-
-  return ( 
+  return (
     <Grid>
       <Grid.Row
         centered
@@ -64,64 +75,58 @@ const CreateSurveyPage: React.FC = () => {
           backgroundSize: '100% 100%',
         }}
       >
-        <Grid.Column 
+        <Grid.Column
           width={16}
           style={{ maxWidth: '900px' }}
         >
           <Header
-            textAlign='center'
-            content='Create new survey'
+            textAlign="center"
+            content="Create new survey"
             style={{ fontSize: '60px', margin: '80px' }}
           />
 
-          <Segment style={{ background: 'rgb(18, 112, 149, 0.1)' }}>
-            <Form size='large' onSubmit={handleSubmit}>
+          <Segment style={{ background: 'rgb(0, 0, 0, 0.1)' }}>
+            <Form size="large">
               <Container>
-                <Form.Input 
-                  label='Survey title' 
-                  icon='edit' 
-                  iconPosition='left' 
-                  placeholder='Title' 
+                <Form.Input
+                  label="Survey title *"
+                  icon="edit"
+                  iconPosition="left"
+                  placeholder="Title"
                   onChange={(({ target }) => setTitle(target.value))}
                 />
-                <Form.TextArea 
-                  label='Survey description' 
-                  placeholder='Tell something about this survey...' 
+                <Form.TextArea
+                  label="Survey description *"
+                  placeholder="Tell something about this survey..."
                   onChange={(({ target }) => setDescription(target.value))}
                 />
 
-                <Header 
-                  as='h1' 
-                  content='Questions' 
+                <Divider />
+                <Header
+                  as="h1"
+                  content="Questions:"
+                  subheader="Maximum number of questions is 10."
                 />
 
-                <QuestionList />
-
+                <QuestionList questions={questions} />
                 <Divider />
 
-                <Header as='b' content='New question' />
-                  <Form.Input 
-                    icon='edit' 
-                    iconPosition='left' 
-                    placeholder='Question'
-                    value={question}
-                    onChange={(({ target }) => setQuestion(target.value))}
-                  />
-                  <Button
-                    style={{ marginTop: 20, width: '150px' }}
-                    secondary
-                    inverted
-                    fluid size='medium' 
-                    content='Cancel'
-                    onClick={() => console.log('cancel')}
-                  />
-                  <Button
-                    style={{ marginTop: 20, width: '150px' }}
-                    color='blue' 
-                    fluid size='medium' 
-                    content='Add Question'
-                    onClick={addQuestion}
-                  />
+                <Header as="h1" content="Add Question" />
+                <Form.Input
+                  icon="edit"
+                  iconPosition="left"
+                  placeholder="Question"
+                  value={question}
+                  onChange={(({ target }) => setQuestion(target.value))}
+                />
+                <Button
+                  style={{ marginTop: 20, width: '150px' }}
+                  color="blue"
+                  fluid
+                  size="medium"
+                  content="Add Question"
+                  onClick={addQuestion}
+                />
               </Container>
             </Form>
 
@@ -129,12 +134,10 @@ const CreateSurveyPage: React.FC = () => {
         </Grid.Column>
       </Grid.Row>
 
-
-
-      <Grid.Row centered color='grey'>
+      <Grid.Row centered color="grey">
         <Segment inverted style={{ maxWidth: '600px' }}>
           <Form.Group grouped>
-            <Header inverted as='span'>
+            <Header inverted as="span">
               Make this survey private?
             </Header>
             <p>
@@ -142,28 +145,29 @@ const CreateSurveyPage: React.FC = () => {
             </p>
             <Form.Field inline>
               <Radio
-                name='radioGroup'
+                name="radioGroup"
                 checked={isPrivate}
-                onChange={() => setIsPrivate(true)}              
+                onChange={() => setIsPrivate(true)}
               />
               <b> Yes</b>
             </Form.Field>
             <Form.Field>
               <Radio
-                name='radioGroup'
+                name="radioGroup"
                 checked={!isPrivate}
                 onChange={() => setIsPrivate(false)}
               />
               <b> No</b>
             </Form.Field>
-          </Form.Group> 
+          </Form.Group>
           <Button
             style={{ marginTop: 20 }}
-            color='blue' 
-            fluid size='large' 
+            color="blue"
+            fluid
+            size="large"
             onClick={handleSubmit}
-            disabled={!validCredentials()}
-            content='Create'
+            disabled={!validFields()}
+            content="Create"
           />
         </Segment>
       </Grid.Row>

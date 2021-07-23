@@ -1,85 +1,42 @@
 import React from 'react';
-import { useState } from 'react';
-import { 
-  Accordion, 
+import {
   Button,
-  Divider,
-  Form,
   Header,
   Icon,
-  Item,
-  List
+  List,
 } from 'semantic-ui-react';
 
-const QuestionList: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState<number>(-1);
-  const [question, setQuestion] = useState('');
+interface Props {
+  questions: Array<string>;
+}
 
-  const questions = [
-    'randomquestion1',
-    'randomquestion2'
-  ];
+const QuestionList: React.FC<Props> = ({ questions }) => {
+  if (questions.length === 0) {
+    return (
+      <Header as="h2" subheader="No questions added yet..." />
+    );
+  }
 
   return (
-    <div>
-      {Object.values(questions).map((question, index) => 
-        <Accordion
-          key={index}
-          styled
-        >
-
-          <Accordion.Title
-            index={index}
-            active={activeIndex === index}
-            onClick={(e, titleProps) => {
-              if (activeIndex === index) {
-                // close if clicking currently opened question
-                setActiveIndex(-1);
-              } else {
-                setActiveIndex(titleProps.index as number);
-              }
-            }}
-          >
-            <Icon name='dropdown' />
-            {index+1}. question: {question}
-          </Accordion.Title>
-
-          <Accordion.Content active={activeIndex === index}>
-            <Header as='h1' subheader='Answer options for this question: ' />
-              <List divided >
-                <List.Item>
-                  <List.Header>text1</List.Header>
-                </List.Item>
-                <List.Item>
-                  <List.Header>text2</List.Header>
-                </List.Item>
-                <List.Item>
-                  <List.Header>text3</List.Header>
-                </List.Item>
-              </List>
-
-            <Divider />
-
-            <Item.Group>
-              <Form.Input 
-                icon='question' 
-                iconPosition='left' 
-                placeholder='Answer option'
-                onChange={(({ target }) => setQuestion(target.value))}
-              />
-              <Button
-                color='green' 
-                size='small' 
-                content='Add option'
-              />
-            </Item.Group>
-            
-          </Accordion.Content>
-        </Accordion>
-      )}
-    </div>
+    <List
+      divided
+      verticalAlign="middle"
+    >
+      {Object.values(questions).map((question, index) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <List.Item key={index} style={{ padding: '10px' }}>
+          <List.Content floated="right">
+            <Button color="blue">Edit</Button>
+            <Button color="red">Remove</Button>
+          </List.Content>
+          <Icon name="caret right" size="big" color="grey" />
+          <List.Content>
+            <Header as="h3" content={`Question ${index + 1}:`} subheader={question} />
+          </List.Content>
+        </List.Item>
+      ))}
+    </List>
   );
 };
-  
 
 export default QuestionList;
