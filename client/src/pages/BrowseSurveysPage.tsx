@@ -41,7 +41,7 @@ const BrowseSurveysPage: React.FC = () => (
         >
           <p>
             You can also create new survey
-            <a href="/surveys/create"> Here</a>
+            <a href="/surveys/create"> H ere</a>
           </p>
         </Header>
         <SurveyList />
