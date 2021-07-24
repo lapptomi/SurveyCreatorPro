@@ -2,7 +2,7 @@
 /* eslint-disable arrow-body-style */
 import bcrypt from 'bcrypt';
 import { UserInputError } from 'apollo-server-express';
-import { IUser, NewUser } from '../../types';
+import { IUser, NewUser } from '../types';
 import User from '../models/user';
 import { toNewUser } from '../utils';
 
@@ -46,6 +46,7 @@ export const resolvers = {
         const addedUser = await User.create(newUser);
         return addedUser;
       } catch (error) {
+        console.log('Error creating new user:', (error as Error).message);
         throw new UserInputError((error as Error).message, {
           invalidArgs: args,
         });

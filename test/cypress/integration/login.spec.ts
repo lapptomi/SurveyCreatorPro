@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { NewUser } from "../../../server/types"
+import { NewUser } from "../../../server/src/types"
 
 
 const testUser: NewUser = {

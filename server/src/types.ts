@@ -4,17 +4,11 @@ export interface IUser {
   password: string;
 }
 
-export interface IQuestion {
-  id?: string;
-  question: string;
-  answerOptions: Array<string>;
-}
-
 export interface ISurvey {
   id?: string;
   title: string;
   description: string;
-  questions: Array<IQuestion>;
+  questions: Array<string>;
   private: boolean;
 }
 

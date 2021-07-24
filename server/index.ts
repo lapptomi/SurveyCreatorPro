@@ -5,7 +5,7 @@ import * as jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import { schema } from './src/graphql/schema';
 import app from './src/app';
-import { ApolloContext, IUser } from './types';
+import { ApolloContext, IToken, IUser } from './src/types';
 import User from './src/models/user';
 
 dotenv.config();
@@ -29,7 +29,6 @@ mongoose.connect(MONGODB_URI as string, {
 const startApolloServer = async () => {
   const server = new ApolloServer({
     schema,
-    // eslint-disable-next-line consistent-return
     context: async ({ req }): Promise<ApolloContext | null> => {
       const authorization = req
         ? req.headers.authorization
@@ -43,7 +42,7 @@ const startApolloServer = async () => {
 
         const decodedToken = jwt.verify(
           token, process.env.SECRET as string,
-        ) as IUser;
+        ) as IToken;
 
         if (!token || !decodedToken.id) {
           throw new Error('Token missing or invalid');
@@ -51,7 +50,9 @@ const startApolloServer = async () => {
 
         const user = await User.findById(decodedToken.id) as IUser;
 
-        return { currentUser: user };
+        return {
+          currentUser: user,
+        };
       }
 
       return null;
@@ -59,7 +60,6 @@ const startApolloServer = async () => {
   });
 
   await server.start();
-
   server.applyMiddleware({ app });
 
   const PORT = process.env.PORT || 4000;

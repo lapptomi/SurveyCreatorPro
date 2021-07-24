@@ -20,7 +20,7 @@ const LoginPage: React.FC = () => {
 
     login({ variables: { email, password } })
       .then((response) => {
-        const token = JSON.stringify(response.data.login.token);
+        const { token } = response.data.login;
         window.localStorage.setItem('loggedUser', token);
         window.location.replace('/');
       })
@@ -47,9 +47,12 @@ const LoginPage: React.FC = () => {
 
           <Form size="large" onSubmit={handleSubmit}>
             <Segment style={{ background: 'rgba(14, 44, 71, 0.07)' }}>
-              <Header as="h1" textAlign="center">
-                Log in to your account
-              </Header>
+              <Header
+                as="h1"
+                textAlign="center"
+                content="Log in to your account"
+                subheader="(Email must be realistic, for example: user@random.com)"
+              />
               <Form.Input
                 id="login-form-email-field"
                 fluid

@@ -31,7 +31,7 @@ const RegisterForm: React.FC = () => {
     createNewUser({ variables: { email, password } })
       .then(() => login({ variables: { email, password } })
         .then((response) => {
-          const token = JSON.stringify(response.data.login.token);
+          const { token } = response.data.login;
           window.localStorage.setItem('loggedUser', token);
           window.location.replace('/');
         }))

@@ -15,19 +15,19 @@ const LoggedInTopNav: React.FC = () => {
 
   return (
     <>
-      <Menu.Item active={location.pathname === '/surveys/create'}>
-        <Link to="/surveys/create">
-          <Icon name="edit outline" />
-          {' '}
-          <b>Create Survey</b>
-        </Link>
-      </Menu.Item>
-
       <Menu.Item active={location.pathname === '/surveys/browse'}>
         <Link to="/surveys/browse">
           <Icon name="list ul" />
           {' '}
           <b>Browse Surveys</b>
+        </Link>
+      </Menu.Item>
+
+      <Menu.Item active={location.pathname === '/surveys/create'}>
+        <Link to="/surveys/create">
+          <Icon name="edit outline" />
+          {' '}
+          <b>Create Survey</b>
         </Link>
       </Menu.Item>
 
