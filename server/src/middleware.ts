@@ -8,6 +8,7 @@ const reqestPrinter = (req: Request, _res: Response, next: NextFunction): void =
   next();
 };
 
+/*
 const tokenExtractor = (req: Request, _res: Response, next: NextFunction): void => {
   const authorization = req.get('authorization');
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
@@ -15,6 +16,7 @@ const tokenExtractor = (req: Request, _res: Response, next: NextFunction): void 
   }
   next();
 };
+*/
 
 const unknownEndpoint = (_req: Request, res: Response): void => {
   res.status(404).send({ error: 'unknown endpoint' });
@@ -59,5 +61,4 @@ export default {
   reqestPrinter,
   unknownEndpoint,
   errorHandler,
-  tokenExtractor,
 };

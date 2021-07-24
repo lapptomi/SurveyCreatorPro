@@ -41,4 +41,6 @@
 | 16.7 | 2   | small styling changes on the React UI and fixing Cypress tests   |
 | 16.7 | 2   | fixing Github actions pipeline / Heroku deploy   |
 | 19.7 | 3   | creating a form on the ui for adding new surveys   |
-| 23.7 | 5  | creating a form on the ui for adding new surveys and some other minor changes  |
+| 23.7 | 5  | creating a form on the ui for adding new surveys and some other minor changes  |  
+| 24.7 | 3  | adding functionality for creating new surveys  |  
+| 24.7 | 1  | writing tests  |  

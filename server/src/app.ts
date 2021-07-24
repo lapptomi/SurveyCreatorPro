@@ -15,8 +15,6 @@ if (process.env.NODE_ENV === 'development') {
   app.use(middleware.reqestPrinter);
 }
 
-app.use(middleware.tokenExtractor);
-
 app.post('/api/testing/reset', async (_req, res) => {
   try {
     // Delete objects only if NODE_ENV is in test mode

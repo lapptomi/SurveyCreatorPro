@@ -2,7 +2,7 @@
 /* eslint-disable arrow-body-style */
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import { IToken } from '../../types';
+import { IToken } from '../types';
 import User from '../models/user';
 
 interface LoginArgs {
@@ -26,8 +26,7 @@ export const typeDef = `
 
 export const resolvers = {
   Mutation: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    login: async (_root: any, args: LoginArgs): Promise<IToken> => {
+    login: async (_root: unknown, args: LoginArgs): Promise<IToken> => {
       const user = await User.findOne({ email: args.email });
       if (!user) {
         throw new Error('User not found');
