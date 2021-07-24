@@ -92,6 +92,7 @@ const CreateSurveyPage: React.FC = () => {
             <Form size="large">
               <Container>
                 <Form.Input
+                  id="survey-form-title-input"
                   label="Survey title *"
                   icon="edit"
                   iconPosition="left"
@@ -99,6 +100,7 @@ const CreateSurveyPage: React.FC = () => {
                   onChange={(({ target }) => setTitle(target.value))}
                 />
                 <Form.TextArea
+                  id="survey-form-description-input"
                   label="Survey description *"
                   placeholder="Tell something about this survey..."
                   onChange={(({ target }) => setDescription(target.value))}
@@ -115,8 +117,9 @@ const CreateSurveyPage: React.FC = () => {
 
                 <QuestionList questions={questions} />
 
-                <Header as="h3" content="Add Question" />
+                <Header as="h3" content="New Question" />
                 <Form.Input
+                  id="survey-form-question-input"
                   icon="edit"
                   iconPosition="left"
                   placeholder="Write your question here"
@@ -124,7 +127,8 @@ const CreateSurveyPage: React.FC = () => {
                   onChange={(({ target }) => setQuestion(target.value))}
                 />
                 <Button
-                  style={{ marginTop: 20, width: '150px' }}
+                  id="survey-form-add-question-button"
+                  style={{ marginTop: '20px', maxWidth: '150px' }}
                   color="blue"
                   fluid
                   size="medium"
@@ -150,11 +154,13 @@ const CreateSurveyPage: React.FC = () => {
                   subheader="If survey is set to private users need a link to access them."
                 />
                 <Radio
+                  className="survey-form-yes-radio"
                   checked={isPrivate}
                   onChange={() => setIsPrivate(true)}
                 />
                 <b> Yes </b>
                 <Radio
+                  className="survey-form-no-radio"
                   checked={!isPrivate}
                   onChange={() => setIsPrivate(false)}
                 />
@@ -163,12 +169,14 @@ const CreateSurveyPage: React.FC = () => {
 
               <Segment textAlign="center">
                 <Button
+                  id="survey-form-cancel-button"
                   inverted
                   secondary
                 >
                   Cancel
                 </Button>
                 <Button
+                  id="survey-form-create-button"
                   color="blue"
                   onClick={handleSubmit}
                   disabled={!validFields()}

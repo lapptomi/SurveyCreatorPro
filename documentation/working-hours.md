@@ -43,3 +43,4 @@
 | 19.7 | 3   | creating a form on the ui for adding new surveys   |
 | 23.7 | 5  | creating a form on the ui for adding new surveys and some other minor changes  |  
 | 24.7 | 3  | adding functionality for creating new surveys  |  
+| 24.7 | 1  | writing tests  |  
