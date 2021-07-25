@@ -1,59 +1,81 @@
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@apollo/client';
+import React from 'react';
 import {
-  Segment, List, Container, Header, Icon,
+  Segment, List, Container, Header, Icon, Message, Label,
 } from 'semantic-ui-react';
-import surveyService from '../services/surveys';
-import { NewSurvey } from '../types';
-import LoadingScreen from './LoadingScreen';
+import { GET_ALL_SURVEYS } from '../graphql/queries/survey';
+import ErrorPage from '../pages/ErrorPage';
+import { ISurvey } from '../types';
+import Loading from './Loading';
 
 const SurveyList: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [surveys, setSurveys] = useState<NewSurvey[]>([]);
+  const { loading, data } = useQuery(GET_ALL_SURVEYS);
 
-  useEffect(() => {
-    surveyService.getAll()
-      .then((data) => {
-        setSurveys(data);
-        setIsLoading(false);
-      })
-      .catch((e) => {
-        setIsLoading(false);
-        console.log((e as Error).message);
-      });
-  }, []);
+  if (loading) {
+    return <Loading />;
+  }
+  if (!data) {
+    return <ErrorPage />;
+  }
+
+  const surveys: Array<ISurvey> = data.allSurveys;
 
   return (
-    <>
-      <LoadingScreen isLoading={isLoading} />
-      <Container style={{
-        padding: '1em 0em',
-      }}
-      >
-        <Segment
-          inverted
-          size="big"
-        >
-          <Header inverted as="h1" content="Surveys" />
-          <List divided inverted relaxed>
+    <Container>
+      <Segment>
+        <Segment style={{ background: 'rgb(34 69 101)' }}>
+          <Header
+            inverted
+            icon="list"
+            content="List of public surveys"
+            subheader={`${surveys.length} surveys found`}
+            style={{ fontSize: '30px', margin: '10px' }}
+          />
+        </Segment>
+
+        <Segment>
+          <List divided relaxed>
             {Object.values(surveys).map((survey, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <List.Item key={index}>
-                <Icon name="book" />
-                <List.Content>
-                  <List.Header>
-                    Title:
-                    {survey.title}
-                  </List.Header>
-                  Description:
-                  {' '}
-                  {survey.description}
-                </List.Content>
+              <List.Item
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                style={{ padding: '20px' }}
+              >
+                <Segment clearing color="green">
+                  <List.Content>
+                    <Header as="h2">
+                      <Header.Content>
+                        Survey Title:&nbsp;
+                        <span style={{ fontWeight: 'normal' }}>
+                          {survey.title}
+                        </span>
+                      </Header.Content>
+                    </Header>
+
+                    <Message
+                      header="Survey description:&nbsp;"
+                      content={survey.description}
+                    />
+                  </List.Content>
+
+                  <List.Content floated="right" style={{ marginTop: 20 }}>
+                    <Label>Click the arrow to answer this survey</Label>
+                    <Icon
+                      link
+                      color="green"
+                      size="huge"
+                      name="arrow circle right"
+                      onClick={() => window.location.replace(`/surveys/${survey.id}`)}
+                    />
+                  </List.Content>
+                </Segment>
               </List.Item>
             ))}
           </List>
+
         </Segment>
-      </Container>
-    </>
+      </Segment>
+    </Container>
   );
 };
 

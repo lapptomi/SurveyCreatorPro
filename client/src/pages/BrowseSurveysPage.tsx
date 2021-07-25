@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Header, Grid } from 'semantic-ui-react';
 import SurveyList from '../components/SurveyList';
+import img from '../style/img2.png';
 
 const BrowseSurveysPage: React.FC = () => (
   <Grid
@@ -8,41 +10,34 @@ const BrowseSurveysPage: React.FC = () => (
     style={{ minHeight: '100vh' }}
     verticalAlign="middle"
   >
-    <Grid.Row color="black">
-      <Container text>
+    <Grid.Row
+      color="black"
+      style={{
+        minHeight: '1200px',
+        backgroundImage: `url(${img})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100% 100%',
+      }}
+    >
+      <Container text style={{ marginTop: '70px' }}>
         <Header
           as="h1"
           content="Browse Public Surveys"
-          inverted
-          style={{
-            fontSize: '3em',
-            fontWeight: 'normal',
-            marginTop: '1.5em',
-          }}
+          style={{ fontSize: '3em', fontWeight: 'normal' }}
         />
         <Header
           as="h2"
           content="Here you can browse and answer to public surveys that other people have created"
-          inverted
-          style={{
-            fontSize: '1.4em',
-            fontWeight: 'normal',
-            marginTop: '1em',
-          }}
+          style={{ fontWeight: 'normal' }}
         />
         <Header
-          inverted
-          style={{
-            fontSize: '1.2em',
-            fontWeight: 'normal',
-            marginTop: '1.5em',
-            marginBottom: '2em',
-          }}
+          as="h2"
+          style={{ fontWeight: 'normal' }}
         >
-          <p>
-            You can also create new survey
-            <a href="/surveys/create"> H ere</a>
-          </p>
+          You can also create new survey
+          <Link to="/surveys/create">
+            <span> Here</span>
+          </Link>
         </Header>
         <SurveyList />
       </Container>

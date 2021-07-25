@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router, Route, Switch, Redirect,
 } from 'react-router-dom';
@@ -10,17 +10,15 @@ import CreateSurveyPage from './pages/CreateSurveyPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import { useGlobalState } from './state/state';
-import LoadingScreen from './components/LoadingScreen';
+import Loading from './components/Loading';
+import SurveyPage from './pages/SurveyPage';
+import ErrorPage from './pages/ErrorPage';
 
 const App: React.FC = () => {
   const [state] = useGlobalState();
 
-  useEffect(() => {
-    console.log('STATE = ', state);
-  }, []);
-
   if (state.isLoading) {
-    return <LoadingScreen isLoading={!state.isLoading} />;
+    return <Loading />;
   }
 
   return (
@@ -37,26 +35,33 @@ const App: React.FC = () => {
         <div style={{ minHeight: '1000px' }}>
           <Switch>
 
-            <Route path="/register">
+            <Route exact path="/register">
               { state.isLoggedIn ? <Redirect to="/" /> : <RegisterPage /> }
             </Route>
 
-            <Route path="/login">
+            <Route exact path="/login">
               { state.isLoggedIn ? <Redirect to="/" /> : <LoginPage /> }
             </Route>
 
-            <Route path="/surveys/browse">
+            <Route exact path="/surveys/browse">
               { state.isLoggedIn ? <BrowseSurveysPage /> : <Redirect to="/" /> }
             </Route>
 
-            <Route path="/surveys/create">
+            <Route exact path="/surveys/create">
               { state.isLoggedIn ? <CreateSurveyPage /> : <Redirect to="/" /> }
             </Route>
 
-            <Route path="/">
+            <Route exact path="/surveys/:id">
+              { state.isLoggedIn ? <SurveyPage /> : <Redirect to="/" /> }
+            </Route>
+
+            <Route exact path="/">
               <HomePage />
             </Route>
 
+            <Route path="*">
+              <ErrorPage />
+            </Route>
           </Switch>
         </div>
         <Footer />

@@ -22,3 +22,31 @@ export const CREATE_SURVEY = gql`
     }
   }
 `;
+
+const SURVEY_FIELDS = gql`
+  fragment SurveyFields on Survey {
+    id
+    title
+    description
+    questions
+    private
+  }
+`;
+
+export const GET_ALL_SURVEYS = gql`
+  ${SURVEY_FIELDS}
+  query {
+    allSurveys {
+      ...SurveyFields
+    }
+  }
+`;
+
+export const FIND_SURVEY_BY_ID = gql`
+  ${SURVEY_FIELDS}
+  query findSurvey($surveyId: ID!) {
+    findSurvey(surveyId: $surveyId) {
+      ...SurveyFields
+    }
+  }
+`;

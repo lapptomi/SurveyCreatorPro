@@ -10,22 +10,22 @@ import {
 } from 'semantic-ui-react';
 import '../style/index.css';
 
-import img from '../style/header-image.png';
 import img2 from '../style/img2.png';
 import img3 from '../style/img3.png';
+import { useGlobalState } from '../state/state';
 
 const HomePage: React.FC = () => {
-  const loggedIn = window.localStorage.getItem('loggedUser') !== null;
+  const [state] = useGlobalState();
 
   return (
-    <Grid style={{ minHeight: '100vh' }}>
+    <Grid>
       <Grid.Row
         centered
         color="black"
         style={{
           paddingTop: '150px',
           height: '850px',
-          backgroundImage: `url(${img})`,
+          backgroundImage: `url(${img2})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: '100% 100%',
         }}
@@ -59,7 +59,7 @@ const HomePage: React.FC = () => {
           />
           <Button
             as="a"
-            href={loggedIn ? '/surveys/create' : '/login'}
+            href={state.loggedIn ? '/surveys/create' : '/login'}
             primary
             size="huge"
             style={{ marginTop: '50px', width: '300px' }}
@@ -76,7 +76,7 @@ const HomePage: React.FC = () => {
         verticalAlign="middle"
       >
         <Grid.Column
-          style={{ padding: '150px', maxWidth: '1000px' }}
+          style={{ padding: '170px', maxWidth: '1000px' }}
           textAlign="left"
           computer={12}
           mobile={16}
@@ -86,7 +86,7 @@ const HomePage: React.FC = () => {
               What is SurveyCreatorPro?
             </Header>
 
-            <Header as="p" style={{ fontSize: '1.9em', opacity: '0.8' }} inverted>
+            <Header as="h3" style={{ fontSize: '1.9em', opacity: '0.8' }} inverted>
               Lorem ipsum dolor sit amet, consectetur adipisci elit,
               sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -97,9 +97,7 @@ const HomePage: React.FC = () => {
 
         <Grid.Column
           className="hidden-mobile" // image will be hidden with mobile resolutions
-          style={{
-            marginTop: '50px',
-          }}
+          style={{ marginTop: '50px' }}
           computer={4}
           mobile={16}
         >
@@ -109,9 +107,44 @@ const HomePage: React.FC = () => {
 
       <Grid.Row
         centered
+        style={{ background: 'rgb(50 77 102)' }}
+        verticalAlign="middle"
+      >
+        <Grid.Column
+          className="hidden-mobile" // image will be hidden with mobile resolutions
+          style={{ marginTop: '50px' }}
+          computer={4}
+          mobile={16}
+        >
+          <Header as="h1" content="Some image here?" />
+        </Grid.Column>
+
+        <Grid.Column
+          style={{ padding: '170px', maxWidth: '1000px' }}
+          textAlign="right"
+          computer={12}
+          mobile={16}
+        >
+          <Container>
+            <Header as="h1" style={{ fontSize: '4.5em' }} inverted>
+              How does it work?
+            </Header>
+
+            <Header as="h3" style={{ fontSize: '1.9em', opacity: '0.8' }} inverted>
+              Lorem ipsum dolor sit amet, consectetur adipisci elit,
+              sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquid ex ea commodi consequat.
+            </Header>
+          </Container>
+        </Grid.Column>
+      </Grid.Row>
+
+      <Grid.Row
+        centered
         verticalAlign="middle"
         style={{
-          padding: '150px',
+          padding: '200px',
           backgroundImage: `url(${img2})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: '100% 100%',
@@ -134,7 +167,7 @@ const HomePage: React.FC = () => {
                 href="/register"
                 size="huge"
               >
-                Click Here To Sign Up For Free
+                Click Here To Sign Up
                 <Icon name="arrow right" />
               </Button>
             </Container>

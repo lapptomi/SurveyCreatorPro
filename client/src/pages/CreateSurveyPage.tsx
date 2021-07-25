@@ -2,6 +2,7 @@
 /* eslint-disable no-alert */
 import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Form,
@@ -32,9 +33,8 @@ const CreateSurveyPage: React.FC = () => {
           title, description, questions, private: isPrivate,
         },
       }).then((result) => {
-        console.log(result);
-        window.alert('New Survey created!');
-        window.location.replace('/');
+        const surveyId: string = result.data.addSurvey.id;
+        window.location.replace(`/surveys/${surveyId}`);
       }).catch((error) => {
         console.log(error.message);
         window.alert(`Error creating survey: ${(error as Error).message}`);
@@ -75,17 +75,45 @@ const CreateSurveyPage: React.FC = () => {
           width={16}
           style={{ maxWidth: '900px' }}
         >
-          <Segment style={{
-            background: 'rgb(0, 0, 0, 0.03)',
-            marginTop: '50px',
-          }}
-          >
+
+          <Container text style={{ margin: '70px' }}>
+            <Header
+              as="h2"
+              textAlign="left"
+              content="Create New Survey"
+              style={{
+                fontSize: '3em',
+                fontWeight: 'normal',
+              }}
+            />
+            <Header
+              textAlign="left"
+              style={{ fontWeight: 'normal' }}
+            >
+              Here you can create new private or public surveys
+              by filling the form below
+              with valid information.
+            </Header>
+            <Header
+              as="h2"
+              textAlign="left"
+              style={{ fontWeight: 'normal' }}
+            >
+              You can also browse and answer public surveys
+              <Link to="/surveys/browse">
+                <span> Here</span>
+              </Link>
+            </Header>
+          </Container>
+
+          <Segment style={{ background: 'rgb(0, 0, 0, 0.03)' }}>
             <Segment style={{ background: 'rgb(34 69 101)' }}>
               <Header
+                as="h2"
                 inverted
                 textAlign="center"
-                content="Create New Survey"
-                style={{ fontSize: '50px', margin: '50px' }}
+                content="Survey Information"
+                style={{ fontSize: '40px', margin: '20px' }}
               />
             </Segment>
 
@@ -107,13 +135,17 @@ const CreateSurveyPage: React.FC = () => {
                 />
 
                 <Divider />
-                <Header
-                  icon="list"
-                  as="h1"
-                  content="Questions:"
-                  subheader="Maximum number of questions is 10."
-                />
-                <Divider />
+
+                <Segment style={{ background: 'rgb(34 69 101)' }}>
+                  <Header
+                    as="h2"
+                    inverted
+                    icon="list"
+                    content="Questions"
+                    subheader="Maximum number of questions is 10 at the moment."
+                    style={{ fontSize: '30px' }}
+                  />
+                </Segment>
 
                 <QuestionList questions={questions} />
 
@@ -185,11 +217,9 @@ const CreateSurveyPage: React.FC = () => {
               </Segment>
 
             </Segment.Group>
-
           </Segment>
         </Grid.Column>
       </Grid.Row>
-
     </Grid>
   );
 };
