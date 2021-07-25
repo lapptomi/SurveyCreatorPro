@@ -23,7 +23,6 @@ export const CREATE_SURVEY = gql`
   }
 `;
 
-// Fragment for all survey fields
 const SURVEY_FIELDS = gql`
   fragment SurveyFields on Survey {
     id

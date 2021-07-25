@@ -86,7 +86,7 @@ const HomePage: React.FC = () => {
               What is SurveyCreatorPro?
             </Header>
 
-            <Header as="p" style={{ fontSize: '1.9em', opacity: '0.8' }} inverted>
+            <Header as="h3" style={{ fontSize: '1.9em', opacity: '0.8' }} inverted>
               Lorem ipsum dolor sit amet, consectetur adipisci elit,
               sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -130,7 +130,7 @@ const HomePage: React.FC = () => {
               How does it work?
             </Header>
 
-            <Header as="p" style={{ fontSize: '1.9em', opacity: '0.8' }} inverted>
+            <Header as="h3" style={{ fontSize: '1.9em', opacity: '0.8' }} inverted>
               Lorem ipsum dolor sit amet, consectetur adipisci elit,
               sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               Ut enim ad minim veniam, quis nostrud exercitation ullamco
