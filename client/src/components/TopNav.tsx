@@ -21,8 +21,7 @@ const LoggedInTopNav: React.FC = () => {
       >
         <Link to="/surveys/browse">
           <Icon name="list ul" />
-          {' '}
-          <b>Browse Surveys</b>
+          <b> Browse Surveys</b>
         </Link>
       </Menu.Item>
 
@@ -32,8 +31,7 @@ const LoggedInTopNav: React.FC = () => {
       >
         <Link to="/surveys/create">
           <Icon name="edit outline" />
-          {' '}
-          <b>Create Survey</b>
+          <b> Create Survey</b>
         </Link>
       </Menu.Item>
 
@@ -42,8 +40,7 @@ const LoggedInTopNav: React.FC = () => {
         <Menu.Item active={location.pathname === '/profile'}>
           <Link to="/profile">
             <Icon name="user" />
-            {' '}
-            <b>Profile</b>
+            <b> Profile</b>
           </Link>
         </Menu.Item>
 

@@ -1,23 +1,22 @@
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
 import React, { useState } from 'react';
 import {
-  Button, Form, Grid, Header, Message, Segment,
+  Button, Form, Grid, Header, Icon, Message, Segment,
 } from 'semantic-ui-react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
-import LoadingScreen from '../components/LoadingScreen';
 import backgroundImage from '../style/header-image.png';
 import { LOGIN } from '../graphql/queries/login';
+import Loading from '../components/Loading';
 
 const LoginPage: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const [login] = useMutation(LOGIN);
+  const [login, { loading }] = useMutation(LOGIN);
 
   const handleSubmit = (): void => {
-    setLoading(true);
-
     login({ variables: { email, password } })
       .then((response) => {
         const { token } = response.data.login;
@@ -25,15 +24,17 @@ const LoginPage: React.FC = () => {
         window.location.replace('/');
       })
       .catch((error) => {
-        setLoading(false);
         console.log(error.message);
         window.alert(error.message);
       });
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <Grid textAlign="center" verticalAlign="middle">
-      <LoadingScreen isLoading={loading} />
       <Grid.Row
         color="black"
         style={{
@@ -47,12 +48,17 @@ const LoginPage: React.FC = () => {
 
           <Form size="large" onSubmit={handleSubmit}>
             <Segment style={{ background: 'rgba(14, 44, 71, 0.07)' }}>
-              <Header
-                as="h1"
-                textAlign="center"
-                content="Log in to your account"
-                subheader="(Email must be realistic, for example: user@random.com)"
-              />
+              <Segment style={{ background: 'rgb(34 69 101)' }}>
+                <Header
+                  as="h1"
+                  inverted
+                  style={{ fontSize: '30px', margin: '10px' }}
+                >
+                  <Icon name="sign-in" />
+                  Log in to your account
+                </Header>
+              </Segment>
+
               <Form.Input
                 id="login-form-email-field"
                 fluid

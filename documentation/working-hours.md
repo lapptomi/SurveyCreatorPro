@@ -44,3 +44,4 @@
 | 23.7 | 5  | creating a form on the ui for adding new surveys and some other minor changes  |  
 | 24.7 | 3  | adding functionality for creating new surveys  |  
 | 24.7 | 1  | writing tests  |  
+| 25.7 | 9  | creating new pages on the React UI and some styling changes  |  

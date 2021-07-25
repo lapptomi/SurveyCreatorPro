@@ -65,10 +65,10 @@ describe('Survey', function() {
 
     cy.get('#survey-form-create-button').click()
 
-    /*
-      Change later to better checking that survey has been created
-    */
-    cy.contains('What is SurveyCreatorPro?')
+    cy.wait(3000)
+    cy.contains(`Title: ${testSurvey.title}`)
+    cy.contains(`Description: ${testSurvey.description}`)
+    cy.contains(`List of survey questions`)
   });
 
   it('cannot be created without adding questions', function() {

@@ -15,6 +15,7 @@ export const typeDef = `
 
   extend type Query {
     allSurveys: [Survey!]!
+    findSurvey(surveyId: ID!): Survey
   }
 
   extend type Mutation {
@@ -31,6 +32,9 @@ export const resolvers = {
   Query: {
     allSurveys: async (): Promise<Array<ISurvey>> => {
       return await Survey.find({}) as Array<ISurvey>;
+    },
+    findSurvey: async (_root: unknown, args: { surveyId: string }): Promise<ISurvey> => {
+      return await Survey.findById(args.surveyId) as ISurvey;
     },
   },
   Mutation: {

@@ -5,29 +5,27 @@ import {
   Form,
   Grid,
   Header,
+  Icon,
   Message,
   Segment,
 } from 'semantic-ui-react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import backgroundImage from '../style/header-image.png';
-import LoadingScreen from '../components/LoadingScreen';
 import { CREATE_NEW_USER } from '../graphql/queries/user';
 import { LOGIN } from '../graphql/queries/login';
+import Loading from '../components/Loading';
 
 const RegisterForm: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [acceptTerms, setAcceptTerms] = useState<boolean>(false);
 
-  const [createNewUser] = useMutation(CREATE_NEW_USER);
-  const [login] = useMutation(LOGIN);
+  const [createNewUser, registerData] = useMutation(CREATE_NEW_USER);
+  const [login, loginData] = useMutation(LOGIN);
 
   const handleSubmit = (): void => {
-    setLoading(true);
-
     createNewUser({ variables: { email, password } })
       .then(() => login({ variables: { email, password } })
         .then((response) => {
@@ -36,7 +34,6 @@ const RegisterForm: React.FC = () => {
           window.location.replace('/');
         }))
       .catch((error) => {
-        setLoading(false);
         console.log(error.message);
         window.alert(error);
       });
@@ -47,15 +44,17 @@ const RegisterForm: React.FC = () => {
       && acceptTerms
       && password === confirmPassword;
 
+  if (registerData.loading || loginData.loading) {
+    return <Loading />;
+  }
+
   return (
     <Grid
       textAlign="center"
       style={{ minHeight: '1000px' }}
       verticalAlign="middle"
     >
-      <LoadingScreen isLoading={loading} />
       <Grid.Row
-        color="black"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundRepeat: 'no-repeat',
@@ -66,15 +65,23 @@ const RegisterForm: React.FC = () => {
         <Grid.Column style={{ maxWidth: 600 }} width={16}>
           <Form size="large" onSubmit={handleSubmit}>
             <Segment style={{ background: 'rgba(14, 44, 71, 0.07)' }}>
-              <Header as="h1" textAlign="center">
-                Create new account
-              </Header>
+              <Segment style={{ background: 'rgb(34 69 101)' }}>
+                <Header
+                  as="h1"
+                  inverted
+                  style={{ fontSize: '30px', margin: '10px' }}
+                >
+                  <Icon name="signup" />
+                  Create new account
+                </Header>
+              </Segment>
+
               <Form.Input
                 id="register-form-email-field"
                 fluid
                 icon="at"
                 iconPosition="left"
-                placeholder="Email"
+                placeholder="Email (must be realistic, like for example: user@random.com)"
                 onChange={(({ target }) => setEmail(target.value))}
               />
               <Form.Input
