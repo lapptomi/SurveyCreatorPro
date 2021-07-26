@@ -18,7 +18,7 @@ const ErrorPage: React.FC = () => (
           Oops!
         </Header>
         <Header>
-          <Header.Content style={{ fontSize: '60px', marginTop: '50px' }}>
+          <Header.Content style={{ fontSize: '60px', marginTop: '30px' }}>
             404 - Page Not Found :(
           </Header.Content>
           <Header.Subheader style={{ paddingTop: '40px', fontSize: '30px' }}>
@@ -27,7 +27,7 @@ const ErrorPage: React.FC = () => (
         </Header>
         <Button
           primary
-          style={{ marginTop: '20px' }}
+          style={{ marginTop: '40px' }}
           onClick={() => window.location.replace('/')}
         >
           GO TO HOMEPAGE

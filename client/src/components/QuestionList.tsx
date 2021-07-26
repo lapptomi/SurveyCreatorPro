@@ -8,9 +8,10 @@ import {
 
 interface Props {
   questions: Array<string>;
+  handleRemove(question: string): void;
 }
 
-const QuestionList: React.FC<Props> = ({ questions }) => {
+const QuestionList: React.FC<Props> = ({ questions, handleRemove }) => {
   if (questions.length === 0) {
     return (
       <Header as="h2" subheader="No questions added yet..." />
@@ -26,8 +27,12 @@ const QuestionList: React.FC<Props> = ({ questions }) => {
         // eslint-disable-next-line react/no-array-index-key
         <List.Item key={index} style={{ padding: '10px' }}>
           <List.Content floated="right">
-            <Button color="blue">Edit</Button>
-            <Button color="red">Remove</Button>
+            <Button color="blue" onClick={() => window.alert('Edit button not working yet')}>
+              Edit
+            </Button>
+            <Button color="red" onClick={() => handleRemove(question)}>
+              Remove
+            </Button>
           </List.Content>
           <Icon name="caret right" size="big" color="grey" />
           <List.Content>

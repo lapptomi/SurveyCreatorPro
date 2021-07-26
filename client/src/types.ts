@@ -17,3 +17,9 @@ export interface ISurvey {
 export type NewSurvey = Omit<ISurvey, 'id'>;
 
 export type SafeUser = Omit<IUser, 'id' | 'password'>;
+
+export interface Answer {
+  row: number;
+  question: string;
+  answerOption: string;
+}

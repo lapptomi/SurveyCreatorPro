@@ -51,6 +51,10 @@ const CreateSurveyPage: React.FC = () => {
       window.alert('Question must be atleast 4 characters');
       return;
     }
+    if (questions.includes(question)) {
+      window.alert('You cannot add two same questions at the moment');
+      return;
+    }
 
     setQuestions(questions.concat(question));
     setQuestion('');
@@ -59,6 +63,13 @@ const CreateSurveyPage: React.FC = () => {
   const validFields = (): boolean => (
     title.length > 3 && questions.length > 0 && description.length > 0
   );
+
+  const handleRemove = (questionName: string) => {
+    if (window.confirm('Delete this question?')) {
+      const updatedQuestions = questions.filter((q) => q !== questionName);
+      setQuestions(updatedQuestions);
+    }
+  };
 
   return (
     <Grid>
@@ -71,12 +82,8 @@ const CreateSurveyPage: React.FC = () => {
           backgroundSize: '100% 100%',
         }}
       >
-        <Grid.Column
-          width={16}
-          style={{ maxWidth: '900px' }}
-        >
-
-          <Container text style={{ margin: '70px' }}>
+        <Grid.Column width={16}>
+          <Container style={{ margin: '50px' }}>
             <Header
               as="h2"
               textAlign="left"
@@ -104,50 +111,56 @@ const CreateSurveyPage: React.FC = () => {
                 <span> Here</span>
               </Link>
             </Header>
-          </Container>
 
-          <Segment style={{ background: 'rgb(0, 0, 0, 0.03)' }}>
-            <Segment style={{ background: 'rgb(34 69 101)' }}>
-              <Header
-                as="h2"
-                inverted
-                textAlign="center"
-                content="Survey Information"
-                style={{ fontSize: '40px', margin: '20px' }}
-              />
-            </Segment>
+            <Segment style={{ background: 'rgb(65, 93, 119, 30%)', marginTop: '70px' }}>
+              <Form size="large">
+                <Segment.Group>
+                  <Segment style={{ background: 'rgb(34 69 101)' }}>
+                    <Header
+                      inverted
+                      textAlign="center"
+                      content="Survey Information"
+                      style={{ fontSize: '30px', margin: '20px' }}
+                    />
+                  </Segment>
 
-            <Form size="large">
-              <Container>
-                <Form.Input
-                  id="survey-form-title-input"
-                  label="Survey title *"
-                  icon="edit"
-                  iconPosition="left"
-                  placeholder="Title"
-                  onChange={(({ target }) => setTitle(target.value))}
-                />
-                <Form.TextArea
-                  id="survey-form-description-input"
-                  label="Survey description *"
-                  placeholder="Tell something about this survey..."
-                  onChange={(({ target }) => setDescription(target.value))}
-                />
+                  <Segment>
+                    <Form.Input
+                      id="survey-form-title-input"
+                      label="Survey title *"
+                      icon="edit"
+                      iconPosition="left"
+                      placeholder="Title"
+                      onChange={(({ target }) => setTitle(target.value))}
+                    />
+                    <Form.TextArea
+                      id="survey-form-description-input"
+                      label="Survey description *"
+                      placeholder="Tell something about this survey..."
+                      onChange={(({ target }) => setDescription(target.value))}
+                    />
+                  </Segment>
+                </Segment.Group>
 
-                <Divider />
+                <Segment.Group>
+                  <Segment style={{ background: 'rgb(34 69 101)' }}>
+                    <Header
+                      as="h2"
+                      inverted
+                      icon="list"
+                      content="Questions"
+                      subheader="Maximum number of questions is 10 at the moment."
+                      style={{ fontSize: '30px' }}
+                    />
+                  </Segment>
 
-                <Segment style={{ background: 'rgb(34 69 101)' }}>
-                  <Header
-                    as="h2"
-                    inverted
-                    icon="list"
-                    content="Questions"
-                    subheader="Maximum number of questions is 10 at the moment."
-                    style={{ fontSize: '30px' }}
-                  />
-                </Segment>
-
-                <QuestionList questions={questions} />
+                  <Segment>
+                    <QuestionList
+                      questions={questions}
+                      handleRemove={handleRemove}
+                    />
+                  </Segment>
+                </Segment.Group>
 
                 <Header as="h3" content="New Question" />
                 <Form.Input
@@ -168,56 +181,61 @@ const CreateSurveyPage: React.FC = () => {
                   onClick={addQuestion}
                   disabled={!question}
                 />
-              </Container>
-            </Form>
 
-            <Divider />
+                <Divider />
 
-            <Segment.Group>
-              <Segment
-                inverted
-                textAlign="center"
-                style={{ background: 'rgb(34 69 101)' }}
-              >
-                <Header
-                  inverted
-                  as="h2"
-                  content="Make this survey private?"
-                  subheader="If survey is set to private users need a link to access them."
-                />
-                <Radio
-                  className="survey-form-yes-radio"
-                  checked={isPrivate}
-                  onChange={() => setIsPrivate(true)}
-                />
-                <b> Yes </b>
-                <Radio
-                  className="survey-form-no-radio"
-                  checked={!isPrivate}
-                  onChange={() => setIsPrivate(false)}
-                />
-                <b> No</b>
-              </Segment>
+                <Segment.Group>
+                  <Segment
+                    inverted
+                    textAlign="center"
+                    style={{ background: 'rgb(34 69 101)' }}
+                  >
+                    <Header
+                      inverted
+                      as="h2"
+                      content="Make this survey private?"
+                      subheader="If survey is set to private users need a link to access them."
+                    />
+                    <Radio
+                      className="survey-form-yes-radio"
+                      checked={isPrivate}
+                      onChange={() => setIsPrivate(true)}
+                    />
+                    <b> Yes </b>
+                    <Radio
+                      className="survey-form-no-radio"
+                      checked={!isPrivate}
+                      onChange={() => setIsPrivate(false)}
+                    />
+                    <b> No</b>
+                  </Segment>
 
-              <Segment textAlign="center">
-                <Button
-                  id="survey-form-cancel-button"
-                  inverted
-                  secondary
-                >
-                  Cancel
-                </Button>
-                <Button
-                  id="survey-form-create-button"
-                  color="blue"
-                  onClick={handleSubmit}
-                  disabled={!validFields()}
-                  content="Create"
-                />
-              </Segment>
+                  <Segment textAlign="center">
+                    <Button
+                      id="survey-form-cancel-button"
+                      inverted
+                      secondary
+                      onClick={() => {
+                        if (window.confirm('Are you sure you want to discard all changes?')) {
+                          window.location.replace('/');
+                        }
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      id="survey-form-create-button"
+                      color="blue"
+                      onClick={handleSubmit}
+                      disabled={!validFields()}
+                      content="Create"
+                    />
+                  </Segment>
 
-            </Segment.Group>
-          </Segment>
+                </Segment.Group>
+              </Form>
+            </Segment>
+          </Container>
         </Grid.Column>
       </Grid.Row>
     </Grid>
