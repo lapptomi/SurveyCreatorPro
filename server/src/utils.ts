@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NewUser, NewSurvey } from './types';
+import { NewUser, NewSurvey, IQuestion } from './types';
 
 const isString = (text: any): text is string => {
   return typeof text === 'string' || text instanceof String;
@@ -10,6 +10,13 @@ const parseEmail = (email: string): string => {
     throw new Error(`Incorrect or missing email: ${email}`);
   }
   return email;
+};
+
+const parseId = (id: string): string => {
+  if (!id || !isString(id) || id.length < 6) {
+    throw new Error(`Incorrect or missing id: ${id}`);
+  }
+  return id;
 };
 
 const parsePassword = (password: string): string => {
@@ -40,8 +47,15 @@ const parseDescription = (description: string): string => {
   return description;
 };
 
-const parseQuestions = (questions: Array<string>): Array<string> => {
-  questions.forEach((question: string) => {
+export const parseQuestions = (questions: Array<IQuestion>): Array<IQuestion> => {
+  if (questions.length < 3) {
+    throw new Error('Survey must have atleast 3 questions');
+  }
+
+  questions.forEach(({ questionNumber, question }) => {
+    if (Number.isNaN(questionNumber)) {
+      throw new Error(`Incorrect or missing questionNumber: ${questionNumber}`);
+    }
     if (!question || !isString(question) || question.length < 4 || question.length > 50) {
       throw new Error(`Incorrect or missing question: ${question}`);
     }
@@ -52,6 +66,7 @@ const parseQuestions = (questions: Array<string>): Array<string> => {
 
 export const toNewSurvey = (object: NewSurvey): NewSurvey => {
   return {
+    creatorId: parseId(object.creatorId),
     title: parseTitle(object.title),
     description: parseDescription(object.description),
     questions: parseQuestions(object.questions),

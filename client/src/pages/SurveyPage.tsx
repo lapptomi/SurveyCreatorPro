@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
@@ -7,7 +7,7 @@ import {
 } from 'semantic-ui-react';
 import Loading from '../components/Loading';
 import TableRow from '../components/TableRow';
-import { FIND_SURVEY_BY_ID } from '../graphql/queries/survey';
+import { ADD_RESPONSE, FIND_SURVEY_BY_ID } from '../graphql/queries/survey';
 import img from '../style/img2.png';
 import { Answer, ISurvey } from '../types';
 import ErrorPage from './ErrorPage';
@@ -19,8 +19,9 @@ const SurveyPage: React.FC = () => {
   const { loading, data } = useQuery(FIND_SURVEY_BY_ID, {
     variables: { surveyId: id },
   });
+  const [addResponse, responseData] = useMutation(ADD_RESPONSE);
 
-  if (loading) {
+  if (loading || responseData.loading) {
     return <Loading />;
   }
   if (!id || !data) {
@@ -32,11 +33,17 @@ const SurveyPage: React.FC = () => {
   const handleSubmit = () => {
     console.log('SUBMIT');
     console.log(answers, id);
+
+    addResponse({ variables: { surveyId: id, answers } })
+      .then((response) => {
+        console.log('Reponse = ', response);
+      })
+      .catch((error) => console.log(window.alert(error.message)));
   };
 
   const handleChange = (updatedAnswer: Answer) => {
     const updatedAnswers = answers.filter((a) => (
-      a.question !== updatedAnswer.question || a.row !== updatedAnswer.row
+      a.question !== updatedAnswer.question || a.questionNumber !== updatedAnswer.questionNumber
     ));
 
     setAnswers([...updatedAnswers, updatedAnswer]);
@@ -107,12 +114,12 @@ const SurveyPage: React.FC = () => {
                     </Table.Header>
 
                     <Table.Body>
-                      {survey.questions.map((question, index) => (
+                      {survey.questions.map((obj, index) => (
                         <TableRow
                           // eslint-disable-next-line react/no-array-index-key
                           key={index}
                           rowIndex={index}
-                          question={question}
+                          obj={obj}
                           handleChange={handleChange}
                         />
                       ))}

@@ -16,12 +16,13 @@ import {
 import QuestionList from '../components/QuestionList';
 import { CREATE_SURVEY } from '../graphql/queries/survey';
 import img from '../style/img2.png';
+import { IQuestion } from '../types';
 
 const CreateSurveyPage: React.FC = () => {
   const [isPrivate, setIsPrivate] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [questions, setQuestions] = useState<Array<string>>([]);
+  const [questions, setQuestions] = useState<Array<IQuestion>>([]);
   const [question, setQuestion] = useState<string>('');
 
   const [createNewSurvey] = useMutation(CREATE_SURVEY);
@@ -51,12 +52,12 @@ const CreateSurveyPage: React.FC = () => {
       window.alert('Question must be atleast 4 characters');
       return;
     }
-    if (questions.includes(question)) {
+    if (questions.some((q) => q.question === question)) {
       window.alert('You cannot add two same questions at the moment');
       return;
     }
 
-    setQuestions(questions.concat(question));
+    setQuestions(questions.concat({ questionNumber: questions.length, question }));
     setQuestion('');
   };
 
@@ -66,7 +67,7 @@ const CreateSurveyPage: React.FC = () => {
 
   const handleRemove = (questionName: string) => {
     if (window.confirm('Delete this question?')) {
-      const updatedQuestions = questions.filter((q) => q !== questionName);
+      const updatedQuestions = questions.filter((q) => q.question !== questionName);
       setQuestions(updatedQuestions);
     }
   };
@@ -112,7 +113,7 @@ const CreateSurveyPage: React.FC = () => {
               </Link>
             </Header>
 
-            <Segment style={{ background: 'rgb(65, 93, 119, 30%)', marginTop: '70px' }}>
+            <Segment style={{ background: 'rgb(65, 93, 119, 10%)', marginTop: '70px' }}>
               <Form size="large">
                 <Segment.Group>
                   <Segment style={{ background: 'rgb(34 69 101)' }}>
@@ -156,7 +157,7 @@ const CreateSurveyPage: React.FC = () => {
 
                   <Segment>
                     <QuestionList
-                      questions={questions}
+                      questionObjects={questions}
                       handleRemove={handleRemove}
                     />
                   </Segment>

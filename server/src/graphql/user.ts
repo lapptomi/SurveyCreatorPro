@@ -3,7 +3,7 @@
 import bcrypt from 'bcrypt';
 import { UserInputError } from 'apollo-server-express';
 import { IUser, NewUser } from '../types';
-import User from '../models/user';
+import User from '../models/User';
 import { toNewUser } from '../utils';
 
 export const typeDef = `

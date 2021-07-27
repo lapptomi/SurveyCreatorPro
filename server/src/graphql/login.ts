@@ -3,7 +3,7 @@
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { IToken } from '../types';
-import User from '../models/user';
+import User from '../models/User';
 
 interface LoginArgs {
   email: string;
