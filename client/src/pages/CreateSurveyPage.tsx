@@ -13,6 +13,7 @@ import {
   Segment,
   Divider,
 } from 'semantic-ui-react';
+import Loading from '../components/Loading';
 import QuestionList from '../components/QuestionList';
 import { CREATE_SURVEY } from '../graphql/queries/survey';
 import img from '../style/img2.png';
@@ -25,7 +26,7 @@ const CreateSurveyPage: React.FC = () => {
   const [questions, setQuestions] = useState<Array<IQuestion>>([]);
   const [question, setQuestion] = useState<string>('');
 
-  const [createNewSurvey] = useMutation(CREATE_SURVEY);
+  const [createNewSurvey, data] = useMutation(CREATE_SURVEY);
 
   const handleSubmit = () => {
     if (window.confirm('Create new survey?')) {
@@ -71,6 +72,10 @@ const CreateSurveyPage: React.FC = () => {
       setQuestions(updatedQuestions);
     }
   };
+
+  if (data.loading) {
+    return <Loading />;
+  }
 
   return (
     <Grid>

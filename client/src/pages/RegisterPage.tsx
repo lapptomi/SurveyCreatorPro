@@ -11,7 +11,7 @@ import {
 } from 'semantic-ui-react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
-import backgroundImage from '../style/header-image.png';
+import backgroundImage from '../style/img2.png';
 import { CREATE_NEW_USER } from '../graphql/queries/user';
 import { LOGIN } from '../graphql/queries/login';
 import Loading from '../components/Loading';

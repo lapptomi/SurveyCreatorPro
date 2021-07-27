@@ -31,22 +31,21 @@ const SurveyPage: React.FC = () => {
   const survey: ISurvey = data.findSurvey;
 
   const handleSubmit = () => {
-    console.log('SUBMIT');
-    console.log(answers, id);
-
     addResponse({ variables: { surveyId: id, answers } })
       .then((response) => {
         console.log('Reponse = ', response);
+        window.alert('The form was submitted succesfully!');
+        window.location.replace('/surveys/browse');
       })
-      .catch((error) => console.log(window.alert(error.message)));
+      .catch((error) => window.alert(error.message));
   };
 
-  const handleChange = (updatedAnswer: Answer) => {
+  const handleChange = (answer: Answer) => {
     const updatedAnswers = answers.filter((a) => (
-      a.question !== updatedAnswer.question || a.questionNumber !== updatedAnswer.questionNumber
+      a.question !== answer.question || a.questionNumber !== answer.questionNumber
     ));
 
-    setAnswers([...updatedAnswers, updatedAnswer]);
+    setAnswers([...updatedAnswers, answer]);
   };
 
   return (

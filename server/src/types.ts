@@ -10,22 +10,22 @@ export interface IQuestion {
 }
 
 export interface ISurvey {
-  id: string;
+  id?: string;
   creatorId: string;
   title: string;
   description: string;
   questions: Array<IQuestion>;
   private: boolean;
-  responses?: Array<Response>
+  responses: Array<IResponse>
 }
 
-export interface Response {
-  respondent: string | IUser;
+export interface IResponse {
+  respondent: string;
   surveyId?: string;
-  answers: Array<Answer>;
+  answers: Array<IAnswer>;
 }
 
-interface Answer {
+export interface IAnswer {
   questionNumber: number;
   question: string;
   answer: 1 | 2 | 3 | 4 | 5;

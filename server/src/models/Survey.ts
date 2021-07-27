@@ -1,17 +1,8 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
-import { IQuestion, Response, SchemaName } from '../types';
+import { ISurvey, SchemaName } from '../types';
 
-export interface ISurveySchema extends Document {
-  creatorId: string;
-  title: string;
-  description: string;
-  questions: Array<IQuestion>;
-  private: boolean;
-  responses?: Array<Response>;
-}
-
-const surveySchema: Schema = new mongoose.Schema({
+const surveySchema = new Schema({
   creatorId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -81,6 +72,6 @@ const surveySchema: Schema = new mongoose.Schema({
 
 surveySchema.plugin(uniqueValidator);
 
-const Survey = mongoose.model(SchemaName.Survey, surveySchema);
+const Survey = mongoose.model<ISurvey & Document>(SchemaName.Survey, surveySchema);
 
 export default Survey;

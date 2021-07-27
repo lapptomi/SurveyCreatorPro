@@ -3,7 +3,7 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 
 const Loading: React.FC = () => (
   <Dimmer active>
-    <Loader />
+    <Loader>Loading...</Loader>
   </Dimmer>
 );
 

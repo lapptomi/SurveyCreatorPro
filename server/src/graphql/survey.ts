@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable arrow-body-style */
 import { UserInputError } from 'apollo-server-express';
 import {
-  ApolloContext, ISurvey, NewSurvey, Response,
+  ApolloContext, ISurvey, NewSurvey, IResponse,
 } from '../types';
-import Survey, { ISurveySchema } from '../models/Survey';
-import { parseQuestions, toNewSurvey } from '../utils';
+import Survey from '../models/Survey';
+import { parseAnswers, toNewSurvey } from '../utils';
 
 export const typeDef = `
   type Survey {
@@ -14,7 +15,7 @@ export const typeDef = `
     description: String!
     questions: [Question!]!
     private: Boolean!
-    responses: [Response!]
+    responses: [Response!]!
   }
 
   input QuestionInput {
@@ -68,10 +69,10 @@ export const typeDef = `
 export const resolvers = {
   Query: {
     allSurveys: async (): Promise<Array<ISurvey>> => {
-      return await Survey.find({}) as Array<ISurvey>;
+      return Survey.find({});
     },
-    findSurvey: async (_root: unknown, args: { surveyId: string }): Promise<ISurvey> => {
-      return await Survey.findById(args.surveyId) as ISurvey;
+    findSurvey: async (_root: unknown, args: { surveyId: string }): Promise<ISurvey | null> => {
+      return Survey.findById(args.surveyId);
     },
   },
   Mutation: {
@@ -81,17 +82,16 @@ export const resolvers = {
       context: ApolloContext,
     ): Promise<ISurvey> => {
       try {
-        console.log(context);
         const newSurvey = toNewSurvey({
           creatorId: context.currentUser.id,
           title: args.title,
           description: args.description,
           questions: args.questions,
           private: args.private,
+          responses: [],
         });
 
-        const addedSurvey = await Survey.create(new Survey(newSurvey)) as ISurvey;
-        console.log(addedSurvey);
+        const addedSurvey = await Survey.create(new Survey(newSurvey));
         return addedSurvey;
       } catch (error) {
         console.log('Error creating survey:', (error as Error).message);
@@ -100,32 +100,37 @@ export const resolvers = {
     },
     addResponse: async (
       _root: unknown,
-      args: Response,
+      args: IResponse,
       context: ApolloContext,
     ): Promise<ISurvey> => {
       try {
-        if (!args.surveyId || !args.answers) {
-          throw new Error('Error adding response to survey');
-        }
         if (!context.currentUser.id) {
           throw new Error('User not authenticated');
         }
-        parseQuestions(args.answers);
 
-        console.log(context.currentUser.id);
-        console.log(args);
+        const survey = await Survey.findById(args.surveyId);
+        if (!survey) {
+          throw new Error('Survey not found');
+        }
 
-        const survey = await Survey.findById(args.surveyId) as ISurveySchema;
+        const userHasRespondedAlready = survey.responses?.some(({ respondent }) => {
+          // eslint-disable-next-line eqeqeq
+          return respondent == context.currentUser.id; // change respondent to string?
+        });
 
-        const response = {
-          respondent: context.currentUser.id,
-          answers: args.answers,
-        };
-        // survey.responses = survey.responses?.concat(response);
-        survey.responses?.push(response);
-        await survey.save();
+        if (!userHasRespondedAlready) {
+          const response: IResponse = {
+            respondent: context.currentUser.id,
+            answers: parseAnswers(args.answers),
+          };
 
-        return survey as ISurvey;
+          survey.responses?.push(response);
+          await survey.save();
+        } else {
+          throw new Error('You have already answered this survey');
+        }
+
+        return survey;
       } catch (error) {
         console.log('Error creating survey:', (error as Error).message);
         throw new UserInputError((error as Error).message, { invalidArgs: args });
