@@ -28,7 +28,7 @@ const CreateSurveyPage: React.FC = () => {
 
   const [createNewSurvey, data] = useMutation(CREATE_SURVEY);
 
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     if (window.confirm('Create new survey?')) {
       createNewSurvey({
         variables: {
@@ -44,7 +44,7 @@ const CreateSurveyPage: React.FC = () => {
     }
   };
 
-  const addQuestion = () => {
+  const addQuestion = (): void => {
     if (questions.length >= 10) {
       window.alert('Max number of questions is 10 at the moment');
       return;
@@ -66,7 +66,7 @@ const CreateSurveyPage: React.FC = () => {
     title.length > 3 && questions.length > 0 && description.length > 0
   );
 
-  const handleRemove = (questionName: string) => {
+  const handleRemove = (questionName: string): void => {
     if (window.confirm('Delete this question?')) {
       const updatedQuestions = questions.filter((q) => q.question !== questionName);
       setQuestions(updatedQuestions);
@@ -137,13 +137,13 @@ const CreateSurveyPage: React.FC = () => {
                       icon="edit"
                       iconPosition="left"
                       placeholder="Title"
-                      onChange={(({ target }) => setTitle(target.value))}
+                      onChange={(({ target }): void => setTitle(target.value))}
                     />
                     <Form.TextArea
                       id="survey-form-description-input"
                       label="Survey description *"
                       placeholder="Tell something about this survey..."
-                      onChange={(({ target }) => setDescription(target.value))}
+                      onChange={(({ target }): void => setDescription(target.value))}
                     />
                   </Segment>
                 </Segment.Group>
@@ -175,7 +175,7 @@ const CreateSurveyPage: React.FC = () => {
                   iconPosition="left"
                   placeholder="Write your question here"
                   value={question}
-                  onChange={(({ target }) => setQuestion(target.value))}
+                  onChange={(({ target }): void => setQuestion(target.value))}
                 />
                 <Button
                   id="survey-form-add-question-button"
@@ -205,13 +205,13 @@ const CreateSurveyPage: React.FC = () => {
                     <Radio
                       className="survey-form-yes-radio"
                       checked={isPrivate}
-                      onChange={() => setIsPrivate(true)}
+                      onChange={(): void => setIsPrivate(true)}
                     />
                     <b> Yes </b>
                     <Radio
                       className="survey-form-no-radio"
                       checked={!isPrivate}
-                      onChange={() => setIsPrivate(false)}
+                      onChange={(): void => setIsPrivate(false)}
                     />
                     <b> No</b>
                   </Segment>
@@ -221,7 +221,7 @@ const CreateSurveyPage: React.FC = () => {
                       id="survey-form-cancel-button"
                       inverted
                       secondary
-                      onClick={() => {
+                      onClick={(): void => {
                         if (window.confirm('Are you sure you want to discard all changes?')) {
                           window.location.replace('/');
                         }

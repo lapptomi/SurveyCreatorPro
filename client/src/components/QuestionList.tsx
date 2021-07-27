@@ -25,10 +25,10 @@ const QuestionList: React.FC<Props> = ({ questionObjects, handleRemove }) => {
         // eslint-disable-next-line react/no-array-index-key
         <List.Item key={index} style={{ padding: '10px' }}>
           <List.Content floated="right">
-            <Button color="blue" onClick={() => window.alert('Edit button not working yet')}>
+            <Button color="blue" onClick={(): void => window.alert('Edit button not working yet')}>
               Edit
             </Button>
-            <Button color="red" onClick={() => handleRemove(questionObj.question)}>
+            <Button color="red" onClick={(): void => handleRemove(questionObj.question)}>
               Remove
             </Button>
           </List.Content>

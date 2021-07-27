@@ -14,12 +14,12 @@ import ErrorPage from './ErrorPage';
 
 const SurveyPage: React.FC = () => {
   const [answers, setAnswers] = useState<Array<Answer>>([]);
+  const [addResponse, responseData] = useMutation(ADD_RESPONSE);
 
   const { id } = useParams<{ id: string }>();
   const { loading, data } = useQuery(FIND_SURVEY_BY_ID, {
     variables: { surveyId: id },
   });
-  const [addResponse, responseData] = useMutation(ADD_RESPONSE);
 
   if (loading || responseData.loading) {
     return <Loading />;
@@ -30,7 +30,7 @@ const SurveyPage: React.FC = () => {
 
   const survey: ISurvey = data.findSurvey;
 
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     addResponse({ variables: { surveyId: id, answers } })
       .then((response) => {
         console.log('Reponse = ', response);
@@ -40,7 +40,7 @@ const SurveyPage: React.FC = () => {
       .catch((error) => window.alert(error.message));
   };
 
-  const handleChange = (answer: Answer) => {
+  const handleChange = (answer: Answer): void => {
     const updatedAnswers = answers.filter((a) => (
       a.question !== answer.question || a.questionNumber !== answer.questionNumber
     ));
@@ -147,7 +147,7 @@ const SurveyPage: React.FC = () => {
                             secondary
                             inverted
                             size="small"
-                            onClick={() => {
+                            onClick={(): void => {
                               if (window.confirm('Discard changes and exit?')) {
                                 window.location.replace('/');
                               }

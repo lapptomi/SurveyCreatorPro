@@ -144,7 +144,8 @@ const HomePage: React.FC = () => {
         centered
         verticalAlign="middle"
         style={{
-          padding: '200px',
+          paddingTop: '250px',
+          paddingBottom: '250px',
           backgroundImage: `url(${img2})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: '100% 100%',

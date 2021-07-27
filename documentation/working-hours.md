@@ -48,4 +48,5 @@
 | 26.7 | 8  | creating a form for answering survey questions  |  
 | 27.7 | 7  | adding functionality for answering surveys (server and client)  |  
 | 27.7 | 8  | adding functionality for answering surveys (server)  |  
-
+| 27.7 | 8  | adding functionality for answering surveys (server)  |  
+| 28.7 | 1  | minor changes on the client  |  

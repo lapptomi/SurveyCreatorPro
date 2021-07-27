@@ -28,7 +28,7 @@ const ErrorPage: React.FC = () => (
         <Button
           primary
           style={{ marginTop: '40px' }}
-          onClick={() => window.location.replace('/')}
+          onClick={(): void => window.location.replace('/')}
         >
           GO TO HOMEPAGE
         </Button>

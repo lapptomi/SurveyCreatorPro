@@ -65,7 +65,7 @@ const SurveyList: React.FC = () => {
                       color="green"
                       size="huge"
                       name="arrow circle right"
-                      onClick={() => window.location.replace(`/surveys/${survey.id}`)}
+                      onClick={(): void => window.location.replace(`/surveys/${survey.id}`)}
                     />
                   </List.Content>
                 </Segment>

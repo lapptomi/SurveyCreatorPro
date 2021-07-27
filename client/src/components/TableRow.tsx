@@ -18,7 +18,7 @@ const TableRow: React.FC<Props> = ({ obj, rowIndex, handleChange }) => {
         <Form.Radio
           value="option1"
           checked={answerOption === 1}
-          onClick={(() => {
+          onClick={((): void => {
             setAnswerOption(1);
             handleChange({ questionNumber: rowIndex, question: obj.question, answer: 1 });
           })}
@@ -27,7 +27,7 @@ const TableRow: React.FC<Props> = ({ obj, rowIndex, handleChange }) => {
       <Table.Cell textAlign="center">
         <Form.Radio
           checked={answerOption === 2}
-          onClick={(() => {
+          onClick={((): void => {
             setAnswerOption(2);
             handleChange({ questionNumber: rowIndex, question: obj.question, answer: 2 });
           })}
@@ -36,7 +36,7 @@ const TableRow: React.FC<Props> = ({ obj, rowIndex, handleChange }) => {
       <Table.Cell textAlign="center">
         <Form.Radio
           checked={answerOption === 3}
-          onClick={(() => {
+          onClick={((): void => {
             setAnswerOption(3);
             handleChange({ questionNumber: rowIndex, question: obj.question, answer: 3 });
           })}
@@ -45,7 +45,7 @@ const TableRow: React.FC<Props> = ({ obj, rowIndex, handleChange }) => {
       <Table.Cell textAlign="center">
         <Form.Radio
           checked={answerOption === 4}
-          onClick={(() => {
+          onClick={((): void => {
             setAnswerOption(4);
             handleChange({ questionNumber: rowIndex, question: obj.question, answer: 4 });
           })}
@@ -54,7 +54,7 @@ const TableRow: React.FC<Props> = ({ obj, rowIndex, handleChange }) => {
       <Table.Cell textAlign="center">
         <Form.Radio
           checked={answerOption === 5}
-          onClick={(() => {
+          onClick={((): void => {
             setAnswerOption(5);
             handleChange({ questionNumber: rowIndex, question: obj.question, answer: 5 });
           })}

@@ -2,7 +2,7 @@
 /* eslint-disable no-alert */
 import React, { useState } from 'react';
 import {
-  Button, Form, Grid, Header, Icon, Message, Segment,
+  Button, Form, Grid, Header, Message, Segment,
 } from 'semantic-ui-react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
@@ -41,31 +41,34 @@ const LoginPage: React.FC = () => {
           backgroundImage: `url(${backgroundImage})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: '100% 100%',
-          height: '1000px',
+          height: '900px',
         }}
       >
-        <Grid.Column style={{ maxWidth: '600px' }} width={16}>
+        <Grid.Column style={{ maxWidth: '700px' }} width={16}>
+          <Header
+            as="h1"
+            content="SurveyCreatorPro"
+            style={{ fontSize: '5em', ontWeight: 'bold' }}
+          />
+          <Header
+            as="h2"
+            content="Log in to your account"
+            style={{ fontSize: '2.5em', fontWeight: 'normal' }}
+          />
 
           <Form size="large" onSubmit={handleSubmit}>
-            <Segment style={{ background: 'rgba(14, 44, 71, 0.07)' }}>
-              <Segment style={{ background: 'rgb(34 69 101)' }}>
-                <Header
-                  as="h1"
-                  inverted
-                  style={{ fontSize: '30px', margin: '10px' }}
-                >
-                  <Icon name="sign-in" />
-                  Log in to your account
-                </Header>
-              </Segment>
-
+            <Segment style={{
+              background: 'rgba(14, 44, 71, 0.07)',
+              marginTop: '50px',
+            }}
+            >
               <Form.Input
                 id="login-form-email-field"
                 fluid
                 icon="at"
                 iconPosition="left"
                 placeholder="Email"
-                onChange={(({ target }) => setEmail(target.value))}
+                onChange={(({ target }): void => setEmail(target.value))}
               />
               <Form.Input
                 id="login-form-password-field"
@@ -74,7 +77,7 @@ const LoginPage: React.FC = () => {
                 iconPosition="left"
                 placeholder="Password"
                 type="password"
-                onChange={(({ target }) => setPassword(target.value))}
+                onChange={(({ target }): void => setPassword(target.value))}
               />
               <Button
                 id="login-form-login-button"
