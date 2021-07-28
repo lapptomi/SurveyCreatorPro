@@ -48,6 +48,10 @@ const SurveyPage: React.FC = () => {
     setAnswers([...updatedAnswers, answer]);
   };
 
+  if (!survey) {
+    return <ErrorPage />;
+  }
+
   return (
     <Grid>
       <Grid.Row
