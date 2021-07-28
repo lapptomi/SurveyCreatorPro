@@ -5,33 +5,40 @@ import {
   Icon,
   List,
 } from 'semantic-ui-react';
+import { IQuestion } from '../types';
 
 interface Props {
-  questions: Array<string>;
+  questionObjects: Array<IQuestion>;
+  handleRemove(question: string): void;
 }
 
-const QuestionList: React.FC<Props> = ({ questions }) => {
-  if (questions.length === 0) {
+const QuestionList: React.FC<Props> = ({ questionObjects, handleRemove }) => {
+  if (questionObjects.length === 0) {
     return (
       <Header as="h2" subheader="No questions added yet..." />
     );
   }
 
   return (
-    <List
-      divided
-      verticalAlign="middle"
-    >
-      {Object.values(questions).map((question, index) => (
+    <List divided verticalAlign="middle">
+      {Object.values(questionObjects).map((questionObj, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <List.Item key={index} style={{ padding: '10px' }}>
           <List.Content floated="right">
-            <Button color="blue">Edit</Button>
-            <Button color="red">Remove</Button>
+            <Button color="blue" onClick={(): void => window.alert('Edit button not working yet')}>
+              Edit
+            </Button>
+            <Button color="red" onClick={(): void => handleRemove(questionObj.question)}>
+              Remove
+            </Button>
           </List.Content>
           <Icon name="caret right" size="big" color="grey" />
           <List.Content>
-            <Header as="h3" content={`Question ${index + 1}:`} subheader={question} />
+            <Header
+              as="h3"
+              content={`Question ${index + 1}:`}
+              subheader={questionObj.question}
+            />
           </List.Content>
         </List.Item>
       ))}

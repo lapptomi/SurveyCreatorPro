@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import { schema } from './src/graphql/schema';
 import app from './src/app';
 import { ApolloContext, IToken, IUser } from './src/types';
-import User from './src/models/user';
+import User from './src/models/User';
 
 dotenv.config();
 
@@ -29,7 +29,8 @@ mongoose.connect(MONGODB_URI as string, {
 const startApolloServer = async () => {
   const server = new ApolloServer({
     schema,
-    context: async ({ req }): Promise<ApolloContext | null> => {
+    // eslint-disable-next-line consistent-return
+    context: async ({ req }): Promise<ApolloContext | void> => {
       const authorization = req
         ? req.headers.authorization
         : null;
@@ -54,8 +55,6 @@ const startApolloServer = async () => {
           currentUser: user,
         };
       }
-
-      return null;
     },
   });
 

@@ -2,8 +2,8 @@
 import express from 'express';
 import cors from 'cors';
 import middleware from './middleware';
-import Survey from './models/survey';
-import User from './models/user';
+import Survey from './models/Survey';
+import User from './models/User';
 
 const app = express();
 

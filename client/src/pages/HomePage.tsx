@@ -32,7 +32,6 @@ const HomePage: React.FC = () => {
       >
         <Container text>
           <Header
-            as="h1"
             content="SurveyCreatorPro"
             style={{
               fontSize: '5em',
@@ -41,7 +40,6 @@ const HomePage: React.FC = () => {
             }}
           />
           <Header
-            as="h2"
             content="Your number #1 tool for creating surveys"
             style={{
               fontSize: '1.7em',
@@ -82,11 +80,11 @@ const HomePage: React.FC = () => {
           mobile={16}
         >
           <Container>
-            <Header as="h1" style={{ fontSize: '4.5em' }} inverted>
+            <Header style={{ fontSize: '4.5em' }} inverted>
               What is SurveyCreatorPro?
             </Header>
 
-            <Header as="h3" style={{ fontSize: '1.9em', opacity: '0.8' }} inverted>
+            <Header style={{ fontSize: '1.9em', opacity: '0.8' }} inverted>
               Lorem ipsum dolor sit amet, consectetur adipisci elit,
               sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -126,7 +124,7 @@ const HomePage: React.FC = () => {
           mobile={16}
         >
           <Container>
-            <Header as="h1" style={{ fontSize: '4.5em' }} inverted>
+            <Header style={{ fontSize: '4.5em' }} inverted>
               How does it work?
             </Header>
 
@@ -144,7 +142,8 @@ const HomePage: React.FC = () => {
         centered
         verticalAlign="middle"
         style={{
-          padding: '200px',
+          paddingTop: '250px',
+          paddingBottom: '250px',
           backgroundImage: `url(${img2})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: '100% 100%',
@@ -154,21 +153,18 @@ const HomePage: React.FC = () => {
           <Segment vertical textAlign="center">
             <Container text>
               <Header
-                as="h1"
                 content="So What Are You Waiting For?"
-                style={{
-                  fontSize: '3em',
-                }}
+                style={{ fontSize: '3em' }}
               />
               <Button
-                style={{ marginTop: 40 }}
+                style={{ marginTop: '40px' }}
                 color="blue"
                 as="a"
                 href="/register"
                 size="huge"
               >
                 Click Here To Sign Up
-                <Icon name="arrow right" />
+                <Icon name="angle right" />
               </Button>
             </Container>
           </Segment>

@@ -19,7 +19,7 @@ const BrowseSurveysPage: React.FC = () => (
         backgroundSize: '100% 100%',
       }}
     >
-      <Container text style={{ marginTop: '70px' }}>
+      <Container style={{ marginTop: '70px' }}>
         <Header
           as="h1"
           content="Browse Public Surveys"

@@ -1,17 +1,50 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable arrow-body-style */
 import { UserInputError } from 'apollo-server-express';
-import { ISurvey, NewSurvey } from '../types';
-import Survey from '../models/survey';
-import { toNewSurvey } from '../utils';
+import {
+  ApolloContext, ISurvey, NewSurvey, IResponse,
+} from '../types';
+import Survey from '../models/Survey';
+import { parseAnswers, toNewSurvey } from '../utils';
 
 export const typeDef = `
   type Survey {
     id: ID!
+    creatorId: ID!
     title: String!
     description: String!
-    questions: [String!]!
+    questions: [Question!]!
     private: Boolean!
+    responses: [Response!]!
   }
+
+  input QuestionInput {
+    questionNumber: Int!
+    question: String!
+  }
+
+  type Question {
+    questionNumber: Int!
+    question: String!
+  }
+
+  type Response {
+    respondent: ID!
+    answers: [Answer!]!
+  }
+
+  type Answer {
+    questionNumber: Int!
+    question: String!
+    answer: Int!
+  }
+
+  input AnswerInput {
+    questionNumber: Int!
+    question: String!
+    answer: Int!
+  }
+
 
   extend type Query {
     allSurveys: [Survey!]!
@@ -22,8 +55,13 @@ export const typeDef = `
     addSurvey (
       title: String!
       description: String!
-      questions: [String!]!
+      questions: [QuestionInput!]!
       private: Boolean!
+    ): Survey
+
+    addResponse (
+      surveyId: ID!
+      answers: [AnswerInput!]!
     ): Survey
   }
 `;
@@ -31,23 +69,71 @@ export const typeDef = `
 export const resolvers = {
   Query: {
     allSurveys: async (): Promise<Array<ISurvey>> => {
-      return await Survey.find({}) as Array<ISurvey>;
+      return Survey.find({});
     },
-    findSurvey: async (_root: unknown, args: { surveyId: string }): Promise<ISurvey> => {
-      return await Survey.findById(args.surveyId) as ISurvey;
+    findSurvey: async (_root: unknown, args: { surveyId: string }): Promise<ISurvey | null> => {
+      return Survey.findById(args.surveyId);
     },
   },
   Mutation: {
-    addSurvey: async (_root: unknown, args: NewSurvey): Promise<ISurvey> => {
+    addSurvey: async (
+      _root: unknown,
+      args: NewSurvey,
+      context: ApolloContext,
+    ): Promise<ISurvey> => {
       try {
-        const newSurvey = toNewSurvey(args);
-        const addedSurvey = await Survey.create(new Survey(newSurvey)) as ISurvey;
+        const newSurvey = toNewSurvey({
+          creatorId: context.currentUser.id,
+          title: args.title,
+          description: args.description,
+          questions: args.questions,
+          private: args.private,
+          responses: [],
+        });
+
+        const addedSurvey = await Survey.create(new Survey(newSurvey));
         return addedSurvey;
       } catch (error) {
         console.log('Error creating survey:', (error as Error).message);
-        throw new UserInputError((error as Error).message, {
-          invalidArgs: args,
+        throw new UserInputError((error as Error).message, { invalidArgs: args });
+      }
+    },
+    addResponse: async (
+      _root: unknown,
+      args: IResponse,
+      context: ApolloContext,
+    ): Promise<ISurvey> => {
+      try {
+        if (!context.currentUser.id) {
+          throw new Error('User not authenticated');
+        }
+
+        const survey = await Survey.findById(args.surveyId);
+        if (!survey) {
+          throw new Error('Survey not found');
+        }
+
+        const userHasRespondedAlready = survey.responses?.some(({ respondent }) => {
+          // eslint-disable-next-line eqeqeq
+          return respondent == context.currentUser.id; // change respondent to string?
         });
+
+        if (!userHasRespondedAlready) {
+          const response: IResponse = {
+            respondent: context.currentUser.id,
+            answers: parseAnswers(args.answers),
+          };
+
+          survey.responses?.push(response);
+          await survey.save();
+        } else {
+          throw new Error('You have already answered this survey');
+        }
+
+        return survey;
+      } catch (error) {
+        console.log('Error creating survey:', (error as Error).message);
+        throw new UserInputError((error as Error).message, { invalidArgs: args });
       }
     },
   },

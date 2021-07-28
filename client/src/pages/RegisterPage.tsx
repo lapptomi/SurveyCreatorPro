@@ -5,13 +5,12 @@ import {
   Form,
   Grid,
   Header,
-  Icon,
   Message,
   Segment,
 } from 'semantic-ui-react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
-import backgroundImage from '../style/header-image.png';
+import backgroundImage from '../style/img2.png';
 import { CREATE_NEW_USER } from '../graphql/queries/user';
 import { LOGIN } from '../graphql/queries/login';
 import Loading from '../components/Loading';
@@ -59,30 +58,39 @@ const RegisterForm: React.FC = () => {
           backgroundImage: `url(${backgroundImage})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: '100% 100%',
-          height: '1000px',
+          height: '900px',
         }}
       >
-        <Grid.Column style={{ maxWidth: 600 }} width={16}>
+        <Grid.Column style={{ maxWidth: '700px' }} width={16}>
+          <Header
+            as="h1"
+            content="SurveyCreatorPro"
+            style={{
+              fontSize: '5em',
+              fontWeight: 'bold',
+            }}
+          />
+          <Header
+            as="h2"
+            content="Create new account"
+            style={{
+              fontSize: '2.5em',
+              fontWeight: 'normal',
+            }}
+          />
           <Form size="large" onSubmit={handleSubmit}>
-            <Segment style={{ background: 'rgba(14, 44, 71, 0.07)' }}>
-              <Segment style={{ background: 'rgb(34 69 101)' }}>
-                <Header
-                  as="h1"
-                  inverted
-                  style={{ fontSize: '30px', margin: '10px' }}
-                >
-                  <Icon name="signup" />
-                  Create new account
-                </Header>
-              </Segment>
-
+            <Segment style={{
+              background: 'rgba(14, 44, 71, 0.07)',
+              marginTop: '50px',
+            }}
+            >
               <Form.Input
                 id="register-form-email-field"
                 fluid
                 icon="at"
                 iconPosition="left"
                 placeholder="Email (must be realistic, like for example: user@random.com)"
-                onChange={(({ target }) => setEmail(target.value))}
+                onChange={(({ target }): void => setEmail(target.value))}
               />
               <Form.Input
                 id="register-form-password-field"
@@ -91,7 +99,7 @@ const RegisterForm: React.FC = () => {
                 iconPosition="left"
                 placeholder="Password"
                 type="password"
-                onChange={(({ target }) => setPassword(target.value))}
+                onChange={(({ target }): void => setPassword(target.value))}
               />
               <Form.Input
                 id="register-form-confirm-password-field"
@@ -100,14 +108,14 @@ const RegisterForm: React.FC = () => {
                 iconPosition="left"
                 placeholder="Confirm Password"
                 type="password"
-                onChange={(({ target }) => setConfirmPassword(target.value))}
+                onChange={(({ target }): void => setConfirmPassword(target.value))}
               />
               <Form.Checkbox
                 className="register-form-accept-terms-checkbox"
                 inline
                 label="I agree to the terms and something..."
                 required
-                onClick={() => setAcceptTerms(!acceptTerms)}
+                onClick={(): void => setAcceptTerms(!acceptTerms)}
               />
               <Button
                 id="register-form-signup-button"

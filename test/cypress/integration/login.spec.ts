@@ -1,16 +1,11 @@
 /// <reference types="cypress" />
-import { NewUser } from "../../../server/src/types"
 
-
-const testUser: NewUser = {
-  email: 'testemail@gmail.com',
-  password: "testpassword",
-}
+import { BASE_URL, testUser } from "../../constants";
 
 describe('Login', function() {
   // @ts-check
   beforeEach(function() {
-    cy.request('POST', 'http://localhost:4000/api/testing/reset')
+    cy.request('POST', `${BASE_URL}/api/testing/reset`)
 
     cy.visit('http://localhost:3000')
 
@@ -21,7 +16,6 @@ describe('Login', function() {
     cy.get('#register-form-confirm-password-field').type(testUser.password)
 
     cy.get('.register-form-accept-terms-checkbox').click()
-    cy.wait(1000)
 
     cy.get('#register-form-signup-button').click()
       .then(() => {
@@ -32,7 +26,6 @@ describe('Login', function() {
       })
 
     cy.contains('Log out').click()
-    cy.wait(1000)
 
     cy.get('#topnav-login-button').click()
   });
