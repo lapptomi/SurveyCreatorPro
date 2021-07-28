@@ -15,7 +15,7 @@ const Footer: React.FC = () => (
           <Grid divided inverted>
             <Grid.Column width={16}>
               <Header inverted as="h1" content="SurveyCreatorPro" />
-              <Header inverted as="p" subheader="© 2021 All Rights Reserved jne" />
+              <Header inverted as="span" subheader="© 2021 All Rights Reserved jne" />
             </Grid.Column>
           </Grid>
           <Divider inverted section />

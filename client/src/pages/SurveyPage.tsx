@@ -76,93 +76,100 @@ const SurveyPage: React.FC = () => {
 
           <Container>
             <Segment>
-              <Segment style={{ background: 'rgb(34 69 101)' }}>
-                <Header
-                  as="h1"
-                  inverted
-                  icon="list"
-                  content="List of survey questions"
-                  style={{ fontSize: '30px', margin: '10px' }}
-                />
-              </Segment>
-              <Segment>
-                <Header as="h3">
-                  Please answer the questions below by selecting a number between 1 - 5.
-                </Header>
 
-                <h4>Answer options meaning: </h4>
-                <p>1 - Strongly Disagree</p>
-                <p>2 - Somewhat Disagree</p>
-                <p>3 - Neutral</p>
-                <p>4 - Somewhat Agree</p>
-                <p>5 - Strongly Agree</p>
+              <Segment.Group>
+                <Segment style={{ background: 'rgb(34 69 101)' }}>
+                  <Header
+                    as="h1"
+                    inverted
+                    icon="list"
+                    content="List of survey questions"
+                    style={{ fontSize: '30px', margin: '10px' }}
+                  />
+                </Segment>
 
-                <Form>
-                  <Table celled color="blue">
-                    <Table.Header>
-                      <Table.Row textAlign="center">
-                        <Table.HeaderCell textAlign="left">
-                          Question
-                        </Table.HeaderCell>
-                        <Table.HeaderCell>1</Table.HeaderCell>
-                        <Table.HeaderCell>2</Table.HeaderCell>
-                        <Table.HeaderCell>3</Table.HeaderCell>
-                        <Table.HeaderCell>4</Table.HeaderCell>
-                        <Table.HeaderCell>5</Table.HeaderCell>
-                      </Table.Row>
-                    </Table.Header>
+                <Segment>
+                  <Header as="h3">
+                    Please answer the questions below by selecting a number between 1 - 5.
+                  </Header>
 
-                    <Table.Body>
-                      {survey.questions.map((obj, index) => (
-                        <TableRow
+                  <h4>Answer options meaning: </h4>
+                  <p>1 - Strongly Disagree</p>
+                  <p>2 - Somewhat Disagree</p>
+                  <p>3 - Neutral</p>
+                  <p>4 - Somewhat Agree</p>
+                  <p>5 - Strongly Agree</p>
+
+                  <Form>
+                    <Table celled color="blue">
+                      <Table.Header>
+                        <Table.Row textAlign="center">
+                          <Table.HeaderCell textAlign="left">
+                            Question
+                          </Table.HeaderCell>
+                          <Table.HeaderCell>1</Table.HeaderCell>
+                          <Table.HeaderCell>2</Table.HeaderCell>
+                          <Table.HeaderCell>3</Table.HeaderCell>
+                          <Table.HeaderCell>4</Table.HeaderCell>
+                          <Table.HeaderCell>5</Table.HeaderCell>
+                        </Table.Row>
+                      </Table.Header>
+
+                      <Table.Body>
+                        {survey.questions.map((obj, index) => (
+                          <TableRow
                           // eslint-disable-next-line react/no-array-index-key
-                          key={index}
-                          rowIndex={index}
-                          obj={obj}
-                          handleChange={handleChange}
-                        />
-                      ))}
-                    </Table.Body>
-                    <Table.Footer fullWidth>
-                      <Table.Row>
-                        <Table.HeaderCell />
-                        <Table.HeaderCell colSpan="5">
-                          <Button
-                            floated="right"
-                            icon
-                            labelPosition="left"
-                            primary
-                            size="small"
-                            type="submit"
-                            disabled={answers.length < survey.questions.length}
-                            onClick={handleSubmit}
-                          >
-                            <Icon name="check" />
-                            Submit
-                          </Button>
-                          <Button
-                            floated="right"
-                            icon
-                            labelPosition="left"
-                            secondary
-                            inverted
-                            size="small"
-                            onClick={(): void => {
-                              if (window.confirm('Discard changes and exit?')) {
-                                window.location.replace('/');
-                              }
-                            }}
-                          >
-                            <Icon name="cancel" />
-                            Cancel
-                          </Button>
-                        </Table.HeaderCell>
-                      </Table.Row>
-                    </Table.Footer>
-                  </Table>
-                </Form>
+                            key={index}
+                            rowIndex={index}
+                            obj={obj}
+                            handleChange={handleChange}
+                          />
+                        ))}
+                      </Table.Body>
+                      <Table.Footer fullWidth>
+                        <Table.Row>
+                          <Table.HeaderCell />
+                          <Table.HeaderCell colSpan="5">
+                            <Button
+                              id="submit-answer-button"
+                              floated="right"
+                              icon
+                              labelPosition="left"
+                              primary
+                              size="small"
+                              type="submit"
+                              disabled={answers.length < survey.questions.length}
+                              onClick={handleSubmit}
+                            >
+                              <Icon name="check" />
+                              Submit
+                            </Button>
+                            <Button
+                              id="cancel-answer-button"
+                              floated="right"
+                              icon
+                              labelPosition="left"
+                              secondary
+                              inverted
+                              size="small"
+                              onClick={(): void => {
+                                if (window.confirm('Discard changes and exit?')) {
+                                  window.location.replace('/');
+                                }
+                              }}
+                            >
+                              <Icon name="cancel" />
+                              Cancel
+                            </Button>
+                          </Table.HeaderCell>
+                        </Table.Row>
+                      </Table.Footer>
+                    </Table>
+                  </Form>
 
-              </Segment>
+                </Segment>
+              </Segment.Group>
+
             </Segment>
           </Container>
 

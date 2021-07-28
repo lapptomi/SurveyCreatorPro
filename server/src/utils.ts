@@ -67,10 +67,6 @@ export const parseQuestions = (questions: Array<IQuestion>): Array<IQuestion> =>
 };
 
 export const parseAnswers = (answers: Array<IAnswer>): Array<IAnswer> => {
-  if (answers.length < 3) {
-    throw new Error('Survey must have atleast 3 questions');
-  }
-
   answers.forEach((answer) => {
     if (Number.isNaN(answer.questionNumber)) {
       throw new Error(`Incorrect or missing questionNumber: ${answer.questionNumber}`);

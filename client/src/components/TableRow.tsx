@@ -10,13 +10,14 @@ interface Props {
 
 const TableRow: React.FC<Props> = ({ obj, rowIndex, handleChange }) => {
   const [answerOption, setAnswerOption] = useState<number>(-1);
-
+  console.log('row = ', rowIndex + 1);
   return (
     <Table.Row>
       <Table.Cell>{obj.question}</Table.Cell>
+
       <Table.Cell textAlign="center">
         <Form.Radio
-          value="option1"
+          className={`table-row${rowIndex + 1}-option1`}
           checked={answerOption === 1}
           onClick={((): void => {
             setAnswerOption(1);
@@ -26,6 +27,7 @@ const TableRow: React.FC<Props> = ({ obj, rowIndex, handleChange }) => {
       </Table.Cell>
       <Table.Cell textAlign="center">
         <Form.Radio
+          className={`table-row${rowIndex + 1}-option2`}
           checked={answerOption === 2}
           onClick={((): void => {
             setAnswerOption(2);
@@ -35,6 +37,7 @@ const TableRow: React.FC<Props> = ({ obj, rowIndex, handleChange }) => {
       </Table.Cell>
       <Table.Cell textAlign="center">
         <Form.Radio
+          className={`table-row${rowIndex + 1}-option3`}
           checked={answerOption === 3}
           onClick={((): void => {
             setAnswerOption(3);
@@ -44,6 +47,7 @@ const TableRow: React.FC<Props> = ({ obj, rowIndex, handleChange }) => {
       </Table.Cell>
       <Table.Cell textAlign="center">
         <Form.Radio
+          className={`table-row${rowIndex + 1}-option4`}
           checked={answerOption === 4}
           onClick={((): void => {
             setAnswerOption(4);
@@ -53,6 +57,7 @@ const TableRow: React.FC<Props> = ({ obj, rowIndex, handleChange }) => {
       </Table.Cell>
       <Table.Cell textAlign="center">
         <Form.Radio
+          className={`table-row${rowIndex + 1}-option5`}
           checked={answerOption === 5}
           onClick={((): void => {
             setAnswerOption(5);

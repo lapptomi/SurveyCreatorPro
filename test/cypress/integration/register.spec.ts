@@ -1,16 +1,14 @@
 /// <reference types="cypress" />
-import { NewUser } from "../../../server/src/types";
-// @ts-check
 
-const testUser: NewUser = {
-  email: 'testemail@gmail.com',
-  password: "testpassword",
-}
+import { BASE_URL, testUser } from "../../constants";
+
+// @ts-check
 
 describe('Sign up', function() {
 
   beforeEach(function() {
-    cy.request('POST', 'http://localhost:4000/api/testing/reset')
+    cy.request('POST', `${BASE_URL}/api/testing/reset`)
+
     cy.visit('http://localhost:3000')
 
     // Open sign up page
@@ -26,7 +24,6 @@ describe('Sign up', function() {
     
     cy.get('#register-form-signup-button').click()
       .then(() => {
-        cy.wait(2000)
         cy.contains('Log out')
         cy.contains('Profile')
         cy.contains('Create Survey')
@@ -44,7 +41,6 @@ describe('Sign up', function() {
     
     cy.get('#register-form-signup-button').click()
       .then(() => {
-        cy.wait(2000)
         cy.contains('Log out')
         cy.contains('Profile')
         cy.contains('Create Survey')
@@ -61,7 +57,6 @@ describe('Sign up', function() {
     cy.get('.register-form-accept-terms-checkbox').click()
     
     cy.get('#register-form-signup-button').click()
-    cy.wait(2000)
     cy.contains('Create new account')
   })
 
