@@ -26,6 +26,9 @@ describe('Creating a survey', function() {
       })
 
     cy.get('#topnav-create-survey-button').click()
+
+    cy.contains('Something went wrong or the page does not exist...').should('not.exist')
+    cy.contains('404 - Page Not Found :(').should('not.exist')
   });
   
 
@@ -153,6 +156,9 @@ describe('Answering a survey', function() {
     cy.contains(`Title: ${testSurvey.title}`)
     cy.contains(`Description: ${testSurvey.description}`)
     cy.contains(`List of survey questions`)
+
+    cy.contains('Something went wrong or the page does not exist...').should('not.exist')
+    cy.contains('404 - Page Not Found :(').should('not.exist')
   });
   
 

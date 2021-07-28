@@ -6,10 +6,6 @@ const SURVEY_FIELDS = gql`
     id
     title
     description
-    questions {
-      questionNumber
-      question
-    }
     private
   }
 `;
@@ -47,6 +43,10 @@ export const FIND_SURVEY_BY_ID = gql`
   query findSurvey($surveyId: ID!) {
     findSurvey(surveyId: $surveyId) {
       ...SurveyFields
+      questions {
+        questionNumber
+        question
+      }
     }
   }
 `;

@@ -13,6 +13,9 @@ describe('Sign up', function() {
 
     // Open sign up page
     cy.get('#topnav-signup-button').click()
+
+    cy.contains('Something went wrong or the page does not exist...').should('not.exist')
+    cy.contains('404 - Page Not Found :(').should('not.exist')
   })
 
   it('succeeds with valid credentials', function() {

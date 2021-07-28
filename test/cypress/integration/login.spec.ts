@@ -28,6 +28,9 @@ describe('Login', function() {
     cy.contains('Log out').click()
 
     cy.get('#topnav-login-button').click()
+
+    cy.contains('Something went wrong or the page does not exist...').should('not.exist')
+    cy.contains('404 - Page Not Found :(').should('not.exist')
   });
   
 

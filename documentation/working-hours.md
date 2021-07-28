@@ -51,5 +51,5 @@
 | 27.7 | 8  | adding functionality for answering surveys (server)  |  
 | 28.7 | 1  | minor changes on the client  |  
 | 28.7 | 4  | some changes on the React UI and writing tests  |  
-| 28.7 | 1  | debugging  |  
+| 28.7 | 2  | debugging  |  
 
