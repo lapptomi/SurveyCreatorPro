@@ -2,7 +2,7 @@
 /* eslint-disable arrow-body-style */
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import { IToken, IUser } from '../types';
+import { IToken } from '../types';
 import User from '../models/User';
 
 interface LoginArgs {
@@ -27,7 +27,7 @@ export const typeDef = `
 export const resolvers = {
   Mutation: {
     login: async (_root: unknown, args: LoginArgs): Promise<IToken> => {
-      const user = await User.findOne({ email: args.email }) as IUser;
+      const user = await User.findOne({ email: args.email });
       if (!user) {
         throw new Error('User not found');
       }
@@ -38,7 +38,7 @@ export const resolvers = {
       }
 
       const userForToken = {
-        id: user.id,
+        id: user.id as string,
       } as IToken;
 
       const newToken = jwt.sign(
@@ -48,7 +48,7 @@ export const resolvers = {
       );
 
       return {
-        id: user.id,
+        id: user.id as string,
         token: newToken,
       };
     },

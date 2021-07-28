@@ -1,5 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
-import uniqueValidator from 'mongoose-unique-validator';
+import mongoose, { Document, Schema } from 'mongoose';
 import { IUser, SchemaName } from '../types';
 
 const userSchema: Schema = new mongoose.Schema({
@@ -15,8 +14,6 @@ const userSchema: Schema = new mongoose.Schema({
     unique: false,
   },
 });
-
-userSchema.plugin(uniqueValidator);
 
 const User = mongoose.model<IUser & Document>(SchemaName.User, userSchema);
 

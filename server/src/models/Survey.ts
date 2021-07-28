@@ -1,5 +1,4 @@
 import mongoose, { Document, Schema } from 'mongoose';
-import uniqueValidator from 'mongoose-unique-validator';
 import { ISurvey, SchemaName } from '../types';
 
 const surveySchema = new Schema({
@@ -69,8 +68,6 @@ const surveySchema = new Schema({
     }],
   }],
 });
-
-surveySchema.plugin(uniqueValidator);
 
 const Survey = mongoose.model<ISurvey & Document>(SchemaName.Survey, surveySchema);
 

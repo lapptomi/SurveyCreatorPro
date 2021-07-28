@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable arrow-body-style */
 import { UserInputError } from 'apollo-server-express';
+import { Document } from 'mongoose';
 import {
   ApolloContext, ISurvey, NewSurvey, IResponse,
 } from '../types';
@@ -71,7 +72,10 @@ export const resolvers = {
     allSurveys: async (): Promise<Array<ISurvey>> => {
       return Survey.find({});
     },
-    findSurvey: async (_root: unknown, args: { surveyId: string }): Promise<ISurvey | null> => {
+    findSurvey: async (
+      _root: unknown,
+      args: { surveyId: string },
+    ): Promise<ISurvey | null> => {
       return Survey.findById(args.surveyId);
     },
   },
@@ -108,7 +112,7 @@ export const resolvers = {
           throw new Error('User not authenticated');
         }
 
-        const survey = await Survey.findById(args.surveyId);
+        const survey = await Survey.findById(args.surveyId) as Document & ISurvey;
         if (!survey) {
           throw new Error('Survey not found');
         }

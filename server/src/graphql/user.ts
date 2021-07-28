@@ -28,7 +28,7 @@ export const typeDef = `
 export const resolvers = {
   Query: {
     allUsers: async (): Promise<Array<IUser>> => {
-      return await User.find({}) as Array<IUser>;
+      return User.find({});
     },
   },
   Mutation: {
@@ -41,7 +41,7 @@ export const resolvers = {
         const newUser = new User({
           email: args.email,
           password: await bcrypt.hash(args.password, 10),
-        }) as NewUser;
+        });
 
         const addedUser = await User.create(newUser);
         return addedUser;
