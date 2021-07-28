@@ -45,7 +45,7 @@ const LoggedInTopNav: React.FC = () => {
         </Menu.Item>
 
         <Menu.Item>
-          <Link to="/logout">
+          <Link to="/">
             <Button
               id="topnav-logout-button"
               primary

@@ -37,7 +37,10 @@ const SurveyPage: React.FC = () => {
         window.alert('The form was submitted succesfully!');
         window.location.replace('/surveys/browse');
       })
-      .catch((error) => window.alert(error.message));
+      .catch((error) => {
+        window.alert(error.message);
+        window.location.replace('/surveys/browse');
+      });
   };
 
   const handleChange = (answer: Answer): void => {
@@ -125,7 +128,7 @@ const SurveyPage: React.FC = () => {
                           // eslint-disable-next-line react/no-array-index-key
                             key={index}
                             rowIndex={index}
-                            obj={obj}
+                            questionObj={obj}
                             handleChange={handleChange}
                           />
                         ))}

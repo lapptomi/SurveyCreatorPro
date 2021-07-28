@@ -30,7 +30,7 @@ const ErrorPage: React.FC = () => (
           style={{ marginTop: '40px' }}
           onClick={(): void => window.location.replace('/')}
         >
-          GO TO HOMEPAGE
+          Go Back To Homepage
         </Button>
       </Grid.Column>
     </Grid.Row>

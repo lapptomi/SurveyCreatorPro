@@ -3,12 +3,12 @@ import { Table, Form } from 'semantic-ui-react';
 import { Answer, IQuestion } from '../types';
 
 interface Props {
-  obj: IQuestion;
+  questionObj: IQuestion;
   rowIndex: number;
   handleChange(answerOption: Answer): void;
 }
 
-const TableRow: React.FC<Props> = ({ obj, rowIndex, handleChange }) => {
+const TableRow: React.FC<Props> = ({ questionObj: obj, rowIndex, handleChange }) => {
   const [answerOption, setAnswerOption] = useState<number>(-1);
   console.log('row = ', rowIndex + 1);
   return (

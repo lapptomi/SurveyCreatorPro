@@ -17,13 +17,12 @@ import Loading from '../components/Loading';
 import QuestionList from '../components/QuestionList';
 import { CREATE_SURVEY } from '../graphql/queries/survey';
 import img from '../style/img2.png';
-import { IQuestion } from '../types';
 
 const CreateSurveyPage: React.FC = () => {
   const [isPrivate, setIsPrivate] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [questions, setQuestions] = useState<Array<IQuestion>>([]);
+  const [questions, setQuestions] = useState<Array<string>>([]);
   const [question, setQuestion] = useState<string>('');
 
   const [createNewSurvey, data] = useMutation(CREATE_SURVEY);
@@ -45,20 +44,20 @@ const CreateSurveyPage: React.FC = () => {
   };
 
   const addQuestion = (): void => {
-    if (questions.length >= 10) {
-      window.alert('Max number of questions is 10 at the moment');
+    if (questions.length >= 20) {
+      window.alert('Max number of questions is 20 at the moment');
       return;
     }
     if (question.length < 4) {
       window.alert('Question must be atleast 4 characters');
       return;
     }
-    if (questions.some((q) => q.question === question)) {
+    if (questions.some((q) => q === question)) {
       window.alert('You cannot add two same questions at the moment');
       return;
     }
 
-    setQuestions(questions.concat({ questionNumber: questions.length, question }));
+    setQuestions(questions.concat(question));
     setQuestion('');
   };
 
@@ -68,7 +67,7 @@ const CreateSurveyPage: React.FC = () => {
 
   const handleRemove = (questionName: string): void => {
     if (window.confirm('Delete this question?')) {
-      const updatedQuestions = questions.filter((q) => q.question !== questionName);
+      const updatedQuestions = questions.filter((q) => q !== questionName);
       setQuestions(updatedQuestions);
     }
   };
@@ -155,14 +154,14 @@ const CreateSurveyPage: React.FC = () => {
                       inverted
                       icon="list"
                       content="Questions"
-                      subheader="Maximum number of questions is 10 at the moment."
+                      subheader="Survey must have atleast 2 questions."
                       style={{ fontSize: '30px' }}
                     />
                   </Segment>
 
                   <Segment>
                     <QuestionList
-                      questionObjects={questions}
+                      questions={questions}
                       handleRemove={handleRemove}
                     />
                   </Segment>

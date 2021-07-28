@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  NewUser, NewSurvey, IQuestion, IAnswer,
+  NewUser, NewSurvey, IQuestion, IAnswer, ISurvey,
 } from './types';
 
 const isString = (text: any): text is string => {
@@ -49,21 +49,19 @@ const parseDescription = (description: string): string => {
   return description;
 };
 
-export const parseQuestions = (questions: Array<IQuestion>): Array<IQuestion> => {
+export const parseQuestions = (questions: Array<any>): Array<IQuestion> => {
   if (questions.length < 2) {
     throw new Error('Survey must have atleast 2 questions');
   }
 
-  questions.forEach(({ questionNumber, question }) => {
-    if (Number.isNaN(questionNumber)) {
-      throw new Error(`Incorrect or missing questionNumber: ${questionNumber}`);
-    }
+  questions.forEach((question) => {
     if (!question || !isString(question) || question.length < 4 || question.length > 50) {
-      throw new Error(`Incorrect or missing question: ${question}`);
+      throw new Error(`Incorrect or missing question: ${question as string}`);
     }
   });
 
-  return questions;
+  // Add a questionNumber to every question
+  return questions.map((question: string, index) => ({ questionNumber: index, question }));
 };
 
 export const parseAnswers = (answers: Array<IAnswer>): Array<IAnswer> => {
@@ -82,7 +80,7 @@ export const parseAnswers = (answers: Array<IAnswer>): Array<IAnswer> => {
   return answers;
 };
 
-export const toNewSurvey = (object: NewSurvey): NewSurvey => {
+export const toNewSurvey = (object: NewSurvey): ISurvey => {
   return {
     creatorId: parseId(object.creatorId),
     title: parseTitle(object.title),

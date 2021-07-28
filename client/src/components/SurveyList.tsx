@@ -9,7 +9,9 @@ import { ISurvey } from '../types';
 import Loading from './Loading';
 
 const SurveyList: React.FC = () => {
-  const { loading, data } = useQuery(GET_ALL_SURVEYS);
+  const { loading, data } = useQuery(GET_ALL_SURVEYS, {
+    variables: { private: true },
+  });
 
   if (loading) {
     return <Loading />;
@@ -23,7 +25,6 @@ const SurveyList: React.FC = () => {
   return (
     <Container>
       <Segment>
-
         <Segment.Group>
           <Segment style={{ background: 'rgb(34 69 101)' }}>
             <Header
@@ -86,12 +87,10 @@ const SurveyList: React.FC = () => {
                     </List.Item>
                   ))}
                 </List>
-
               </Segment>
             )}
 
         </Segment.Group>
-
       </Segment>
     </Container>
   );

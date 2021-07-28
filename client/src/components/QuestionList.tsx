@@ -5,14 +5,13 @@ import {
   Icon,
   List,
 } from 'semantic-ui-react';
-import { IQuestion } from '../types';
 
 interface Props {
-  questionObjects: Array<IQuestion>;
+  questions: Array<string>;
   handleRemove(question: string): void;
 }
 
-const QuestionList: React.FC<Props> = ({ questionObjects, handleRemove }) => {
+const QuestionList: React.FC<Props> = ({ questions: questionObjects, handleRemove }) => {
   if (questionObjects.length === 0) {
     return (
       <Header as="h2" subheader="No questions added yet..." />
@@ -21,14 +20,14 @@ const QuestionList: React.FC<Props> = ({ questionObjects, handleRemove }) => {
 
   return (
     <List divided verticalAlign="middle">
-      {Object.values(questionObjects).map((questionObj, index) => (
+      {Object.values(questionObjects).map((question, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <List.Item key={index} style={{ padding: '10px' }}>
           <List.Content floated="right">
             <Button color="blue" onClick={(): void => window.alert('Edit button not working yet')}>
               Edit
             </Button>
-            <Button color="red" onClick={(): void => handleRemove(questionObj.question)}>
+            <Button color="red" onClick={(): void => handleRemove(question)}>
               Remove
             </Button>
           </List.Content>
@@ -37,7 +36,7 @@ const QuestionList: React.FC<Props> = ({ questionObjects, handleRemove }) => {
             <Header
               as="h3"
               content={`Question ${index + 1}:`}
-              subheader={questionObj.question}
+              subheader={question}
             />
           </List.Content>
         </List.Item>

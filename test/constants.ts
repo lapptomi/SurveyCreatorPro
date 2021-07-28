@@ -18,11 +18,7 @@ export const testSurvey: NewSurvey = {
   creatorId: 'random-id-123',
   title: 'test-title',
   description: 'test-description',
-  questions: [
-    { questionNumber: 0, question: 'question1' },
-    { questionNumber: 1, question: 'question2' },
-    { questionNumber: 2, question: 'question3' }
-  ],
-  private: true,
+  questions: ['question1', 'question2', 'question3'],
+  private: false,
   responses: []
 }
