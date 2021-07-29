@@ -29,6 +29,27 @@ export const CREATE_SURVEY = gql`
   }
 `;
 
+export const GET_SURVEYS_OF_CURRENT_USER = gql`
+  ${SURVEY_FIELDS}
+  query allSurveys($ofCurrentUser: Boolean) {
+    allSurveys(ofCurrentUser: $ofCurrentUser) {
+      ...SurveyFields
+      questions {
+        question
+        questionNumber
+      }
+      responses {
+        respondent
+        answers {
+          questionNumber
+          question
+          answer
+        }
+      }
+    }
+  }
+`;
+
 export const GET_ALL_SURVEYS = gql`
   ${SURVEY_FIELDS}
   query allSurveys($private: Boolean) {

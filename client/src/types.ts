@@ -12,11 +12,24 @@ export interface ISurvey {
   description: string;
   questions: Array<IQuestion>;
   private: boolean;
+  responses: Array<IResponse>
 }
 
 export interface IQuestion {
   questionNumber: number;
   question: string;
+}
+
+export interface IResponse {
+  respondent: string;
+  surveyId?: string;
+  answers: Array<IAnswer>;
+}
+
+export interface IAnswer {
+  questionNumber: number;
+  question: string;
+  answer: 1 | 2 | 3 | 4 | 5;
 }
 
 export type NewSurvey = Omit<ISurvey, 'id'>;

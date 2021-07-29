@@ -86,10 +86,9 @@ const CreateSurveyPage: React.FC = () => {
         }}
       >
         <Loading active={createSurveyData.loading} />
-        <Container style={{ margin: '50px' }}>
+        <Container style={{ margin: '50px' }} textAlign="left">
           <Header
             as="h2"
-            textAlign="left"
             content="Create New Survey"
             style={{
               fontSize: '3em',

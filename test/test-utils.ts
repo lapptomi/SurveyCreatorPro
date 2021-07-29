@@ -13,8 +13,7 @@ export const testUser2: NewUser = {
   password: "testpassword2",
 }
 
-export const testSurvey: NewSurvey = {
-  creatorId: 'random-id-123',
+export const testSurvey: Omit<NewSurvey, 'creatorId'> = {
   title: 'test-title',
   description: 'test-description',
   questions: ['question1', 'question2', 'question3'],
