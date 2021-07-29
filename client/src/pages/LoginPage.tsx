@@ -13,6 +13,7 @@ import Loading from '../components/Loading';
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const [login, { loading }] = useMutation(LOGIN);
 
@@ -25,13 +26,9 @@ const LoginPage: React.FC = () => {
       })
       .catch((error) => {
         console.log(error.message);
-        window.alert(error.message);
+        setErrorMessage(error.message);
       });
   };
-
-  if (loading) {
-    return <Loading />;
-  }
 
   return (
     <Grid textAlign="center" verticalAlign="middle">
@@ -44,6 +41,7 @@ const LoginPage: React.FC = () => {
           height: '900px',
         }}
       >
+        <Loading active={loading} />
         <Grid.Column style={{ maxWidth: '700px' }} width={16}>
           <Header
             as="h1"
@@ -62,6 +60,11 @@ const LoginPage: React.FC = () => {
               marginTop: '50px',
             }}
             >
+              <Message negative hidden={!errorMessage}>
+                <Message.Header>Error logging in</Message.Header>
+                <p>{errorMessage}</p>
+              </Message>
+
               <Form.Input
                 id="login-form-email-field"
                 fluid

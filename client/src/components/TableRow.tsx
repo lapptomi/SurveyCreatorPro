@@ -10,11 +10,10 @@ interface Props {
 
 const TableRow: React.FC<Props> = ({ questionObj: obj, rowIndex, handleChange }) => {
   const [answerOption, setAnswerOption] = useState<number>(-1);
-  console.log('row = ', rowIndex + 1);
+
   return (
     <Table.Row>
       <Table.Cell>{obj.question}</Table.Cell>
-
       <Table.Cell textAlign="center">
         <Form.Radio
           className={`table-row${rowIndex + 1}-option1`}
@@ -65,7 +64,6 @@ const TableRow: React.FC<Props> = ({ questionObj: obj, rowIndex, handleChange })
           })}
         />
       </Table.Cell>
-
     </Table.Row>
   );
 };

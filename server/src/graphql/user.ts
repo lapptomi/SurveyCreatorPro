@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable arrow-body-style */
-import bcrypt from 'bcrypt';
 import { UserInputError } from 'apollo-server-express';
 import { IUser, NewUser } from '../types';
 import User from '../models/User';
@@ -27,26 +26,20 @@ export const typeDef = `
 
 export const resolvers = {
   Query: {
-    allUsers: async (): Promise<Array<IUser>> => {
-      return User.find({});
-    },
+    allUsers: async (): Promise<Array<IUser>> => User.find({}),
   },
   Mutation: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    addUser: async (_root: any, args: NewUser): Promise<IUser> => {
+    addUser: async (_root: unknown, args: NewUser): Promise<IUser> => {
       try {
-        // Check that the user object has valid fields or throw error if not
-        toNewUser(args);
-
-        const newUser = new User({
-          email: args.email,
-          password: await bcrypt.hash(args.password, 10),
-        });
+        const newUser = await toNewUser(args);
 
         const addedUser = await User.create(newUser);
         return addedUser;
       } catch (error) {
         console.log('Error creating new user:', (error as Error).message);
+        if ((error as Error).message.includes('duplicate key error collection')) {
+          throw new Error('Email is already taken');
+        }
         throw new UserInputError((error as Error).message, {
           invalidArgs: args,
         });

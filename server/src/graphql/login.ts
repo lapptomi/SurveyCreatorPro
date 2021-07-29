@@ -28,12 +28,10 @@ export const resolvers = {
   Mutation: {
     login: async (_root: unknown, args: LoginArgs): Promise<IToken> => {
       const user = await User.findOne({ email: args.email });
-      if (!user) {
-        throw new Error('User not found');
-      }
+      const password = user ? user.password : '';
 
-      const passwordsMatch = await bcrypt.compare(args.password, user.password);
-      if (!passwordsMatch) {
+      const passwordsMatch = await bcrypt.compare(args.password, password);
+      if (!passwordsMatch || !user) {
         throw new Error('Invalid username or password');
       }
 

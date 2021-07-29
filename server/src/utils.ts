@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import bcrypt from 'bcrypt';
 import {
   NewUser, NewSurvey, IQuestion, IAnswer, ISurvey,
 } from './types';
@@ -21,17 +22,19 @@ const parseId = (id: string): string => {
   return id;
 };
 
-const parsePassword = (password: string): string => {
+const parsePassword = async (password: string): Promise<string> => {
   if (!password || !isString(password) || password.length < 4) {
     throw new Error(`Incorrect or missing password: ${password}`);
   }
-  return password;
+
+  const passwordHash = await bcrypt.hash(password, 10);
+  return passwordHash;
 };
 
-export const toNewUser = (object: NewUser): NewUser => {
+export const toNewUser = async (object: NewUser): Promise<NewUser> => {
   return {
     email: parseEmail(object.email),
-    password: parsePassword(object.password),
+    password: await parsePassword(object.password),
   };
 };
 
@@ -60,7 +63,7 @@ export const parseQuestions = (questions: Array<any>): Array<IQuestion> => {
     }
   });
 
-  // Add a questionNumber to every question
+  // Add questionNumber to every question
   return questions.map((question: string, index) => ({ questionNumber: index, question }));
 };
 

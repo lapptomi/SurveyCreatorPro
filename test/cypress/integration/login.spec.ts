@@ -1,90 +1,97 @@
 /// <reference types="cypress" />
+import { addUserMutation, BASE_URL, loginMutation, testUser } from "../../test-utils";
 
-import { BASE_URL, testUser } from "../../constants";
 
 describe('Login', function() {
-  // @ts-check
+
   beforeEach(function() {
     cy.request('POST', `${BASE_URL}/api/testing/reset`)
 
+    // creating user for testing login
+    cy.graphQlRequest(addUserMutation(testUser.email, testUser.password))
+
     cy.visit('http://localhost:3000')
 
-    // creating user for testing login
-    cy.get('#topnav-signup-button').click()
-    cy.get('#register-form-email-field').type(testUser.email)
-    cy.get('#register-form-password-field').type(testUser.password)
-    cy.get('#register-form-confirm-password-field').type(testUser.password)
-
-    cy.get('.register-form-accept-terms-checkbox').click()
-
-    cy.get('#register-form-signup-button').click()
-      .then(() => {
-        cy.contains('Log out')
-        cy.contains('Profile')
-        cy.contains('Create Survey')
-        cy.contains('Browse Surveys')
-      })
-
-    cy.contains('Log out').click()
-
+    // Open login page
     cy.get('#topnav-login-button').click()
-
-    cy.contains('Something went wrong or the page does not exist...').should('not.exist')
-    cy.contains('404 - Page Not Found :(').should('not.exist')
   });
   
 
-  it('front page can be opened', function() {
-    cy.contains('SurveyCreatorPro').click()
-    cy.contains('Get Started')
+  it('login page can be opened', function() {
+    cy.contains('SurveyCreatorPro')
+    cy.contains('Log in to your account')
   });
 
   it('succeeds with correct credentials', function() {
+    // Try on the client
     cy.get('#login-form-email-field').type(testUser.email)
     cy.get('#login-form-password-field').type(testUser.password)
     cy.get('#login-form-login-button').click()
     
     cy.contains('Log out')
     cy.contains('Profile')
-  })
+
+    // Try sending request to the server
+    cy.graphQlRequest(loginMutation(testUser.email, testUser.password)).then((response) => {
+      expect(response.body.errors).to.be.undefined
+      expect(response.body.data.login.token).to.not.be.undefined
+    })
+  });
 
   it('fails with wrong email', function() {
+    // Try on the client
     cy.get('#login-form-email-field').type('worngemail@random.com')
     cy.get('#login-form-password-field').type(testUser.password)
     cy.get('#login-form-login-button').click()
 
-    cy.wait(1000)
-    cy.contains('Log in to your account')
-    
-    cy.on('window:alert', (str) => {
-      expect(str).to.eq('User not found')
+    cy.contains('Error logging in')
+    cy.contains('Invalid username or password')
+
+    // Try sending request to the server
+    cy.graphQlRequest(loginMutation('WRONG EMAIL', testUser.password)).then((response) => {
+      expect(response.body.errors[0].message).to.eq('Invalid username or password')
     })
-  })
+  });
 
   it('fails with wrong password', function() {
+    // Try on the client
     cy.get('#login-form-email-field').type(testUser.email)
     cy.get('#login-form-password-field').type('wrongpassword')
     cy.get('#login-form-login-button').click()
 
-    cy.wait(1000)
-    cy.contains('Log in to your account')
+    cy.contains('Error logging in')
+    cy.contains('Invalid username or password')
 
-    cy.on('window:alert', (str) => {
-      expect(str).to.eq('Invalid username or password')
+    // Try sending request to the server
+    cy.graphQlRequest(loginMutation(testUser.email, 'WRONG PASSWORD')).then((response) => {
+      expect(response.body.errors[0].message).to.eq('Invalid username or password')
     })
-  })
+  });
 
   it('fails if email is not given', function() {    
+    // Try on the client
     cy.get('#login-form-password-field').type('wrongpassword')
     cy.get('#login-form-login-button').should('be.disabled');
-
+    
     cy.contains('Log in to your account')
-  })
+
+    // Try sending request to the server
+    cy.graphQlRequest(loginMutation('', testUser.email)).then((response) => {
+      expect(response.body.errors[0].message).to.eq('Invalid username or password')
+    })
+  });
 
   it('fails if password is not given', function() {
+    // Try on the client
     cy.get('#login-form-email-field').type(testUser.email)
     cy.get('#login-form-login-button').should('be.disabled');
 
     cy.contains('Log in to your account')
-  })
+
+    // Try sending request to the server
+    cy.graphQlRequest(loginMutation(testUser.email, '')).then((response) => {
+      expect(response.body.errors[0].message).to.eq('Invalid username or password')
+    })
+  });
+
 });

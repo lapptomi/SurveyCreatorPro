@@ -14,7 +14,7 @@ const SurveyList: React.FC = () => {
   });
 
   if (loading) {
-    return <Loading />;
+    return <Loading active />;
   }
   if (!data) {
     return <ErrorPage />;
@@ -51,7 +51,7 @@ const SurveyList: React.FC = () => {
                 <List divided relaxed>
                   {Object.values(surveys).map((survey, index) => (
                     <List.Item
-                      // eslint-disable-next-line react/no-array-index-key
+                    // eslint-disable-next-line react/no-array-index-key
                       key={index}
                       style={{ padding: '20px' }}
                     >
@@ -87,6 +87,7 @@ const SurveyList: React.FC = () => {
                     </List.Item>
                   ))}
                 </List>
+
               </Segment>
             )}
 
