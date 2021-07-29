@@ -36,6 +36,29 @@ describe('Browsing surveys', function() {
     cy.contains('List of public surveys')
   });
 
+  it('shows only surveys that are public', function() {
+    cy.get('#topnav-create-survey-button').click()
+
+    cy.get('#survey-form-title-input').type(testSurvey.title)
+    cy.get('#survey-form-description-input').type(testSurvey.description)
+
+    for (let i = 0; i < testSurvey.questions.length; i++) {
+      cy.get('#survey-form-question-input').type(testSurvey.questions[i])
+      cy.get('#survey-form-add-question-button').click()
+      cy.contains(testSurvey.questions[i])
+    }
+    
+    cy.get('.survey-form-no-radio').click()
+    cy.get('#survey-form-create-button').click()
+
+    cy.wait(2000)
+    cy.get('#topnav-browse-surveys-button').click()
+
+    cy.contains(`Title: ${testSurvey.title}`)
+    cy.contains(`Survey description: ${testSurvey.description}`)
+    cy.contains('No surveys addded yet...').should('not.exist')
+  })
+
 });
 
 
@@ -85,8 +108,6 @@ describe('Creating a survey', function() {
       cy.contains(testSurvey.questions[i])
     }
 
-    cy.get('.survey-form-yes-radio').click()
-
     cy.get('#survey-form-create-button').click()
 
     cy.contains(`Title: ${testSurvey.title}`)
@@ -97,8 +118,6 @@ describe('Creating a survey', function() {
   it('cannot be done without adding questions', function() {
     cy.get('#survey-form-title-input').type(testSurvey.title)
     cy.get('#survey-form-description-input').type(testSurvey.description)
-
-    cy.get('.survey-form-yes-radio').click()
 
     cy.get('#survey-form-create-button').should('be.disabled');
   });
@@ -113,7 +132,6 @@ describe('Creating a survey', function() {
       cy.contains(testSurvey.questions[0])
     }
 
-    cy.get('.survey-form-yes-radio').click()
     cy.get('#survey-form-create-button').should('be.disabled');
   });
 
@@ -127,7 +145,6 @@ describe('Creating a survey', function() {
       cy.contains(testSurvey.questions[i])
     }
 
-    cy.get('.survey-form-yes-radio').click()
     cy.get('#survey-form-create-button').should('be.disabled');
   });
 
@@ -140,7 +157,6 @@ describe('Creating a survey', function() {
     cy.contains(testSurvey.questions[0])
     
 
-    cy.get('.survey-form-yes-radio').click()
     cy.get('#survey-form-create-button').click()
 
     cy.contains('Error creating survey')
@@ -184,7 +200,6 @@ describe('Answering a survey', function() {
       cy.contains(testSurvey.questions[i])
     }
 
-    cy.get('.survey-form-yes-radio').click()
     cy.get('#survey-form-create-button').click()
 
     cy.contains(`Title: ${testSurvey.title}`)

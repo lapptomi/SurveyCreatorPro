@@ -10,7 +10,7 @@ import Loading from './Loading';
 
 const SurveyList: React.FC = () => {
   const { loading, data } = useQuery(GET_ALL_SURVEYS, {
-    variables: { private: true },
+    variables: { private: false },
   });
 
   if (loading) {

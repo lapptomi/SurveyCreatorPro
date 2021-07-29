@@ -42,7 +42,7 @@ export const typeDef = `
 
 
   extend type Query {
-    allSurveys(private: Boolean): [Survey!]!
+    allSurveys(private: Boolean, ofCurrentUser: Boolean): [Survey!]!
     findSurvey(surveyId: ID!): Survey
   }
 
@@ -63,12 +63,20 @@ export const typeDef = `
 
 export const resolvers = {
   Query: {
-    allSurveys: async (_root: unknown, args: { private: boolean }): Promise<Array<ISurvey>> => {
-      // return only surveys that are set to private
-      if (!args.private) {
+    allSurveys: async (
+      _root: unknown,
+      args: { private: boolean, ofCurrentUser: boolean },
+      context: ApolloContext,
+    ): Promise<Array<ISurvey>> => {
+      // return surveys that are set to private
+      if (args.private) {
         return Survey.find({ private: true });
       }
-      return Survey.find({});
+      // return surveys of the current user
+      if (args.ofCurrentUser) {
+        return Survey.find({ creatorId: context.currentUser.id });
+      }
+      return Survey.find({ private: false });
     },
     findSurvey: async (_root: unknown, args: { surveyId: string }): Promise<ISurvey | null> => {
       return Survey.findById(args.surveyId);

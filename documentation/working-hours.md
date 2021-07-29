@@ -53,3 +53,4 @@
 | 28.7 | 2  | debugging  |  
 | 28.7 | 8  | changing GraphQL / TypeScript data structure and fixing tests  |  
 | 29.7 | 7  | fixed / added new tests and added some error handling on the client  |  
+| 29.7 | 7  | added profile page on the frontend and some other minor changes |  

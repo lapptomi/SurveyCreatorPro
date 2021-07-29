@@ -13,6 +13,7 @@ import { useGlobalState } from './state/state';
 import Loading from './components/Loading';
 import SurveyPage from './pages/SurveyPage';
 import ErrorPage from './pages/ErrorPage';
+import ProfilePage from './pages/ProfilePage';
 
 const App: React.FC = () => {
   const [state] = useGlobalState();
@@ -55,6 +56,10 @@ const App: React.FC = () => {
               { state.isLoggedIn ? <SurveyPage /> : <Redirect to="/" /> }
             </Route>
 
+            <Route exact path="/profile">
+              { state.isLoggedIn ? <ProfilePage /> : <Redirect to="/" /> }
+            </Route>
+
             <Route exact path="/">
               <HomePage />
             </Route>
@@ -62,6 +67,7 @@ const App: React.FC = () => {
             <Route path="*">
               <ErrorPage />
             </Route>
+
           </Switch>
         </div>
         <Footer />
