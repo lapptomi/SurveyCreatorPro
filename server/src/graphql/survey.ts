@@ -18,11 +18,6 @@ export const typeDef = `
     responses: [Response!]!
   }
 
-  input QuestionInput {
-    questionNumber: Int!
-    question: String!
-  }
-
   type Question {
     questionNumber: Int!
     question: String!
@@ -47,7 +42,7 @@ export const typeDef = `
 
 
   extend type Query {
-    allSurveys: [Survey!]!
+    allSurveys(private: Boolean): [Survey!]!
     findSurvey(surveyId: ID!): Survey
   }
 
@@ -55,7 +50,7 @@ export const typeDef = `
     addSurvey (
       title: String!
       description: String!
-      questions: [QuestionInput!]!
+      questions: [String!]!
       private: Boolean!
     ): Survey
 
@@ -68,7 +63,11 @@ export const typeDef = `
 
 export const resolvers = {
   Query: {
-    allSurveys: async (): Promise<Array<ISurvey>> => {
+    allSurveys: async (_root: unknown, args: { private: boolean }): Promise<Array<ISurvey>> => {
+      // return only surveys that are set to private
+      if (!args.private) {
+        return Survey.find({ private: true });
+      }
       return Survey.find({});
     },
     findSurvey: async (_root: unknown, args: { surveyId: string }): Promise<ISurvey | null> => {

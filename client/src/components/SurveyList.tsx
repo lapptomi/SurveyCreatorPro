@@ -9,10 +9,12 @@ import { ISurvey } from '../types';
 import Loading from './Loading';
 
 const SurveyList: React.FC = () => {
-  const { loading, data } = useQuery(GET_ALL_SURVEYS);
+  const { loading, data } = useQuery(GET_ALL_SURVEYS, {
+    variables: { private: true },
+  });
 
   if (loading) {
-    return <Loading />;
+    return <Loading active />;
   }
   if (!data) {
     return <ErrorPage />;
@@ -23,7 +25,6 @@ const SurveyList: React.FC = () => {
   return (
     <Container>
       <Segment>
-
         <Segment.Group>
           <Segment style={{ background: 'rgb(34 69 101)' }}>
             <Header
@@ -50,7 +51,7 @@ const SurveyList: React.FC = () => {
                 <List divided relaxed>
                   {Object.values(surveys).map((survey, index) => (
                     <List.Item
-                      // eslint-disable-next-line react/no-array-index-key
+                    // eslint-disable-next-line react/no-array-index-key
                       key={index}
                       style={{ padding: '20px' }}
                     >
@@ -91,7 +92,6 @@ const SurveyList: React.FC = () => {
             )}
 
         </Segment.Group>
-
       </Segment>
     </Container>
   );

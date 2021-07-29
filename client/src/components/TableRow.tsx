@@ -3,18 +3,17 @@ import { Table, Form } from 'semantic-ui-react';
 import { Answer, IQuestion } from '../types';
 
 interface Props {
-  obj: IQuestion;
+  questionObj: IQuestion;
   rowIndex: number;
   handleChange(answerOption: Answer): void;
 }
 
-const TableRow: React.FC<Props> = ({ obj, rowIndex, handleChange }) => {
+const TableRow: React.FC<Props> = ({ questionObj: obj, rowIndex, handleChange }) => {
   const [answerOption, setAnswerOption] = useState<number>(-1);
-  console.log('row = ', rowIndex + 1);
+
   return (
     <Table.Row>
       <Table.Cell>{obj.question}</Table.Cell>
-
       <Table.Cell textAlign="center">
         <Form.Radio
           className={`table-row${rowIndex + 1}-option1`}
@@ -65,7 +64,6 @@ const TableRow: React.FC<Props> = ({ obj, rowIndex, handleChange }) => {
           })}
         />
       </Table.Cell>
-
     </Table.Row>
   );
 };

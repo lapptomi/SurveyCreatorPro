@@ -42,7 +42,8 @@ export interface ApolloContext {
 
 export type NewUser = Omit<IUser, 'id'>;
 
-export type NewSurvey = Omit<ISurvey, 'id'>;
+// Remove id and questions.questionNumber fields
+export type NewSurvey = Omit<ISurvey, 'id' | 'questions'> & { questions: Array<string> };
 
 export type SafeUser = Omit<IUser, 'id' | 'password'>;
 

@@ -48,8 +48,8 @@
 | 26.7 | 8  | creating a form for answering survey questions  |  
 | 27.7 | 7  | adding functionality for answering surveys (server and client)  |  
 | 27.7 | 8  | adding functionality for answering surveys (server)  |  
-| 27.7 | 8  | adding functionality for answering surveys (server)  |  
 | 28.7 | 1  | minor changes on the client  |  
 | 28.7 | 4  | some changes on the React UI and writing tests  |  
 | 28.7 | 2  | debugging  |  
-
+| 28.7 | 8  | changing GraphQL / TypeScript data structure and fixing tests  |  
+| 29.7 | 7  | fixed / added new tests and added some error handling on the client  |  

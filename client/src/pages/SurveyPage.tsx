@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   Button,
-  Container, Form, Grid, Header, Icon, Segment, Table,
+  Container, Form, Grid, Header, Icon, Message, Segment, Table,
 } from 'semantic-ui-react';
 import Loading from '../components/Loading';
 import TableRow from '../components/TableRow';
@@ -15,20 +15,12 @@ import ErrorPage from './ErrorPage';
 const SurveyPage: React.FC = () => {
   const [answers, setAnswers] = useState<Array<Answer>>([]);
   const [addResponse, responseData] = useMutation(ADD_RESPONSE);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const { id } = useParams<{ id: string }>();
   const { loading, data } = useQuery(FIND_SURVEY_BY_ID, {
     variables: { surveyId: id },
   });
-
-  if (loading || responseData.loading) {
-    return <Loading />;
-  }
-  if (!id || !data) {
-    return <ErrorPage />;
-  }
-
-  const survey: ISurvey = data.findSurvey;
 
   const handleSubmit = (): void => {
     addResponse({ variables: { surveyId: id, answers } })
@@ -37,7 +29,10 @@ const SurveyPage: React.FC = () => {
         window.alert('The form was submitted succesfully!');
         window.location.replace('/surveys/browse');
       })
-      .catch((error) => window.alert(error.message));
+      .catch((error) => {
+        console.log(error.message);
+        setErrorMessage(error.message);
+      });
   };
 
   const handleChange = (answer: Answer): void => {
@@ -48,9 +43,14 @@ const SurveyPage: React.FC = () => {
     setAnswers([...updatedAnswers, answer]);
   };
 
-  if (!survey) {
+  if (loading) {
+    return <Loading active />;
+  }
+  if (!data || !data.findSurvey) {
     return <ErrorPage />;
   }
+
+  const survey: ISurvey = data.findSurvey;
 
   return (
     <Grid>
@@ -63,6 +63,7 @@ const SurveyPage: React.FC = () => {
           backgroundSize: '100% 100%',
         }}
       >
+        <Loading active={responseData.loading} />
         <Grid.Column width={16}>
           <Container text style={{ margin: '40px' }}>
             <p>{`Survey: ${survey.id}`}</p>
@@ -105,6 +106,11 @@ const SurveyPage: React.FC = () => {
                   <p>5 - Strongly Agree</p>
 
                   <Form>
+                    <Message negative hidden={!errorMessage}>
+                      <Message.Header>Error answering survey</Message.Header>
+                      <p>{errorMessage}</p>
+                    </Message>
+
                     <Table celled color="blue">
                       <Table.Header>
                         <Table.Row textAlign="center">
@@ -125,10 +131,11 @@ const SurveyPage: React.FC = () => {
                           // eslint-disable-next-line react/no-array-index-key
                             key={index}
                             rowIndex={index}
-                            obj={obj}
+                            questionObj={obj}
                             handleChange={handleChange}
                           />
                         ))}
+
                       </Table.Body>
                       <Table.Footer fullWidth>
                         <Table.Row>

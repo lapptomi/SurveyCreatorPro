@@ -18,7 +18,7 @@ const App: React.FC = () => {
   const [state] = useGlobalState();
 
   if (state.isLoading) {
-    return <Loading />;
+    return <Loading active />;
   }
 
   return (

@@ -15,7 +15,7 @@ export const CREATE_SURVEY = gql`
   mutation addSurvey(
     $title: String!,
     $description: String!,
-    $questions: [QuestionInput!]!,
+    $questions: [String!]!,
     $private: Boolean!
   ) {
     addSurvey(
@@ -31,8 +31,8 @@ export const CREATE_SURVEY = gql`
 
 export const GET_ALL_SURVEYS = gql`
   ${SURVEY_FIELDS}
-  query {
-    allSurveys {
+  query allSurveys($private: Boolean) {
+    allSurveys(private: $private) {
       ...SurveyFields
     }
   }

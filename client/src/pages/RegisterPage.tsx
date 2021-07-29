@@ -20,6 +20,7 @@ const RegisterForm: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [acceptTerms, setAcceptTerms] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const [createNewUser, registerData] = useMutation(CREATE_NEW_USER);
   const [login, loginData] = useMutation(LOGIN);
@@ -34,7 +35,7 @@ const RegisterForm: React.FC = () => {
         }))
       .catch((error) => {
         console.log(error.message);
-        window.alert(error);
+        setErrorMessage(error.message);
       });
   };
 
@@ -42,10 +43,6 @@ const RegisterForm: React.FC = () => {
       && password.length > 3
       && acceptTerms
       && password === confirmPassword;
-
-  if (registerData.loading || loginData.loading) {
-    return <Loading />;
-  }
 
   return (
     <Grid
@@ -61,6 +58,7 @@ const RegisterForm: React.FC = () => {
           height: '900px',
         }}
       >
+        <Loading active={registerData.loading || loginData.loading} />
         <Grid.Column style={{ maxWidth: '700px' }} width={16}>
           <Header
             as="h1"
@@ -84,6 +82,12 @@ const RegisterForm: React.FC = () => {
               marginTop: '50px',
             }}
             >
+
+              <Message negative hidden={!errorMessage}>
+                <Message.Header>Error creating new user</Message.Header>
+                <p>{errorMessage}</p>
+              </Message>
+
               <Form.Input
                 id="register-form-email-field"
                 fluid

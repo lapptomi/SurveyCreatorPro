@@ -23,3 +23,27 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import { BASE_URL } from "../../test-utils"
+
+Cypress.Commands.add('graphQlRequest', (query) => {
+  cy.request({
+    url: `${BASE_URL}/graphql`,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: {
+      query: query
+    },
+    failOnStatusCode: false,
+  })
+})
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      graphQlRequest(query: string): Promise<any>,
+    }
+  }
+}
