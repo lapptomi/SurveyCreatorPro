@@ -17,12 +17,10 @@ if (process.env.NODE_ENV === 'development') {
 
 app.post('/api/testing/reset', async (_req, res) => {
   try {
-    // Delete objects only if NODE_ENV is in test mode
     if (process.env.NODE_ENV !== 'production') {
       await User.deleteMany();
       await Survey.deleteMany();
     }
-
     res.status(204).end();
   } catch (e) {
     console.log(e);
@@ -42,7 +40,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 
 export = app;

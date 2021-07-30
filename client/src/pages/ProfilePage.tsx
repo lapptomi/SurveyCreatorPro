@@ -2,6 +2,7 @@
 /* eslint-disable arrow-body-style */
 import { useQuery } from '@apollo/client';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Accordion,
   Container, Grid, Header, Icon, Label, List, Message, Segment,
@@ -9,7 +10,7 @@ import {
 import Loading from '../components/Loading';
 import { GET_SURVEYS_OF_CURRENT_USER } from '../graphql/queries/survey';
 import backgroundImage from '../style/img2.png';
-import { ISurvey } from '../types';
+import { IQuestion, ISurvey } from '../types';
 import ErrorPage from './ErrorPage';
 
 const ProfilePage: React.FC = () => {
@@ -26,6 +27,14 @@ const ProfilePage: React.FC = () => {
   }
 
   const surveys: Array<ISurvey> = data.allSurveys;
+
+  const getQuestionAnswers = (survey: ISurvey, obj: IQuestion, answerChoise: 1 | 2 | 3 | 4 | 5): number => {
+    const answerList = survey.responses.flatMap(({ answers }) => (
+      answers.filter((a) => a.answer === answerChoise && a.question === obj.question)
+    ));
+
+    return answerList.length;
+  };
 
   return (
     <Grid textAlign="center">
@@ -71,7 +80,7 @@ const ProfilePage: React.FC = () => {
                 <Segment>
                   <Header
                     content="No surveys added yet..."
-                    subheader="Be the first to create one!"
+                    subheader="You have not created any surveys yet."
                     style={{ fontSize: '20px', margin: '10px' }}
                   />
                 </Segment>
@@ -86,6 +95,19 @@ const ProfilePage: React.FC = () => {
                       >
                         <Segment color="blue">
                           <List.Content>
+
+                            <List.Content floated="right">
+                              <Label>Click the arrow to open this survey</Label>
+                              <Link to={`/surveys/${survey.id}`}>
+                                <Icon
+                                  className="open-survey-icon"
+                                  link
+                                  color="green"
+                                  size="huge"
+                                  name="arrow circle right"
+                                />
+                              </Link>
+                            </List.Content>
 
                             <Accordion fluid>
                               <Header>
@@ -124,7 +146,6 @@ const ProfilePage: React.FC = () => {
                                 </Label.Group>
 
                                 <Header as="h2" content="Questions" />
-
                                 {survey.questions.map((obj) => (
                                   <Segment.Group key={obj.questionNumber}>
                                     <Segment>
@@ -139,36 +160,31 @@ const ProfilePage: React.FC = () => {
                                         <Label>
                                           Strongly Disagree:
                                           <Label.Detail>
-                                            {survey.responses.flatMap(({ answers }) => (
-                                              answers.filter((a) => a.answer === 1 && a.question === obj.question)).length)}
+                                            {getQuestionAnswers(survey, obj, 1)}
                                           </Label.Detail>
                                         </Label>
                                         <Label>
                                           Somewhat Disagree:
                                           <Label.Detail>
-                                            {survey.responses.flatMap(({ answers }) => (
-                                              answers.filter((a) => a.answer === 2 && a.question === obj.question)).length)}
+                                            {getQuestionAnswers(survey, obj, 2)}
                                           </Label.Detail>
                                         </Label>
                                         <Label>
                                           Neutral:
                                           <Label.Detail>
-                                            {survey.responses.flatMap(({ answers }) => (
-                                              answers.filter((a) => a.answer === 3 && a.question === obj.question)).length)}
+                                            {getQuestionAnswers(survey, obj, 3)}
                                           </Label.Detail>
                                         </Label>
                                         <Label>
                                           Somewhat Agree:
                                           <Label.Detail>
-                                            {survey.responses.flatMap(({ answers }) => (
-                                              answers.filter((a) => a.answer === 4 && a.question === obj.question)).length)}
+                                            {getQuestionAnswers(survey, obj, 4)}
                                           </Label.Detail>
                                         </Label>
                                         <Label>
                                           Strongly Agree:
                                           <Label.Detail>
-                                            {survey.responses.flatMap(({ answers }) => (
-                                              answers.filter((a) => a.answer === 5 && a.question === obj.question)).length)}
+                                            {getQuestionAnswers(survey, obj, 5)}
                                           </Label.Detail>
                                         </Label>
                                       </Label.Group>
@@ -176,20 +192,15 @@ const ProfilePage: React.FC = () => {
                                   </Segment.Group>
                                 ))}
                               </Accordion.Content>
-
                             </Accordion>
-
                           </List.Content>
                         </Segment>
                       </List.Item>
                     ))}
                   </List>
-
                 </Segment>
               )}
-
           </Segment.Group>
-
         </Container>
       </Grid.Row>
     </Grid>

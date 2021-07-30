@@ -24,13 +24,11 @@ const SurveyPage: React.FC = () => {
 
   const handleSubmit = (): void => {
     addResponse({ variables: { surveyId: id, answers } })
-      .then((response) => {
-        console.log('Reponse = ', response);
+      .then(() => {
         window.alert('The form was submitted succesfully!');
         window.location.replace('/surveys/browse');
       })
       .catch((error) => {
-        console.log(error.message);
         setErrorMessage(error.message);
       });
   };

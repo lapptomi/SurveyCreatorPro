@@ -11,8 +11,8 @@ interface Props {
   handleRemove(question: string): void;
 }
 
-const QuestionList: React.FC<Props> = ({ questions: questionObjects, handleRemove }) => {
-  if (questionObjects.length === 0) {
+const QuestionList: React.FC<Props> = ({ questions, handleRemove }) => {
+  if (questions.length === 0) {
     return (
       <Header as="h2" subheader="No questions added yet..." />
     );
@@ -20,7 +20,7 @@ const QuestionList: React.FC<Props> = ({ questions: questionObjects, handleRemov
 
   return (
     <List divided verticalAlign="middle">
-      {Object.values(questionObjects).map((question, index) => (
+      {Object.values(questions).map((question, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <List.Item key={index} style={{ padding: '10px' }}>
           <List.Content floated="right">

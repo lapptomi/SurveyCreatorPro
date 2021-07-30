@@ -8,9 +8,9 @@ describe('Sign up', function() {
 
     cy.visit('http://localhost:3000')
 
-    // Open sign up page
+    // Open register page
     cy.get('#topnav-signup-button').click()
-  })
+  });
 
   it('succeeds with valid credentials', function() {
     cy.get('#register-form-email-field').type(testUser.email)
@@ -26,7 +26,7 @@ describe('Sign up', function() {
         cy.contains('Create Survey')
         cy.contains('Browse Surveys')
       })
-  })
+  });
 
   it('fails if email is not given', function () {
     // Try sending request to the server with invalid email
@@ -40,7 +40,7 @@ describe('Sign up', function() {
       const users = result.body.data.allUsers
       expect(users.length).to.eq(0)
     })
-  })
+  });
 
   it('fails if password is not given', function () {
     // Try sending request to the server with invalid password
@@ -83,6 +83,5 @@ describe('Sign up', function() {
 
     cy.contains('Error creating new user')
     cy.contains('Email is already taken')
-  })
-
+  });
 });

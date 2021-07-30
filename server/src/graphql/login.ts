@@ -42,7 +42,7 @@ export const resolvers = {
       const newToken = jwt.sign(
         userForToken,
         process.env.SECRET as string,
-        { expiresIn: 60 * 60 }, // expires in 1h
+        { expiresIn: 60 * 60 }, // token expires in 1h
       );
 
       return {

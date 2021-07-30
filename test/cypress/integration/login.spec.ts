@@ -93,5 +93,4 @@ describe('Login', function() {
       expect(response.body.errors[0].message).to.eq('Invalid username or password')
     })
   });
-
 });

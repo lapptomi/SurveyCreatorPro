@@ -31,7 +31,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <Grid textAlign="center" verticalAlign="middle">
+    <Grid verticalAlign="middle" centered>
       <Grid.Row
         color="black"
         style={{
@@ -44,12 +44,12 @@ const LoginPage: React.FC = () => {
         <Loading active={loading} />
         <Grid.Column style={{ maxWidth: '700px' }} width={16}>
           <Header
-            as="h1"
+            textAlign="center"
             content="SurveyCreatorPro"
             style={{ fontSize: '5em', ontWeight: 'bold' }}
           />
           <Header
-            as="h2"
+            textAlign="center"
             content="Log in to your account"
             style={{ fontSize: '2.5em', fontWeight: 'normal' }}
           />
@@ -68,6 +68,7 @@ const LoginPage: React.FC = () => {
               <Form.Input
                 id="login-form-email-field"
                 fluid
+                label="Email"
                 icon="at"
                 iconPosition="left"
                 placeholder="Email"
@@ -76,6 +77,7 @@ const LoginPage: React.FC = () => {
               <Form.Input
                 id="login-form-password-field"
                 fluid
+                label="Password"
                 icon="lock"
                 iconPosition="left"
                 placeholder="Password"
@@ -95,7 +97,7 @@ const LoginPage: React.FC = () => {
             </Segment>
           </Form>
 
-          <Message style={{ background: 'rgba(0, 0, 0, 0.1)' }}>
+          <Message style={{ textAlign: 'center' }}>
             Don&apos;t have an account yet?  &nbsp;
             <Link to="/register">
               Sign up here

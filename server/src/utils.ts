@@ -9,7 +9,7 @@ const isString = (text: any): text is string => {
 };
 
 const parseEmail = (email: string): string => {
-  if (!email || !isString(email) || email.length < 6) {
+  if (!email || !isString(email) || email.length < 6 || email.length > 40) {
     throw new Error(`Incorrect or missing email: ${email}`);
   }
   return email;
@@ -23,7 +23,7 @@ const parseId = (id: string): string => {
 };
 
 const parsePassword = async (password: string): Promise<string> => {
-  if (!password || !isString(password) || password.length < 4) {
+  if (!password || !isString(password) || password.length < 6 || password.length > 20) {
     throw new Error(`Incorrect or missing password: ${password}`);
   }
 
@@ -52,18 +52,18 @@ const parseDescription = (description: string): string => {
   return description;
 };
 
-export const parseQuestions = (questions: Array<any>): Array<IQuestion> => {
+export const parseQuestions = (questions: Array<string>): Array<IQuestion> => {
   if (questions.length < 2) {
     throw new Error('Survey must have atleast 2 questions');
   }
 
   questions.forEach((question) => {
     if (!question || !isString(question) || question.length < 4 || question.length > 50) {
-      throw new Error(`Incorrect or missing question: ${question as string}`);
+      throw new Error(`Incorrect or missing question: ${question}`);
     }
   });
 
-  // Add questionNumber to every question
+  // Add questionNumber to every question starting from 0, 1 ... n
   return questions.map((question: string, index) => ({ questionNumber: index, question }));
 };
 
