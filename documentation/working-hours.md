@@ -55,3 +55,5 @@
 | 29.7 | 7  | fixed / added new tests and added some error handling on the client  |  
 | 29.7 | 7  | added profile page on the frontend and some other minor changes |  
 | 30.7 | 5  | styling changes on the UI and some minor changes on the server  |  
+| 30.7 | 2  | styling changes on the UI |  
+| total | 177  |  |  

@@ -50,6 +50,4 @@ export type SafeUser = Omit<IUser, 'id' | 'password'>;
 export enum SchemaName {
   User = 'User',
   Survey = 'Survey',
-  Question = 'Question',
-  Response = 'Response',
 }

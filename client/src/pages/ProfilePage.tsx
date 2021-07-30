@@ -5,7 +5,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Accordion,
-  Container, Grid, Header, Icon, Label, List, Message, Segment,
+  Button,
+  Container, Divider, Grid, Header, Icon, Label, List, Message, Modal, Segment,
 } from 'semantic-ui-react';
 import Loading from '../components/Loading';
 import { GET_SURVEYS_OF_CURRENT_USER } from '../graphql/queries/survey';
@@ -15,6 +16,8 @@ import ErrorPage from './ErrorPage';
 
 const ProfilePage: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(-1);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const { loading, data } = useQuery(GET_SURVEYS_OF_CURRENT_USER, {
     variables: { ofCurrentUser: true },
   });
@@ -28,7 +31,7 @@ const ProfilePage: React.FC = () => {
 
   const surveys: Array<ISurvey> = data.allSurveys;
 
-  const getQuestionAnswers = (survey: ISurvey, obj: IQuestion, answerChoise: 1 | 2 | 3 | 4 | 5): number => {
+  const countQuestionAnswers = (survey: ISurvey, obj: IQuestion, answerChoise: number): number => {
     const answerList = survey.responses.flatMap(({ answers }) => (
       answers.filter((a) => a.answer === answerChoise && a.question === obj.question)
     ));
@@ -89,28 +92,67 @@ const ProfilePage: React.FC = () => {
                 <Segment>
                   <List divided relaxed>
                     {surveys.map((survey, index) => (
-                      <List.Item
-                        key={survey.id}
-                        style={{ padding: '20px' }}
-                      >
+                      <List.Item key={survey.id} style={{ padding: '20px' }}>
                         <Segment color="blue">
                           <List.Content>
+                            <Modal
+                              centered={false}
+                              open={isOpen}
+                              onClose={(): void => setIsOpen(false)}
+                              onOpen={(): void => setIsOpen(true)}
+                              trigger={(
+                                <Label as="a">
+                                  <Icon link color="blue" name="share" />
+                                  Share link to this survey
+                                </Label>
+                              )}
+                            >
+                              <Modal.Header>Share link</Modal.Header>
+                              <Modal.Content>
+                                <Modal.Description>
+                                  <Segment clearing>
+                                    <Header>
+                                      Link to this survey:&nbsp;
+                                      <span style={{ fontWeight: 'normal' }}>
+                                        {`https://surveycreatorpro.herokuapp.com/surveys/${survey.id}`}
+                                      </span>
+                                    </Header>
+                                    <Button
+                                      color="blue"
+                                      onClick={(): Promise<void> => (
+                                        navigator.clipboard.writeText(`https://surveycreatorpro.herokuapp.com/surveys/${survey.id}`)
+                                      )}
+                                    >
+                                      <Icon name="share" />
+                                      Copy to clipboard
+                                    </Button>
+                                  </Segment>
+                                </Modal.Description>
+                              </Modal.Content>
+                              <Modal.Actions>
+                                <Button color="blue" onClick={(): void => setIsOpen(false)}>
+                                  OK
+                                </Button>
+                              </Modal.Actions>
+                            </Modal>
 
-                            <List.Content floated="right">
-                              <Label>Click the arrow to open this survey</Label>
-                              <Link to={`/surveys/${survey.id}`}>
+                            <Link to={`/surveys/${survey.id}`}>
+                              <Label as="a">
                                 <Icon
                                   className="open-survey-icon"
                                   link
-                                  color="green"
-                                  size="huge"
+                                  color="blue"
                                   name="arrow circle right"
                                 />
-                              </Link>
-                            </List.Content>
+                                Open page
+                              </Label>
+                            </Link>
+                          </List.Content>
 
+                          <List.Content>
+                            <Divider />
                             <Accordion fluid>
-                              <Header>
+                              <Header style={{ marginTop: 20 }}>
                                 Survey:&nbsp;
                                 <span style={{ fontWeight: 'normal' }}>
                                   {survey.id}
@@ -140,7 +182,7 @@ const ProfilePage: React.FC = () => {
                                 />
                                 <Label.Group color="blue">
                                   <Label>
-                                    Total answers
+                                    Total Responses:
                                     <Label.Detail>{survey.responses.length}</Label.Detail>
                                   </Label>
                                 </Label.Group>
@@ -160,31 +202,31 @@ const ProfilePage: React.FC = () => {
                                         <Label>
                                           Strongly Disagree:
                                           <Label.Detail>
-                                            {getQuestionAnswers(survey, obj, 1)}
+                                            {countQuestionAnswers(survey, obj, 1)}
                                           </Label.Detail>
                                         </Label>
                                         <Label>
                                           Somewhat Disagree:
                                           <Label.Detail>
-                                            {getQuestionAnswers(survey, obj, 2)}
+                                            {countQuestionAnswers(survey, obj, 2)}
                                           </Label.Detail>
                                         </Label>
                                         <Label>
                                           Neutral:
                                           <Label.Detail>
-                                            {getQuestionAnswers(survey, obj, 3)}
+                                            {countQuestionAnswers(survey, obj, 3)}
                                           </Label.Detail>
                                         </Label>
                                         <Label>
                                           Somewhat Agree:
                                           <Label.Detail>
-                                            {getQuestionAnswers(survey, obj, 4)}
+                                            {countQuestionAnswers(survey, obj, 4)}
                                           </Label.Detail>
                                         </Label>
                                         <Label>
                                           Strongly Agree:
                                           <Label.Detail>
-                                            {getQuestionAnswers(survey, obj, 5)}
+                                            {countQuestionAnswers(survey, obj, 5)}
                                           </Label.Detail>
                                         </Label>
                                       </Label.Group>

@@ -84,7 +84,7 @@ const HomePage: React.FC = () => {
               What is SurveyCreatorPro?
             </Header>
 
-            <Header style={{ fontSize: '1.9em', opacity: '0.8' }} inverted>
+            <Header style={{ fontSize: '2em', opacity: '0.8' }} inverted>
               Lorem ipsum dolor sit amet, consectetur adipisci elit,
               sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -103,32 +103,16 @@ const HomePage: React.FC = () => {
         </Grid.Column>
       </Grid.Row>
 
-      <Grid.Row
-        centered
-        style={{ background: 'rgb(50 77 102)' }}
-        verticalAlign="middle"
-      >
-        <Grid.Column
-          className="hidden-mobile" // image will be hidden with mobile resolutions
-          style={{ marginTop: '50px' }}
-          computer={4}
-          mobile={16}
-        >
-          <Header as="h1" content="Some image here?" />
-        </Grid.Column>
-
-        <Grid.Column
-          style={{ padding: '170px', maxWidth: '1000px' }}
-          textAlign="right"
-          computer={12}
-          mobile={16}
-        >
-          <Container>
-            <Header style={{ fontSize: '4.5em' }} inverted>
+      <Grid.Row style={{ background: 'rgb(20 60 97)' }}>
+        <Grid.Column width={16} floated="right">
+          <Container
+            textAlign="right"
+            style={{ padding: '200px', maxWidth: '1000px' }}
+          >
+            <Header style={{ fontSize: '5em' }} inverted>
               How does it work?
             </Header>
-
-            <Header as="h3" style={{ fontSize: '1.9em', opacity: '0.8' }} inverted>
+            <Header as="h3" style={{ fontSize: '2em', opacity: '0.8' }} inverted>
               Lorem ipsum dolor sit amet, consectetur adipisci elit,
               sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -149,26 +133,24 @@ const HomePage: React.FC = () => {
           backgroundSize: '100% 100%',
         }}
       >
-        <Grid.Column width={16}>
-          <Segment vertical textAlign="center">
-            <Container text>
-              <Header
-                content="So What Are You Waiting For?"
-                style={{ fontSize: '3em' }}
-              />
-              <Button
-                style={{ marginTop: '40px' }}
-                color="blue"
-                as="a"
-                href="/register"
-                size="huge"
-              >
-                Click Here To Sign Up
-                <Icon name="angle right" />
-              </Button>
-            </Container>
-          </Segment>
-        </Grid.Column>
+        <Segment vertical textAlign="center">
+          <Container text>
+            <Header
+              content="So What Are You Waiting For?"
+              style={{ fontSize: '3em' }}
+            />
+            <Button
+              style={{ marginTop: '40px' }}
+              color="blue"
+              as="a"
+              href="/register"
+              size="huge"
+            >
+              Click Here To Sign Up
+              <Icon name="angle right" />
+            </Button>
+          </Container>
+        </Segment>
       </Grid.Row>
     </Grid>
   );

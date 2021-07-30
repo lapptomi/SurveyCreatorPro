@@ -76,7 +76,6 @@ const RegisterForm: React.FC = () => {
               marginTop: '50px',
             }}
             >
-
               <Message negative hidden={!errorMessage}>
                 <Message.Header>Error creating new user</Message.Header>
                 <p>{errorMessage}</p>
