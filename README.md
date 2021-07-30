@@ -1,6 +1,6 @@
 [![Test And Deploy](https://github.com/lapptomi/surveycreatorpro/actions/workflows/pipeline.yml/badge.svg)](https://github.com/lapptomi/surveycreatorpro/actions/workflows/pipeline.yml)
 
-## [Link to the app](https://surveycreatorpro.herokuapp.com/)
+## [App on Heroku](https://surveycreatorpro.herokuapp.com/)
 
 
 ### Environment variables needed for this app
