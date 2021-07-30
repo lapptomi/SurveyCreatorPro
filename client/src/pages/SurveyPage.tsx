@@ -9,11 +9,11 @@ import Loading from '../components/Loading';
 import TableRow from '../components/TableRow';
 import { ADD_RESPONSE, FIND_SURVEY_BY_ID } from '../graphql/queries/survey';
 import img from '../style/img2.png';
-import { Answer, ISurvey } from '../types';
+import { IAnswer, ISurvey } from '../types';
 import ErrorPage from './ErrorPage';
 
 const SurveyPage: React.FC = () => {
-  const [answers, setAnswers] = useState<Array<Answer>>([]);
+  const [answers, setAnswers] = useState<Array<IAnswer>>([]);
   const [addResponse, responseData] = useMutation(ADD_RESPONSE);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -33,7 +33,7 @@ const SurveyPage: React.FC = () => {
       });
   };
 
-  const handleChange = (answer: Answer): void => {
+  const handleChange = (answer: IAnswer): void => {
     const updatedAnswers = answers.filter((a) => (
       a.question !== answer.question || a.questionNumber !== answer.questionNumber
     ));

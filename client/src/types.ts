@@ -35,9 +35,3 @@ export interface IAnswer {
 export type NewSurvey = Omit<ISurvey, 'id'>;
 
 export type SafeUser = Omit<IUser, 'id' | 'password'>;
-
-export interface Answer {
-  questionNumber: number;
-  question: string;
-  answer: 1 | 2 | 3 | 4 | 5;
-}

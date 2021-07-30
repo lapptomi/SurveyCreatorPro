@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Table, Form } from 'semantic-ui-react';
-import { Answer, IQuestion } from '../types';
+import { IAnswer, IQuestion } from '../types';
 
 interface Props {
   questionObj: IQuestion;
   rowIndex: number;
-  handleChange(answerOption: Answer): void;
+  handleChange(answerOption: IAnswer): void;
 }
 
 const TableRow: React.FC<Props> = ({ questionObj: obj, rowIndex, handleChange }) => {
