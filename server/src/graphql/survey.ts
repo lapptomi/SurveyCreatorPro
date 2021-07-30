@@ -121,21 +121,20 @@ export const resolvers = {
         }
 
         const userHasRespondedAlready = survey.responses?.some(({ respondent }) => {
-          // eslint-disable-next-line eqeqeq
-          return respondent == context.currentUser.id; // change respondent to string?
+          return respondent.toString() === context.currentUser.id;
         });
 
-        if (!userHasRespondedAlready) {
-          const response: IResponse = {
-            respondent: context.currentUser.id,
-            answers: parseAnswers(args.answers),
-          };
-
-          survey.responses?.push(response);
-          await survey.save();
-        } else {
+        if (userHasRespondedAlready) {
           throw new Error('You have already answered this survey');
         }
+
+        const response: IResponse = {
+          respondent: context.currentUser.id,
+          answers: parseAnswers(args.answers),
+        };
+
+        survey.responses?.push(response);
+        await survey.save();
 
         return survey;
       } catch (error) {

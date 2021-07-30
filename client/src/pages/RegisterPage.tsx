@@ -46,7 +46,7 @@ const RegisterForm: React.FC = () => {
 
   return (
     <Grid
-      textAlign="center"
+      centered
       style={{ minHeight: '1000px' }}
       verticalAlign="middle"
     >
@@ -61,20 +61,14 @@ const RegisterForm: React.FC = () => {
         <Loading active={registerData.loading || loginData.loading} />
         <Grid.Column style={{ maxWidth: '700px' }} width={16}>
           <Header
-            as="h1"
+            textAlign="center"
             content="SurveyCreatorPro"
-            style={{
-              fontSize: '5em',
-              fontWeight: 'bold',
-            }}
+            style={{ fontSize: '5em', fontWeight: 'bold' }}
           />
           <Header
-            as="h2"
+            textAlign="center"
             content="Create new account"
-            style={{
-              fontSize: '2.5em',
-              fontWeight: 'normal',
-            }}
+            style={{ fontSize: '2.5em', fontWeight: 'normal' }}
           />
           <Form size="large" onSubmit={handleSubmit}>
             <Segment style={{
@@ -91,14 +85,16 @@ const RegisterForm: React.FC = () => {
               <Form.Input
                 id="register-form-email-field"
                 fluid
+                label="Email (must be realistic, like for example: user@random.com)"
                 icon="at"
                 iconPosition="left"
-                placeholder="Email (must be realistic, like for example: user@random.com)"
+                placeholder="Email"
                 onChange={(({ target }): void => setEmail(target.value))}
               />
               <Form.Input
                 id="register-form-password-field"
                 fluid
+                label="Password (must be at least 6 characters)"
                 icon="lock"
                 iconPosition="left"
                 placeholder="Password"
@@ -108,19 +104,22 @@ const RegisterForm: React.FC = () => {
               <Form.Input
                 id="register-form-confirm-password-field"
                 fluid
+                label="Confirm password"
                 icon="lock"
                 iconPosition="left"
                 placeholder="Confirm Password"
                 type="password"
                 onChange={(({ target }): void => setConfirmPassword(target.value))}
               />
-              <Form.Checkbox
-                className="register-form-accept-terms-checkbox"
-                inline
-                label="I agree to the terms and something..."
-                required
-                onClick={(): void => setAcceptTerms(!acceptTerms)}
-              />
+              <Form.Field style={{ textAlign: 'center' }}>
+                <Form.Checkbox
+                  className="register-form-accept-terms-checkbox"
+                  inline
+                  label="I agree to the terms and something..."
+                  required
+                  onClick={(): void => setAcceptTerms(!acceptTerms)}
+                />
+              </Form.Field>
               <Button
                 id="register-form-signup-button"
                 color="blue"
@@ -134,7 +133,7 @@ const RegisterForm: React.FC = () => {
 
             </Segment>
           </Form>
-          <Message style={{ background: 'rgba(0, 0, 0, 0.1)' }}>
+          <Message style={{ textAlign: 'center' }}>
             Already have an account? &nbsp;
             <Link to="/login">
               Log in here

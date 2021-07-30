@@ -32,8 +32,8 @@ export const resolvers = {
     addUser: async (_root: unknown, args: NewUser): Promise<IUser> => {
       try {
         const newUser = await toNewUser(args);
-
         const addedUser = await User.create(newUser);
+
         return addedUser;
       } catch (error) {
         console.log('Error creating new user:', (error as Error).message);

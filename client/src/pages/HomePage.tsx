@@ -60,7 +60,7 @@ const HomePage: React.FC = () => {
             href={state.loggedIn ? '/surveys/create' : '/login'}
             primary
             size="huge"
-            style={{ marginTop: '50px', width: '300px' }}
+            style={{ marginTop: '30px', width: '300px' }}
           >
             Get Started
             <Icon name="angle right" />

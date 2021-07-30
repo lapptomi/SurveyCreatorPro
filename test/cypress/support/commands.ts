@@ -26,6 +26,7 @@
 
 import { BASE_URL } from "../../test-utils"
 
+// Custom command for Cypress
 Cypress.Commands.add('graphQlRequest', (query) => {
   cy.request({
     url: `${BASE_URL}/graphql`,

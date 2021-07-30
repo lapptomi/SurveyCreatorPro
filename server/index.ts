@@ -10,7 +10,7 @@ import User from './src/models/User';
 
 dotenv.config();
 
-const MONGODB_URI = process.env.NODE_ENV !== 'production'
+const MONGODB_URI = process.env.NODE_ENV === 'test'
   ? process.env.TEST_MONGODB_URI
   : process.env.MONGODB_URI;
 
@@ -40,20 +40,14 @@ const startApolloServer = async () => {
         // auth[0] should equal 'bearer'
         // and auth[1] should be the token
         const token = auth[1];
-
-        const decodedToken = jwt.verify(
-          token, process.env.SECRET as string,
-        ) as IToken;
+        const decodedToken = jwt.verify(token, process.env.SECRET as string) as IToken;
 
         if (!token || !decodedToken.id) {
           throw new Error('Token missing or invalid');
         }
 
-        const user = await User.findById(decodedToken.id) as IUser;
-
-        return {
-          currentUser: user,
-        };
+        const currentUser = await User.findById(decodedToken.id) as IUser;
+        return { currentUser };
       }
     },
   });

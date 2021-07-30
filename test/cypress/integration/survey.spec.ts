@@ -57,8 +57,7 @@ describe('Browsing surveys', function() {
     cy.contains(`Title: ${testSurvey.title}`)
     cy.contains(`Survey description: ${testSurvey.description}`)
     cy.contains('No surveys addded yet...').should('not.exist')
-  })
-
+  });
 });
 
 
@@ -110,9 +109,9 @@ describe('Creating a survey', function() {
 
     cy.get('#survey-form-create-button').click()
 
-    cy.contains(`Title: ${testSurvey.title}`)
-    cy.contains(`Description: ${testSurvey.description}`)
-    cy.contains(`List of survey questions`)
+    cy.contains('Profile')
+    cy.contains('1 surveys found')
+    cy.contains(testSurvey.title)
   });
 
   it('cannot be done without adding questions', function() {
@@ -166,7 +165,7 @@ describe('Creating a survey', function() {
 
 
 describe('Answering a survey', function() {
-  // @ts-check
+  
   beforeEach(function() {
     cy.request('POST', `${BASE_URL}/api/testing/reset`)
 
@@ -202,12 +201,11 @@ describe('Answering a survey', function() {
 
     cy.get('#survey-form-create-button').click()
 
-    cy.contains(`Title: ${testSurvey.title}`)
-    cy.contains(`Description: ${testSurvey.description}`)
-    cy.contains(`List of survey questions`)
+    cy.contains('Profile')
+    cy.contains('1 surveys found')
+    cy.contains(testSurvey.title)
 
-    cy.contains('Something went wrong or the page does not exist...').should('not.exist')
-    cy.contains('404 - Page Not Found :(').should('not.exist')
+    cy.get('.open-survey-icon').click()
   });
   
 

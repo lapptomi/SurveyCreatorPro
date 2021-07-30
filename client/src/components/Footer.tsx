@@ -29,7 +29,13 @@ const Footer: React.FC = () => (
             </Header>
           </Item>
 
-          <List horizontal inverted link size="small">
+          <List
+            horizontal
+            inverted
+            link
+            size="medium"
+            style={{ marginTop: '30px' }}
+          >
             <List.Item as="a" href="/item1">
               Site Map
             </List.Item>

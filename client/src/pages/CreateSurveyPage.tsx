@@ -35,9 +35,8 @@ const CreateSurveyPage: React.FC = () => {
         variables: {
           title, description, questions, private: isPrivate,
         },
-      }).then((result) => {
-        const surveyId: string = result.data.addSurvey.id;
-        window.location.replace(`/surveys/${surveyId}`);
+      }).then(() => {
+        window.location.replace('/profile');
       }).catch((error) => {
         console.log(error.message);
         setErrorMessage(error.message);
