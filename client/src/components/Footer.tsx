@@ -9,7 +9,7 @@ import {
 } from 'semantic-ui-react';
 
 const Footer: React.FC = () => (
-  <Grid>
+  <Grid textAlign="center">
     <Grid.Row style={{ padding: '120px', background: '#0E2C47' }}>
       <Container textAlign="center">
         <Header inverted as="h1" content="SurveyCreatorPro" />

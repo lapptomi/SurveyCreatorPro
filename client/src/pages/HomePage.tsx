@@ -107,7 +107,7 @@ const HomePage: React.FC = () => {
         <Grid.Column width={16} floated="right">
           <Container
             textAlign="right"
-            style={{ padding: '200px', maxWidth: '1000px' }}
+            style={{ padding: '200px 20spx 200px 20px', maxWidth: '1000px' }}
           >
             <Header style={{ fontSize: '5em' }} inverted>
               How does it work?
