@@ -138,7 +138,7 @@ export const resolvers = {
 
         return survey;
       } catch (error) {
-        console.log('Error creating survey:', (error as Error).message);
+        console.log('Error answering survey:', (error as Error).message);
         throw new UserInputError((error as Error).message, { invalidArgs: args });
       }
     },

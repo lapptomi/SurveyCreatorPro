@@ -65,7 +65,6 @@ const SurveyList: React.FC = () => {
                               </span>
                             </Header.Content>
                           </Header>
-
                           <Message
                             header="Survey description:&nbsp;"
                             content={survey.description}
@@ -87,7 +86,6 @@ const SurveyList: React.FC = () => {
                     </List.Item>
                   ))}
                 </List>
-
               </Segment>
             )}
 
