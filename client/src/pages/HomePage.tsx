@@ -103,20 +103,22 @@ const HomePage: React.FC = () => {
       </Grid.Row>
 
       <Grid.Row style={{ background: 'rgb(75 64 138)' }}>
-        <Container
-          textAlign="right"
-          style={{ padding: '200px 100px 200px 100px', maxWidth: '1000px' }}
-        >
-          <Header style={{ fontSize: '5em' }} inverted>
-            How does it work?
-          </Header>
-          <Header as="h3" style={{ fontSize: '2em', opacity: '0.8' }} inverted>
-            Lorem ipsum dolor sit amet, consectetur adipisci elit,
-            sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquid ex ea commodi consequat.
-          </Header>
-        </Container>
+        <Grid.Column width={16} floated="right">
+          <Container
+            textAlign="right"
+            style={{ padding: '200px 100px 200px 100px', maxWidth: '1000px' }}
+          >
+            <Header style={{ fontSize: '5em' }} inverted>
+              How does it work?
+            </Header>
+            <Header as="h3" style={{ fontSize: '2em', opacity: '0.8' }} inverted>
+              Lorem ipsum dolor sit amet, consectetur adipisci elit,
+              sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquid ex ea commodi consequat.
+            </Header>
+          </Container>
+        </Grid.Column>
       </Grid.Row>
 
       <Grid.Row
