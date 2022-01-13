@@ -102,7 +102,7 @@ const HomePage: React.FC = () => {
         </Grid.Column>
       </Grid.Row>
 
-      <Grid.Row style={{ background: 'rgb(75 64 138)' }}>
+      <Grid.Row style={{ background: 'rgb(34 34 34 / 60%)' }}>
         <Grid.Column width={16} floated="right">
           <Container
             textAlign="right"
