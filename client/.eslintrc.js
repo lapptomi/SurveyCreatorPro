@@ -1,24 +1,25 @@
-{
-  "env": {
-    "browser": true,
-    "es6": true,
-    "jest": true
+module.exports = {
+  env: {
+    browser: true,
+    es6: true,
+    jest: true
   },
-  "root": true,
-  "extends": [
+  root: true,
+  extends: [
+    "plugin:import/recommended",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "airbnb-typescript"
   ],
-  "plugins": ["react", "@typescript-eslint"],
-  "settings": {
+  plugins: ["react", "@typescript-eslint"],
+  settings: {
     "react": {
       "pragma": "React",
       "version": "detect"
     }
   },
-  "rules": {
+  rules: {
     "semi": [2, "always"],
     "react/prop-types": 0,
     "@typescript-eslint/semi": ["error"],
@@ -31,8 +32,11 @@
       "mjs": "never"
     }]
   },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "tsconfig.json"
+  ignorePatterns: [".eslintrc.js"],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: "./tsconfig.json",
+    tsconfigRootDir: __dirname,
+    sourceType: "module"
   }
 }

@@ -32,8 +32,6 @@ app.get('/api/health', (_req, res) => {
   res.status(200).send('ok');
 });
 
-// As default GET-requests returns React index.html
-// (React-router-dom didn't work without this)
 if (process.env.NODE_ENV === 'production') {
   app.get('*', (_req, res) => {
     res.sendFile('index.html', { root: './dist/server/build/' });

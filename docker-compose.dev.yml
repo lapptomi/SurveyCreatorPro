@@ -1,0 +1,22 @@
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: dev.Dockerfile
+    volumes:
+     - ./client/src:/usr/src/app/src
+    ports:
+      - 3000:3000
+    container_name: surveycreatorpro-client
+
+  server:
+    build:
+      context: ./server
+      dockerfile: dev.Dockerfile
+    environment:
+      - SECRET=helloworld
+    ports:
+      - 4000:4000
+    volumes:
+      - ./server/src:/usr/src/app/src
+    container_name: surveycreatorpro-server

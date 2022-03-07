@@ -1,0 +1,8 @@
+services:
+  surveycreatorpro-production:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: surveycreatorpro-production
+    ports:
+      - 4000:4000

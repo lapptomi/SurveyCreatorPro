@@ -1,4 +1,4 @@
-import { NewSurvey, NewUser } from "../server/src/types";
+import { NewSurvey, NewUser } from "../src/types";
 
 export const BASE_URL = 'http://localhost:4000';
 
