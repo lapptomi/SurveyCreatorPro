@@ -10,7 +10,7 @@ describe('Login', function() {
     // creating user for testing login
     cy.graphQlRequest(addUserMutation(testUser.email, testUser.password))
 
-    cy.visit('http://localhost:3000')
+    cy.visit(BASE_URL)
 
     // Open login page
     cy.get('#topnav-login-button').click()

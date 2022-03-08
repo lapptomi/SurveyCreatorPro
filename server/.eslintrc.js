@@ -29,7 +29,7 @@ module.exports = {
      "@typescript-eslint/no-explicit-any": 1,
     "no-case-declarations": 0
   },
-  ignorePatterns: [".eslintrc.js"],
+  ignorePatterns: [".eslintrc.js", "test", "dist"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     project: "./tsconfig.json",
