@@ -21,3 +21,19 @@ TEST_MONGODB_URI=[MongoDB URI (for testing purposes)](https://mongoing.com/docs/
 SECRET=secret key for JSON web tokens (can be any string)
 
 #### You can set up these environment variables with [dotenv](https://www.npmjs.com/package/dotenv) for example
+
+# Running Locally
+
+## Development
+The application can be started in development mode by command:  
+```
+docker-compose -f docker-compose.dev.yml up
+```
+And going to http://localhost:3000 in your browser.
+
+## Production
+The application can be started in production mode by command:  
+```
+docker-compose up
+```  
+And going to http://localhost:4000 in your browser.
