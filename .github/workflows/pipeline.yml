@@ -16,9 +16,9 @@ jobs:
         with:
           node-version: '14'
       - name: npm install server
-        run: cd server && npm ci
+        run: cd server && npm install
       - name: npm install client
-        run: cd client && npm ci
+        run: cd client && npm install
       - name: e2e tests
         uses: cypress-io/github-action@v2
         env:
@@ -41,5 +41,6 @@ jobs:
           heroku_app_name: "surveycreatorpro"
           heroku_email: ${{ secrets.EMAIL }}
           healthcheck: "https://surveycreatorpro.herokuapp.com/api/health"
+          usedocker: true
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
