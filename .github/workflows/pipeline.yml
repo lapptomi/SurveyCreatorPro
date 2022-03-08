@@ -27,6 +27,7 @@ jobs:
         with:
           working-directory: server
           browser: chrome
+          install: false
           headless: true
           build: npm run build:full
           start: npm run start:prod
