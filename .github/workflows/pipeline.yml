@@ -28,8 +28,8 @@ jobs:
           working-directory: server
           browser: chrome
           headless: true
-          start: npm run start:test
-          wait-on: http://localhost:3000
+          start: npm run start:prod
+          wait-on: http://localhost:4000
 
       - name: Heroku deploy
         uses: akhileshns/heroku-deploy@v3.12.12
