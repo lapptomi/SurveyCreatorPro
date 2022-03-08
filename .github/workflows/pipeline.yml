@@ -25,9 +25,10 @@ jobs:
           TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
           SECRET: 'randomsecretkey'
         with:
+          working-directory: server
           browser: chrome
           headless: true
-          start: cd server && npm run start:test
+          start: npm run start:test
           wait-on: http://localhost:3000
 
       - name: Heroku deploy
