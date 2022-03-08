@@ -15,20 +15,23 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '14'
-      - name: npm install
-        run: npm install && cd client && npm install
-      - name: lint
-        run: npm run eslint
+      - name: npm install server
+        run: cd server && npm ci
+      - name: npm install client
+        run: cd client && npm ci
       - name: e2e tests
         uses: cypress-io/github-action@v2
         env:
           TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
           SECRET: 'randomsecretkey'
         with:
+          working-directory: server
           browser: chrome
+          install: false
           headless: true
+          build: npm run build:full
           start: npm run start:test
-          wait-on: http://localhost:3000
+          wait-on: http://localhost:4000
 
       - name: Heroku deploy
         uses: akhileshns/heroku-deploy@v3.12.12
@@ -39,5 +42,6 @@ jobs:
           heroku_app_name: "surveycreatorpro"
           heroku_email: ${{ secrets.EMAIL }}
           healthcheck: "https://surveycreatorpro.herokuapp.com/api/health"
+          usedocker: true
           checkstring: "ok"
           rollbackonhealthcheckfailed: true

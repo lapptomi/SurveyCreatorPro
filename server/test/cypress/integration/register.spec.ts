@@ -6,7 +6,7 @@ describe('Sign up', function() {
   beforeEach(function() {
     cy.request('POST', `${BASE_URL}/api/testing/reset`)
 
-    cy.visit('http://localhost:3000')
+    cy.visit(BASE_URL)
 
     // Open register page
     cy.get('#topnav-signup-button').click()

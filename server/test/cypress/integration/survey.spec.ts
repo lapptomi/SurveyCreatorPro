@@ -6,7 +6,7 @@ describe('Browsing surveys', function() {
   beforeEach(function() {
     cy.request('POST', `${BASE_URL}/api/testing/reset`)
 
-    cy.visit('http://localhost:3000')
+    cy.visit(BASE_URL)
 
     // create user for testing and login before each test
     cy.get('#topnav-signup-button').click()
@@ -66,7 +66,7 @@ describe('Creating a survey', function() {
   beforeEach(function() {
     cy.request('POST', `${BASE_URL}/api/testing/reset`)
 
-    cy.visit('http://localhost:3000')
+    cy.visit(BASE_URL)
 
     // create user for testing before each test
     cy.get('#topnav-signup-button').click()
@@ -169,7 +169,7 @@ describe('Answering a survey', function() {
   beforeEach(function() {
     cy.request('POST', `${BASE_URL}/api/testing/reset`)
 
-    cy.visit('http://localhost:3000')
+    cy.visit(BASE_URL)
 
     // create user for testing
     cy.get('#topnav-signup-button').click()
