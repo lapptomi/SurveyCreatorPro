@@ -27,7 +27,7 @@ jobs:
         with:
           browser: chrome
           headless: true
-          start: cd server && npm run start:test
+          start: docker-compose up
           wait-on: http://localhost:3000
 
       - name: Heroku deploy
