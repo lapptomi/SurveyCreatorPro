@@ -30,7 +30,7 @@ jobs:
           install: false
           headless: true
           build: npm run build:full
-          start: npm run start:test
+          start: npm run start:prod
           wait-on: http://localhost:4000
 
       - name: Heroku deploy
