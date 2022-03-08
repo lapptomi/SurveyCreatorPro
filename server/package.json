@@ -10,7 +10,7 @@
     "start:prod": "NODE_ENV=production node dist/index.js",
     "start:test": "concurrently \"cd .. && cd client && npm run start\" \"NODE_ENV=test ts-node index.ts\"",
     "build:ui": "cd .. && cd client && npm install && npm run build --prod && cp -r build ../server/dist/",
-    "build:full": "rm -rf dist && npm run build && npm run build:ui",
+    "build:full": "npm run build && npm run build:ui",
     "eslint": "eslint --ext=.ts,.tsx .",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
