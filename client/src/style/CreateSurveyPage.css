@@ -1,0 +1,43 @@
+.create-survey-grid-row-1 {
+  background-image: url('./main-background.png');
+  background-size: 100% 100%;
+}
+
+.create-survey-grid-row-1-container {
+  margin: 50px;
+  text-align: left;
+}
+
+#create-survey-grid-row-1-header-1 {
+  text-align: left;
+  font-size: 3em;
+  font-weight: normal;
+}
+
+#create-survey-grid-row-1-header-2 {
+  text-align: left;
+  font-size: 1.5em;
+  font-weight: normal;
+}
+
+#create-survey-grid-row-1-header-3 {
+  text-align: left;
+  font-size: 1.5em;
+  font-weight: normal;
+}
+
+#create-survey-survey-form {
+  background: rgb(65, 93, 119, 5%);
+  margin-top: 70px;
+}
+
+#create-survey-survey-form-header {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  margin: 20px;
+}
+
+#create-survey-survey-form-questions {
+  background: rgb(34 69 101);
+}

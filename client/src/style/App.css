@@ -1,0 +1,9 @@
+.App {
+  min-width: 768px;
+  min-height: 1200px;
+  background: #0E2C47;
+}
+
+.main-body {
+  min-height: 1200px;
+}

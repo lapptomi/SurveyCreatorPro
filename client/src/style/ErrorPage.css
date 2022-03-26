@@ -1,0 +1,33 @@
+.grid-row-1 {
+  min-height: 1000px;
+  background-image: url('./main-background.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+#grid-row-1-header {
+  text-align: center;
+  font-weight: bold;
+  padding-top: 200px;
+  font-size: 150px;
+}
+
+#grid-row-1-header-content {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 30px;
+  font-size: 60px;
+}
+
+#grid-row-1-subheader {
+  opacity: 0.8;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 40px;
+  font-size: 30px;
+}
+
+#grid-row-1-button {
+  margin-top: 40px;
+  max-width: 250px;
+}

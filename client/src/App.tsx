@@ -14,6 +14,7 @@ import Loading from './components/Loading';
 import SurveyPage from './pages/SurveyPage';
 import ErrorPage from './pages/ErrorPage';
 import ProfilePage from './pages/ProfilePage';
+import './style/App.css';
 
 const App: React.FC = () => {
   const [state] = useGlobalState();
@@ -24,50 +25,34 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <div
-        className="App"
-        style={{
-          minWidth: '768px',
-          minHeight: '1200px',
-          background: '#0E2C47',
-        }}
-      >
+      <div className="App">
         <TopNav />
-        <div style={{ minHeight: '1000px' }}>
+        <div className='main-body'>
           <Switch>
-
             <Route exact path="/register">
               { state.isLoggedIn ? <Redirect to="/" /> : <RegisterPage /> }
             </Route>
-
             <Route exact path="/login">
               { state.isLoggedIn ? <Redirect to="/" /> : <LoginPage /> }
             </Route>
-
             <Route exact path="/surveys/browse">
               { state.isLoggedIn ? <BrowseSurveysPage /> : <Redirect to="/" /> }
             </Route>
-
             <Route exact path="/surveys/create">
               { state.isLoggedIn ? <CreateSurveyPage /> : <Redirect to="/" /> }
             </Route>
-
             <Route exact path="/surveys/:id">
               { state.isLoggedIn ? <SurveyPage /> : <Redirect to="/" /> }
             </Route>
-
             <Route exact path="/profile">
               { state.isLoggedIn ? <ProfilePage /> : <Redirect to="/" /> }
             </Route>
-
             <Route exact path="/">
               <HomePage />
             </Route>
-
             <Route path="*">
               <ErrorPage />
             </Route>
-
           </Switch>
         </div>
         <Footer />

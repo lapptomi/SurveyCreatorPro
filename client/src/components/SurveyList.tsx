@@ -70,7 +70,6 @@ const SurveyList: React.FC = () => {
                             content={survey.description}
                           />
                         </List.Content>
-
                         <List.Content floated="right" style={{ marginTop: 20 }}>
                           <Label>Click the arrow to answer this survey</Label>
                           <Icon
@@ -88,7 +87,6 @@ const SurveyList: React.FC = () => {
                 </List>
               </Segment>
             )}
-
         </Segment.Group>
       </Segment>
     </Container>

@@ -1,0 +1,99 @@
+.mainpage-grid-row-1 {
+  height: 850px;
+  background-image: url('./main-background.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  text-align: center;
+}
+
+#mainpage-grid-row-1-header-1 {
+  font-size: 5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+#mainpage-grid-row-1-header-2 {
+  font-size: 1.7em;
+  font-weight: normal;
+  text-align: center;
+}
+
+#mainpage-grid-row-1-header-3 {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: normal;
+  margin-bottom: 2em;
+}
+
+#mainpage-grid-row-1-button {
+  width: 300px;
+}
+
+
+.mainpage-grid-row-2 {
+  background: #0E2C47;
+  margin: 200px;
+}
+
+.mainpage-grid-row-2-col-1 {
+  text-align: left;
+  max-width: 1000px;
+}
+
+#mainpage-grid-row-2-header {
+  font-size: 4.5em;
+  color: white;
+}
+
+#mainpage-grid-row-2-subheader {
+  font-size: 2em;
+  color: white;
+  opacity: 0.8;
+}
+
+
+.mainpage-grid-row-3 {
+  background: rgb(34 34 34 / 60%);
+}
+
+.mainpage-grid-row-3-container {
+  text-align: right;
+  padding: 200px 100px 200px 100px;
+  max-width: 1000px;
+}
+
+#mainpage-grid-row-3-header {
+  color: white;
+  font-size: 5em;
+}
+
+#mainpage-grid-row-3-subheader {
+  color: white;
+  font-size: 2em;
+  opacity: 0.8;
+}
+
+
+.mainpage-grid-row-4 {
+  height: 500px;
+  background-image: url('./main-background.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.mainpage-grid-row-4-container {
+  text-align: center;
+  margin: auto;
+}
+
+#mainpage-grid-row-4-header {
+  font-size: 3em;
+}
+
+#mainpage-grid-row-4-button {
+  margin-top: 40px;
+}
+
+
+
+

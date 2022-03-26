@@ -17,7 +17,7 @@ import {
 import Loading from '../components/Loading';
 import QuestionList from '../components/QuestionList';
 import { CREATE_SURVEY } from '../graphql/queries/survey';
-import img from '../style/img2.png';
+import '../style/CreateSurveyPage.css';
 
 const CreateSurveyPage: React.FC = () => {
   const [isPrivate, setIsPrivate] = useState<boolean>(false);
@@ -75,56 +75,25 @@ const CreateSurveyPage: React.FC = () => {
 
   return (
     <Grid>
-      <Grid.Row
-        centered
-        style={{
-          minHeight: '1500px',
-          backgroundImage: `url(${img})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: '100% 100%',
-        }}
-      >
+      <Grid.Row className='create-survey-grid-row-1'>
         <Loading active={createSurveyData.loading} />
-        <Container style={{ margin: '50px' }} textAlign="left">
-          <Header
-            as="h2"
-            content="Create New Survey"
-            style={{
-              fontSize: '3em',
-              fontWeight: 'normal',
-            }}
-          />
-          <Header
-            textAlign="left"
-            style={{ fontWeight: 'normal' }}
-          >
+        <Container className='grid-row-1-container' textAlign="left">
+          <Header id='create-survey-grid-row-1-header-1'>Create New Survey</Header>
+          <Header id='create-survey-grid-row-1-header-2'>
             Here you can create new private or public surveys
             by filling the form below
             with valid information.
           </Header>
-          <Header
-            as="h2"
-            textAlign="left"
-            style={{ fontWeight: 'normal' }}
-          >
+          <Header id='create-survey-grid-row-1-header-3'>
             You can also browse and answer public surveys
-            <Link to="/surveys/browse">
-              <span> Here</span>
-            </Link>
+            <Link to="/surveys/browse"><span> Here</span></Link>
           </Header>
-
-          <Segment style={{ background: 'rgb(65, 93, 119, 10%)', marginTop: '70px' }}>
+          <Segment id='create-survey-survey-form'>
             <Form size="large">
               <Segment.Group>
                 <Segment style={{ background: 'rgb(34 69 101)' }}>
-                  <Header
-                    inverted
-                    textAlign="center"
-                    content="Survey Information"
-                    style={{ fontSize: '30px', margin: '20px' }}
-                  />
+                  <Header id='create-survey-survey-form-header'>Survey Information</Header>
                 </Segment>
-
                 <Segment>
                   <Form.Input
                     id="survey-form-title-input"
@@ -144,7 +113,7 @@ const CreateSurveyPage: React.FC = () => {
               </Segment.Group>
 
               <Segment.Group>
-                <Segment style={{ background: 'rgb(34 69 101)' }}>
+                <Segment id='create-survey-survey-form-questions'>
                   <Header
                     as="h2"
                     inverted
@@ -154,15 +123,10 @@ const CreateSurveyPage: React.FC = () => {
                     style={{ fontSize: '30px' }}
                   />
                 </Segment>
-
                 <Segment>
-                  <QuestionList
-                    questions={questions}
-                    handleRemove={handleRemove}
-                  />
+                  <QuestionList questions={questions} handleRemove={handleRemove} />
                 </Segment>
               </Segment.Group>
-
               <Header as="h3" content="New Question" />
               <Form.Input
                 id="survey-form-question-input"
@@ -182,9 +146,7 @@ const CreateSurveyPage: React.FC = () => {
                 onClick={addQuestion}
                 disabled={!question}
               />
-
               <Divider />
-
               <Message negative hidden={!errorMessage}>
                 <Message.Header>Error creating survey</Message.Header>
                 <p>{errorMessage}</p>
@@ -215,7 +177,6 @@ const CreateSurveyPage: React.FC = () => {
                   />
                   <b> No</b>
                 </Segment>
-
                 <Segment textAlign="center">
                   <Button
                     id="survey-form-cancel-button"
@@ -237,7 +198,6 @@ const CreateSurveyPage: React.FC = () => {
                     content="Create"
                   />
                 </Segment>
-
               </Segment.Group>
             </Form>
           </Segment>

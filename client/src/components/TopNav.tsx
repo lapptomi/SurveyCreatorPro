@@ -24,7 +24,6 @@ const LoggedInTopNav: React.FC = () => {
           <b> Browse Surveys</b>
         </Link>
       </Menu.Item>
-
       <Menu.Item
         id="topnav-create-survey-button"
         active={location.pathname === '/surveys/create'}
@@ -34,16 +33,13 @@ const LoggedInTopNav: React.FC = () => {
           <b> Create Survey</b>
         </Link>
       </Menu.Item>
-
       <Menu.Menu position="right">
-
         <Menu.Item active={location.pathname === '/profile'}>
           <Link to="/profile">
             <Icon name="user" />
             <b> Profile</b>
           </Link>
         </Menu.Item>
-
         <Menu.Item>
           <Link to="/">
             <Button
@@ -55,7 +51,6 @@ const LoggedInTopNav: React.FC = () => {
             </Button>
           </Link>
         </Menu.Item>
-
       </Menu.Menu>
     </>
   );
@@ -78,7 +73,6 @@ const LoggedOutTopNav: React.FC = () => (
           </Button>
         </Link>
       </Menu.Item>
-
       <Menu.Item>
         <Link to="/register">
           <Button
@@ -89,7 +83,6 @@ const LoggedOutTopNav: React.FC = () => (
           </Button>
         </Link>
       </Menu.Item>
-
     </Menu.Menu>
   </>
 );
