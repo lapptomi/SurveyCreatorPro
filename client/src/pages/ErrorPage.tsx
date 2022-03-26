@@ -1,33 +1,17 @@
 import { Button, Grid, Header } from 'semantic-ui-react';
 import React from 'react';
-import img from '../style/img2.png';
+import '../style/ErrorPage.css';
 
 const ErrorPage: React.FC = () => (
   <Grid>
-    <Grid.Row
-      centered
-      style={{
-        minHeight: '1000px',
-        backgroundImage: `url(${img})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '100% 100%',
-      }}
-    >
-      <Grid.Column width={16} textAlign="center">
-        <Header style={{ paddingTop: '200px', fontSize: '150px' }}>
-          Oops!
-        </Header>
-        <Header>
-          <Header.Content style={{ fontSize: '60px', marginTop: '30px' }}>
-            404 - Page Not Found :(
-          </Header.Content>
-          <Header.Subheader style={{ paddingTop: '40px', fontSize: '30px' }}>
-            Something went wrong or the page does not exist...
-          </Header.Subheader>
-        </Header>
+    <Grid.Row className='grid-row-1' centered>
+      <Grid.Column textAlign="center">
+        <Header id='grid-row-1-header'>Oops!</Header>
+          <Header id='grid-row-1-header-content'> 404 - Page Not Found :(</Header>
+          <Header id='grid-row-1-subheader'>Something went wrong or the page does not exist...</Header>
         <Button
+          id='grid-row-1-button'
           primary
-          style={{ marginTop: '40px' }}
           onClick={(): void => window.location.replace('/')}
         >
           Go Back To Homepage

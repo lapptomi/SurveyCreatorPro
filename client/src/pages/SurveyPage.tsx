@@ -2,15 +2,14 @@ import { useMutation, useQuery } from '@apollo/client';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-  Button,
-  Container, Form, Grid, Header, Icon, Message, Segment, Table,
+  Button, Container, Form, Grid, Header, Icon, Message, Segment, Table,
 } from 'semantic-ui-react';
 import Loading from '../components/Loading';
 import TableRow from '../components/TableRow';
 import { ADD_RESPONSE, FIND_SURVEY_BY_ID } from '../graphql/queries/survey';
-import img from '../style/img2.png';
 import { IAnswer, ISurvey } from '../types';
 import ErrorPage from './ErrorPage';
+import '../style/SurveyPage.css';
 
 const SurveyPage: React.FC = () => {
   const [answers, setAnswers] = useState<Array<IAnswer>>([]);
@@ -52,36 +51,22 @@ const SurveyPage: React.FC = () => {
 
   return (
     <Grid>
-      <Grid.Row
-        centered
-        style={{
-          minHeight: '1500px',
-          backgroundImage: `url(${img})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: '100% 100%',
-        }}
-      >
+      <Grid.Row className='surveypage-grid-row-1' centered>
         <Loading active={responseData.loading} />
         <Grid.Column width={16}>
-          <Container text style={{ margin: '40px' }}>
+          <Container className='surveypage-grid-row-1-container' text>
             <p>{`Survey: ${survey.id}`}</p>
-            <Header
-              as="h1"
-              content={`Title: ${survey.title}`}
-              style={{ fontSize: '3em' }}
-            />
-            <Header
-              as="h1"
-              style={{ fontSize: '1.8em', fontWeight: 'normal' }}
-              content={`Description: ${survey.description}`}
-            />
+            <Header id='surveypage-grid-row-1-header-1'>
+              {`Title: ${survey.title}`}
+            </Header>
+            <Header id='surveypage-grid-row-1-header-2'>
+              {`Description: ${survey.description}`}
+            </Header>
           </Container>
-
           <Container>
             <Segment>
-
               <Segment.Group>
-                <Segment style={{ background: 'rgb(34 69 101)' }}>
+                <Segment id='surveypage-grid-row-1-survey-list-header'>
                   <Header
                     as="h1"
                     inverted
@@ -90,25 +75,21 @@ const SurveyPage: React.FC = () => {
                     style={{ fontSize: '30px', margin: '10px' }}
                   />
                 </Segment>
-
                 <Segment>
                   <Header as="h3">
                     Please answer the questions below by selecting a number between 1 - 5.
                   </Header>
-
                   <h4>Answer options meaning: </h4>
                   <p>1 - Strongly Disagree</p>
                   <p>2 - Somewhat Disagree</p>
                   <p>3 - Neutral</p>
                   <p>4 - Somewhat Agree</p>
                   <p>5 - Strongly Agree</p>
-
                   <Form>
                     <Message negative hidden={!errorMessage}>
                       <Message.Header>Error answering survey</Message.Header>
                       <p>{errorMessage}</p>
                     </Message>
-
                     <Table celled color="blue">
                       <Table.Header>
                         <Table.Row textAlign="center">
@@ -175,13 +156,10 @@ const SurveyPage: React.FC = () => {
                       </Table.Footer>
                     </Table>
                   </Form>
-
                 </Segment>
               </Segment.Group>
-
             </Segment>
           </Container>
-
         </Grid.Column>
       </Grid.Row>
     </Grid>

@@ -6,7 +6,7 @@ COPY . .
 
 ENV NODE_ENV=development
 
-RUN npm install
+RUN npm ci
 
 EXPOSE 4000
 

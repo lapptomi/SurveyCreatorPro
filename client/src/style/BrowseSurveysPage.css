@@ -1,0 +1,28 @@
+.grid {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.grid-row-1 {
+  background-image: url('./main-background.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.grid-row-1-container {
+  text-align: left;
+  margin-top: 50px;
+}
+
+#grid-row-1-header-1 {
+  font-size: 3em;
+  font-weight: normal;
+}
+
+#grid-row-1-header-2 {
+  font-weight: normal;
+}
+
+#grid-row-1-header-3 {
+  font-weight: normal;
+}

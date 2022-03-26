@@ -1,0 +1,36 @@
+.profile-grid-row-1 {
+  min-height: 1200px;
+  background-image: url('./main-background.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.profile-grid-row-1-container {
+  margin: 50px;
+  text-align: left;
+}
+
+#profile-grid-row-1-header-1 {
+  font-size: 5em;
+  font-weight: normal;
+}
+
+
+#profile-grid-row-1-header-2 {
+  text-align: left;
+  font-weight: normal;
+}
+
+#profile-survey-list {
+  background: rgb(34 69 101);
+}
+
+#profile-survey-list-header {
+  font-size: 30px;
+  margin: 10px;
+}
+
+#profile-survey-list-header-no-surveys {
+  font-size: 20px;
+  margin: 10px;
+}

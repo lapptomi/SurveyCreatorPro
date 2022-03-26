@@ -10,9 +10,9 @@ import {
 } from 'semantic-ui-react';
 import Loading from '../components/Loading';
 import { GET_SURVEYS_OF_CURRENT_USER } from '../graphql/queries/survey';
-import backgroundImage from '../style/img2.png';
 import { IQuestion, ISurvey } from '../types';
 import ErrorPage from './ErrorPage';
+import '../style/ProfilePage.css';
 
 const ProfilePage: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(-1);
@@ -41,50 +41,30 @@ const ProfilePage: React.FC = () => {
 
   return (
     <Grid textAlign="center">
-      <Grid.Row
-        color="black"
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: '100% 100%',
-          minHeight: '1200px',
-        }}
-      >
-        <Container style={{ margin: '50px' }} textAlign="left">
-          <Header
-            as="h2"
-            content="Profile"
-            style={{
-              fontSize: '5em',
-              fontWeight: 'normal',
-            }}
-          />
-          <Header
-            textAlign="left"
-            style={{ fontWeight: 'normal' }}
-          >
+      <Grid.Row className='profile-grid-row-1'>
+        <Container className='profile-grid-row-1-container'>
+          <Header id='profile-grid-row-1-header-1'>Profile</Header>
+          <Header id='profile-grid-row-1-header-2'>
             Here you can browse the surveys that you have created
             and see the results.
           </Header>
-
           <Segment.Group>
-            <Segment style={{ background: 'rgb(34 69 101)' }}>
+            <Segment id='profile-survey-list'>
               <Header
+                id='profile-survey-list-header'
                 inverted
                 icon="list"
                 content="Your surveys"
                 subheader={`${surveys.length} surveys found`}
-                style={{ fontSize: '30px', margin: '10px' }}
               />
             </Segment>
-
             {surveys.length === 0
               ? (
                 <Segment>
                   <Header
+                    id='profile-survey-list-header-no-surveys'
                     content="No surveys added yet..."
                     subheader="You have not created any surveys yet."
-                    style={{ fontSize: '20px', margin: '10px' }}
                   />
                 </Segment>
               )
@@ -123,16 +103,13 @@ const ProfilePage: React.FC = () => {
                                         navigator.clipboard.writeText(`https://surveycreatorpro.herokuapp.com/surveys/${survey.id}`)
                                       )}
                                     >
-                                      <Icon name="share" />
-                                      Copy to clipboard
+                                      <Icon name="share" /> Copy to clipboard
                                     </Button>
                                   </Segment>
                                 </Modal.Description>
                               </Modal.Content>
                               <Modal.Actions>
-                                <Button color="blue" onClick={(): void => setIsOpen(false)}>
-                                  OK
-                                </Button>
+                                <Button color="blue" onClick={(): void => setIsOpen(false)}>OK</Button>
                               </Modal.Actions>
                             </Modal>
 

@@ -1,7 +1,0 @@
-@media (max-width: 1000px) {
-  .hidden-mobile {
-    visibility: hidden;
-    background-color: greenyellow;
-    height: 0;
-  }
-}

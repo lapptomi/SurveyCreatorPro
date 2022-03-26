@@ -1,0 +1,23 @@
+.surveypage-grid-row-1 {
+  min-height: 1500px;
+  background-image: url('./main-background.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.surveypage-grid-row-1-container {
+  margin: 40px;
+}
+
+#surveypage-grid-row-1-header-1 {
+  font-size: 2.5em;
+}
+
+#surveypage-grid-row-1-header-2 {
+  font-size: 1.8em;
+  font-weight: normal;
+}
+
+#surveypage-grid-row-1-survey-list-header {
+  background: rgb(34 69 101);
+}

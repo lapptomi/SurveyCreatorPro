@@ -10,10 +10,10 @@ import {
 } from 'semantic-ui-react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
-import backgroundImage from '../style/img2.png';
 import { CREATE_NEW_USER } from '../graphql/queries/user';
 import { LOGIN } from '../graphql/queries/login';
 import Loading from '../components/Loading';
+import '../style/RegisterPage.css';
 
 const RegisterForm: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -45,42 +45,18 @@ const RegisterForm: React.FC = () => {
       && password === confirmPassword;
 
   return (
-    <Grid
-      centered
-      style={{ minHeight: '1000px' }}
-      verticalAlign="middle"
-    >
-      <Grid.Row
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: '100% 100%',
-          height: '900px',
-        }}
-      >
+    <Grid centered verticalAlign="middle">
+      <Grid.Row className='register-grid-row-1'>
         <Loading active={registerData.loading || loginData.loading} />
-        <Grid.Column style={{ maxWidth: '700px' }} width={16}>
-          <Header
-            textAlign="center"
-            content="SurveyCreatorPro"
-            style={{ fontSize: '5em', fontWeight: 'bold' }}
-          />
-          <Header
-            textAlign="center"
-            content="Create new account"
-            style={{ fontSize: '2.5em', fontWeight: 'normal' }}
-          />
+        <Grid.Column className='register-grid-col-1' width={16}>
+          <Header id='register-grid-row-1-header-1'>SurveyCreatorPro</Header>
+          <Header id='register-grid-row-1-header-2'>Create new account</Header>
           <Form size="large" onSubmit={handleSubmit}>
-            <Segment style={{
-              background: 'rgba(14, 44, 71, 0.07)',
-              marginTop: '50px',
-            }}
-            >
+            <Segment id='register-form'>
               <Message negative hidden={!errorMessage}>
                 <Message.Header>Error creating new user</Message.Header>
                 <p>{errorMessage}</p>
               </Message>
-
               <Form.Input
                 id="register-form-email-field"
                 fluid
@@ -129,7 +105,6 @@ const RegisterForm: React.FC = () => {
               >
                 Sign Up
               </Button>
-
             </Segment>
           </Form>
           <Message style={{ textAlign: 'center' }}>
